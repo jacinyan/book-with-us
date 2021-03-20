@@ -1,4 +1,4 @@
-import { USER_LOGIN_SUCCESS,USER_LOGOUT_SUCCESS } from '../constants/authConstants'
+import { USER_LOGIN_SUCCESS,USER_LOGOUT } from '../constants/authConstants'
 
 const authReducer = (state = {}, action) => {
     switch (action.type) {
@@ -7,7 +7,7 @@ const authReducer = (state = {}, action) => {
                 ...state,
                 ...action.payload
             }
-        case USER_LOGOUT_SUCCESS:
+        case USER_LOGOUT:
             return {
                 ...state,
                 ...action.payload
