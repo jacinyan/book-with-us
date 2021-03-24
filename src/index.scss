@@ -3,19 +3,25 @@
 // Import a Google Font
 @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&display=swap');
 
+// Import font awesome logos
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css');
+
 // Set your brand colors
-$purple: #8A4D76;
-$pink: #FA7C91;
+$blue-dark: #11124D;
 $brown: #757763;
 $beige-light: #D0D1CD;
 $beige-lighter: #EFF0EB;
+$orange: #FF8C00;
+$blue-light: #5B84C4;
+
 
 // Update Bulma's global variables
 $family-sans-serif: "Rubik", sans-serif;
 $grey-dark: $brown;
 $grey-light: $beige-light;
-$primary: $purple;
-$link: $pink;
+$primary: $blue-dark;
+$warning: $orange;
+$link: $blue-light;
 $widescreen-enabled: false;
 $fullhd-enabled: false;
 
