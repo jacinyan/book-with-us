@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-import { USER_REGISTER_FAILURE, USER_REGISTER_SUCCESS } from "../constants/regConstants"
+import { USER_REGISTER_FAILURE, USER_REGISTER_SUCCESS } from "../constants/userConstants"
 
 export const register = (username, email, password, confirmPassword) => async (dispatch) => {
     try {
@@ -16,16 +16,15 @@ export const register = (username, email, password, confirmPassword) => async (d
 
         console.log(data);
 
-        dispatch(
-            {
+        dispatch({
             type: USER_REGISTER_SUCCESS,
             payload: data
         })
     } catch (error) {
-        console.log(error);
+        console.log(error.message);
         dispatch({
-            type:USER_REGISTER_FAILURE,
-            payload: error
+            type: USER_REGISTER_FAILURE,
+            payload: error.message
         })
     }
 }
