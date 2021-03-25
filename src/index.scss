@@ -14,7 +14,6 @@ $beige-lighter: #EFF0EB;
 $orange: #FF8C00;
 $blue-light: #5B84C4;
 
-
 // Update Bulma's global variables
 $family-sans-serif: "Rubik", sans-serif;
 $grey-dark: $brown;
@@ -34,4 +33,9 @@ $input-shadow: none;
 // Import only what you need from Bulma
 @import '../node_modules/bulma/bulma.sass';
 
-// Home Page
+// ------------------------------------------------
+
+/* Header */
+.navbar{
+    box-shadow: 0 2px 0 0 #a85c00;
+}
