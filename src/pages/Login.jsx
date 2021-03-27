@@ -32,7 +32,7 @@ const Login = ({ location, history }) => {
                 <div className="container has-text-centered">
                     <div className="columns">
                         <div className="column is-8 is-offset-2">
-                            <h3 className="title has-text-white">Login</h3>
+                            <h3 className="title has-text-white">Welcome to BookWithUS</h3>
                             <hr className="login-hr" />
                             <p className="subtitle has-text-white">Start the booking with us today!</p>
                             <div className="box has-shadow">
