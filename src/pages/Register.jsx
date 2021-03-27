@@ -12,8 +12,8 @@ const Register = () => {
 
     const dispatch = useDispatch()
 
-    const regState = useSelector(state => state.reg)
-    console.log(regState);
+    // const regState = useSelector(state => state.reg)
+    // console.log(regState);
 
     const handleSubmit = e => {
         e.preventDefault()

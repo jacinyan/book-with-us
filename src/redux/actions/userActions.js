@@ -20,11 +20,14 @@ export const register = (username, email, password, confirmPassword) => async (d
             type: USER_REGISTER_SUCCESS,
             payload: data
         })
+
     } catch (error) {
-        console.log(error.message);
+        const {response:{data:{errorMsg}}} = error
+        console.log(errorMsg);
+        
         dispatch({
             type: USER_REGISTER_FAILURE,
-            payload: error.message
+            payload: errorMsg
         })
     }
 }
