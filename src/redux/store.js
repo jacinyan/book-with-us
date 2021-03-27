@@ -2,11 +2,11 @@ import { createStore, applyMiddleware, combineReducers } from 'redux'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import thunk from 'redux-thunk'
 
-import { authReducer, regReducer } from './reducers/userReducers'
+import { loginReducer, registerReducer } from './reducers/userReducers'
 
 const rootReducer = combineReducers({
-    auth: authReducer,
-    reg: regReducer
+    login: loginReducer,
+    register: registerReducer
 })
 
 

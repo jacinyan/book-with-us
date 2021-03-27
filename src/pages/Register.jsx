@@ -1,10 +1,11 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 
 import { register } from '../redux/actions/userActions'
+import { toast } from 'react-toastify'
 
-const Register = () => {
+const Register = ({ location, history }) => {
     const [username, setUsername] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -12,13 +13,24 @@ const Register = () => {
 
     const dispatch = useDispatch()
 
-    // const regState = useSelector(state => state.reg)
-    // console.log(regState);
+    const registerState = useSelector(state => state.register)
+    const { userInfo } = registerState
+
+    const redirect = location.search ? location.search.split('=')[1] : '/'
+
+    useEffect(() => {
+        if (userInfo) {
+            history.push(redirect)
+        }
+    }, [history, userInfo, redirect])
 
     const handleSubmit = e => {
         e.preventDefault()
-        console.table({ username, email, password, confirmPassword });
-        dispatch(register(username, email, password, confirmPassword))
+        if (password !== confirmPassword) {
+            toast.error('Passwords do not match')
+        } else {
+            dispatch(register(username, email, password))
+        }
     }
 
     return (
@@ -78,17 +90,14 @@ const Register = () => {
                                             />
                                         </div>
                                     </div>
-                                    <label className="checkbox" style={{ margin: 20 }}>
-                                        <input type="checkbox" />Remember me
-                                    </label>
                                     <button className="button is-block is-warning is-fullwidth">
                                         <strong>Sign Up</strong>
                                     </button>
                                 </form>
                             </div>
                             <p className="has-text-white">
-                                <Link to="">Sign In</Link>&nbsp;·&nbsp;
-                                <Link to="">Need Help?</Link>
+                                Already a user?{'  '}
+                                <Link to={redirect ? `/login?redirect=${redirect}` : '/login'}>Sign In</Link>
                             </p>
                         </div>
                     </div>

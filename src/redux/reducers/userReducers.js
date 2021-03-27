@@ -1,32 +1,29 @@
-import { USER_LOGIN_SUCCESS,
-         USER_LOGOUT,
-         USER_REGISTER_SUCCESS 
-        } 
-from '../constants/userConstants'
+import { 
+    USER_LOGIN_SUCCESS,
+    USER_LOGOUT,
+    USER_REGISTER_SUCCESS 
+} from '../constants/userConstants'
 
-const authReducer = (state = {}, action) => {
+const loginReducer = (state = {}, action) => {
     switch (action.type) {
         case USER_LOGIN_SUCCESS:
             return {
                 ...state,
-                ...action.payload
+                userInfo: action.payload
             }
         case USER_LOGOUT:
-            return {
-                ...state,
-                ...action.payload
-            }
+            return { }
         default:
             return state
     }
 }
 
-const regReducer = (state = {}, action) => {
+const registerReducer = (state = {}, action) => {
     switch (action.type) {
         case USER_REGISTER_SUCCESS:
                 return {
                     ...state,
-                    ...action.payload
+                    userInfo: action.payload
                 }
         default:
             return state
@@ -35,7 +32,7 @@ const regReducer = (state = {}, action) => {
 
 
 export {
-    authReducer,
-    regReducer
+    loginReducer,
+    registerReducer
 }
 
