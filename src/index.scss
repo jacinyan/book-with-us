@@ -33,10 +33,30 @@ $input-shadow: none;
 // Import only what you need from Bulma
 @import '../node_modules/bulma/bulma.sass';
 
-// Header 
+//Layout
 .navbar {
     box-shadow: 0 2px 0 0 #a85c00;
+
+    & img {
+        max-height: 60px;
+    }
 }
+
+main {
+    min-height: 80vh;
+}
+
+footer {
+    padding-bottom: 48px!important;
+}
+
+.fab{
+    padding-right: 10px;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+//
 
 
 
