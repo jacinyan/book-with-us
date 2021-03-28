@@ -13,8 +13,10 @@ const Login = ({ location, history }) => {
     const loginState = useSelector(state => state.login)
     const { userInfo } = loginState
 
+    // check login state
     const redirect = location.search ? location.search.split('=')[1] : '/'
 
+    // if logged in, login button disabled
     useEffect(() => {
         if (userInfo) {
             history.push(redirect)
@@ -32,9 +34,9 @@ const Login = ({ location, history }) => {
                 <div className="container has-text-centered">
                     <div className="columns">
                         <div className="column is-8 is-offset-2">
-                            <h3 className="title has-text-white">Welcome to BookWithUS</h3>
+                            <h3 className="title has-text-white">Welcome to BooksRUS</h3>
                             <hr className="login-hr" />
-                            <p className="subtitle has-text-white">Start the booking with us today!</p>
+                            <p className="subtitle has-text-white">Pick your fav ones today!</p>
                             <div className="box has-shadow">
                                 <form onSubmit={handleSubmit}>
                                     <div className="field">
