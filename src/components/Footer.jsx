@@ -18,9 +18,6 @@ const Footer = () => {
                             <i className="fab fa-twitter"></i>
                         </Link>
                         <Link to="#" className="has-text-white">
-                            <i className="fab fa-google-plus"></i>
-                        </Link>
-                        <Link to="#" className="has-text-white">
                             <i className="fab fa-linkedin"></i>
                         </Link>
                     </div>
