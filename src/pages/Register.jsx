@@ -92,14 +92,14 @@ const Register = ({ location, history }) => {
                                             />
                                         </div>
                                     </div>
-                                    <button className="button is-block is-warning is-fullwidth">
+                                    <button className="button is-block is-primary is-fullwidth">
                                         <strong>Sign Up</strong>
                                     </button>
                                 </form>
                             </div>
-                            <p className="has-text-white">
+                            <p >
                                 Already a user?{'  '}
-                                <Link to={redirect ? `/login?redirect=${redirect}` : '/login'}>Sign In</Link>
+                                <Link to={redirect ? `/login?redirect=${redirect}` : '/login'} className="has-text-white">Sign In</Link>
                             </p>
                         </div>
                     </div>

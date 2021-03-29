@@ -62,14 +62,15 @@ const Login = ({ location, history }) => {
                                             />
                                         </div>
                                     </div>
-                                    <button className="button is-block is-warning is-fullwidth">
+                                    <button className="button is-block is-primary is-fullwidth">
                                         <strong>Log in</strong>
                                     </button>
                                 </form>
                             </div>
-                            <p className="has-text-white">
+                            <p >
                                 New User?{'  '}
-                                <Link to={redirect ? `/register?redirect=${redirect}` : '/register'}>Sign Up</Link>
+                                <Link to={redirect ? `/register?redirect=${redirect}` : '/register'} className="has-text-white">Sign Up
+                                </Link>
                             </p>
                         </div>
                     </div>
