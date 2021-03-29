@@ -8,7 +8,7 @@ const Book = ({ book }) => {
             <div className="card-image has-text-centered" >
                 <figure className="pt-4">
                     <Link to={`/books/${book._id}`}>
-                        <img src={book.image} alt="" style={{ maxHeight: 220 }} />
+                        <img src={book.image} alt="" style={{maxHeight: 220}}/>
                     </Link>
                 </figure>
             </div>
@@ -22,6 +22,7 @@ const Book = ({ book }) => {
                         <Rating 
                             value={book.rating} 
                             text={`${book.numReviews} reviews`}
+                            color= '#60437e'
                         />
                 </div>
                 <div className="content is-medium">

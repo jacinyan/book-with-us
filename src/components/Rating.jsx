@@ -1,52 +1,20 @@
 import React from 'react'
 
-const Rating = ({ value, text }) => {
+const Rating = ({ value, text, color }) => {
     return (
         <div className="rating">
             <span>
-                <i
-                    className={
-                        value >= 1 ? 'fas fa-star'
-                            : value >= 0.5 ? 'fas fa-star-half-alt'
-                                : 'far fa-star'}
-                >
-                </i>
-            </span>
-            <span>
-                <i
-                    className={
-                        value >= 2 ? 'fas fa-star'
-                            : value >= 1.5 ? 'fas fa-star-half-alt'
-                                : 'far fa-star'}
-                >
-                </i>
-            </span>
-            <span>
-                <i
-                    className={
-                        value >= 3 ? 'fas fa-star'
-                            : value >= 2.5 ? 'fas fa-star-half-alt'
-                                : 'far fa-star'}
-                >
-                </i>
-            </span>
-            <span>
-                <i
-                    className={
-                        value >= 4 ? 'fas fa-star'
-                            : value >= 3.5 ? 'fas fa-star-half-alt'
-                                : 'far fa-star'}
-                >
-                </i>
-            </span>
-            <span>
-                <i
-                    className={
-                        value >= 5 ? 'fas fa-star'
-                            : value >= 4.5 ? 'fas fa-star-half-alt'
-                                : 'far fa-star'}
-                >
-                </i>
+                {[...Array(5)].map((_, index) => {
+                    const className = value >= index + 1
+                                ? 'fas fa-star'                 //full star
+                                : value >= index + .5
+                                    ? 'fas fa-star-half-alt'    //half star
+                                    : 'far fa-star'             //empty star
+                    return <i key={index} 
+                              style={{ color }} 
+                              className={className} 
+                            />
+                })}
             </span>
             <span className="pl-2">{text && text}</span>
         </div>

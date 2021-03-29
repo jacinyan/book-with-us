@@ -11,11 +11,11 @@ const Home = () => {
                 <h1 className="mb-5">New Arrivals</h1>
                 <div className="columns is-multiline is-vcentered is-mobile">
                     {books.map(book =>
-                    <Fragment key={book._id}>
-                        <div className="column is-half-mobile is-one-third-tablet is-one-quarter-desktop">
-                            <Book book={book} />
-                        </div>
-                    </Fragment>
+                        <Fragment key={book._id}>
+                            <div className="column is-half-mobile is-one-third-tablet is-one-quarter-desktop">
+                                <Book book={book} />
+                            </div>
+                        </Fragment>
                     )}
                 </div>
             </div>
