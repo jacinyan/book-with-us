@@ -5,7 +5,7 @@ const Footer = () => {
     return (
         <footer className="footer has-background-warning has-text-white">
             <div className="container is-fluid">
-                <div className="columns">
+                <div className="columns is-mobile">
                     <div className="column">
                         <p>Copyright@BooksRUs</p>
                     </div>

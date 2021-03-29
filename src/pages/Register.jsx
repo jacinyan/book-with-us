@@ -43,7 +43,7 @@ const Register = ({ location, history }) => {
                         <div className="column is-8 is-offset-2">
                             <h3 className="title has-text-white">Welcome to BooksRUS</h3>
                             <hr className="login-hr" />
-                            <p className="subtitle has-text-white">Pick your fav ones today!</p>
+                            <p className="subtitle has-text-white">Pick your fav books today!</p>
                             <div className="box has-shadow">
                                 <form onSubmit={handleSubmit}>
                                     <div className="field">
