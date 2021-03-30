@@ -6,8 +6,8 @@ import Book from '../components/Book'
 const Home = () => {
 
     return (
-        <div className="py-6">
-            <div className="container">
+        <section className="py-6">
+            <div className="container is-fluid">
                 <h1 className="mb-5">New Arrivals</h1>
                 <div className="columns is-multiline is-vcentered is-mobile">
                     {books.map(book =>
@@ -19,7 +19,7 @@ const Home = () => {
                     )}
                 </div>
             </div>
-        </div>
+        </section>
     )
 }
 

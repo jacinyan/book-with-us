@@ -19,7 +19,7 @@ const Header = () => {
                 <div className="container is-fluid">
                     <div className="navbar-brand ">
                         <Link className="navbar-item" to="/" >
-                            <img src="assets/logo.png" alt="BooksRUs Logo" />
+                            <img src="/assets/logo.png" alt="BooksRUs Logo" />
                         </Link>
                         <div className="navbar-item has-dropdown is-boxed is-hoverable">
                             <Link className="navbar-link has-text-primary" to="#">
@@ -52,7 +52,7 @@ const Header = () => {
 
                                     <div className="navbar-item">
                                         <Link to="/register" className="button has-text-white is-primary">
-                                            Sign Up
+                                            <strong>Sign Up</strong>
                                         </Link>
                                     </div>
 

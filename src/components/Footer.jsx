@@ -8,7 +8,7 @@ const Footer = () => {
             <div className="container is-fluid">
                 <div className="columns is-mobile">
                     <div className="column">
-                        <p>Copyright @ BooksRUs 2021</p>
+                        <p>Copyright @ BooksRUs</p>
                     </div>
                     <div className="column has-text-right">
                         <Link to="#" className="has-text-white">

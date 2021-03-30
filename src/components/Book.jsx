@@ -8,22 +8,24 @@ const Book = ({ book }) => {
             <div className="card-image has-text-centered" >
                 <figure className="pt-4">
                     <Link to={`/books/${book._id}`}>
-                        <img src={book.image} alt="" style={{maxHeight: 220}}/>
+                        <img src={book.image} alt="" style={{ maxHeight: 220 }} />
                     </Link>
                 </figure>
             </div>
             <div className="card-content">
-                <Link to={`/books/${book._id}`}>
-                    <div className="content">
-                        <p className="title is-6">{book.name}</p>
-                    </div>
-                </Link>
-                <div className="content is-small pt-3 ">
-                        <Rating 
-                            value={book.rating} 
-                            text={`${book.numReviews} reviews`}
-                            color= '#60437e'
-                        />
+                <div className="content ">
+                    <p className="title is-6 ">
+                        <Link to={`/books/${book._id}`} className="has-text-primary">
+                            {book.name}
+                        </Link>
+                    </p>
+                </div>
+                <div className="content is-small">
+                    <Rating
+                        value={book.rating}
+                        text={`${book.numReviews} reviews`}
+                        color='#f8d125'
+                    />
                 </div>
                 <div className="content is-medium">
                     ${book.price}
