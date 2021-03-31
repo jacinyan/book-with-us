@@ -1,9 +1,21 @@
-import React, { Fragment } from 'react'
+import axios from 'axios'
+import React, { Fragment, useState, useEffect } from 'react'
 // import { useSelector } from 'react-redux'
-import books from '../books'
 import Book from '../components/Book'
 
 const Home = () => {
+    const [books, setBooks] = useState([])
+
+    // 
+    useEffect(() => {
+      const fetchBooks =  async () => {
+            const response = await axios.get(process.env.REACT_APP_API + '/books')
+            const books = response.data;
+            setBooks(books)
+        }
+        
+        fetchBooks()
+    }, [])
 
     return (
         <section className="py-6">

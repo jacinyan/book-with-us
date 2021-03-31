@@ -1,11 +1,23 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useState, useEffect } from 'react'
+import { Link} from 'react-router-dom'
 import Rating from '../components/Rating'
-import books from '../books'
+import axios from 'axios'
 
 const BookPage = ({ match }) => {
     // book id matches the match object from props
-    const book = books.find(book => book._id === match.params.id)
+    // const book = books.find(book => book._id === match.params.id)
+    const [book, setBook] = useState({})
+
+    useEffect(() => {
+        const fetchBook = async () => {
+            const bookId = match.params.id
+            const { data } = await axios.get(process.env.REACT_APP_API + `/books/${bookId}`)
+            setBook(data);   
+        }
+
+        fetchBook()
+
+    }, [match])
 
     return (
         <div className="py-6">
@@ -43,8 +55,8 @@ const BookPage = ({ match }) => {
                                 </p>
                             </div>
                             <footer className="card-footer pb-0 ">
-                                <button 
-                                    className="card-footer-item button py-3 has-background-primary has-text-white" 
+                                <button
+                                    className="card-footer-item button py-3 has-background-primary has-text-white"
                                     disabled={book.countInStock === 0}
                                 >
                                     <strong>Add to Cart</strong>
