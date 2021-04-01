@@ -1,34 +1,34 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import Rating from '../components/Rating'
+import Rating from './Rating'
 
-const Book = ({ book }) => {
+const Item = ({ item }) => {
     return (
         <div className="card">
             <div className="card-image has-text-centered" >
                 <figure className="pt-4">
-                    <Link to={`/books/${book._id}`}>
-                        <img src={book.image} alt="" style={{ maxHeight: 220 }} />
+                    <Link to={`/items/${item._id}`}>
+                        <img src={item.image} alt="" style={{ maxHeight: 220 }} />
                     </Link>
                 </figure>
             </div>
             <div className="card-content">
                 <div className="content ">
                     <p className="title is-6 ">
-                        <Link to={`/books/${book._id}`} className="has-text-primary">
-                            {book.name}
+                        <Link to={`/items/${item._id}`} className="has-text-primary">
+                            {item.name}
                         </Link>
                     </p>
                 </div>
                 <div className="content is-small">
                     <Rating
-                        value={book.rating}
-                        text={`${book.numReviews} reviews`}
+                        value={item.rating}
+                        text={`${item.numReviews} reviews`}
                         color='#f8d125'
                     />
                 </div>
                 <div className="content is-medium">
-                    ${book.price}
+                    ${item.price}
                 </div>
             </div>
         </div>
@@ -36,4 +36,4 @@ const Book = ({ book }) => {
     )
 }
 
-export default Book
+export default Item

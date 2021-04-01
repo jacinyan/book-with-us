@@ -4,7 +4,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import Layout from './components/Layout'
 import Home from "./pages/Home";
-import BookPage from "./pages/BookPage";
+import ItemPage from "./pages/ItemPage";
 import Login from './pages/Login'
 import Register from './pages/Register'
 
@@ -15,7 +15,7 @@ function App() {
       <Layout>
         <Switch>
           <Route path='/' exact render={props => <Home {...props} />} />
-          <Route path='/books/:id' render={props => <BookPage {...props} />} />
+          <Route path='/items/:id' render={props => <ItemPage {...props} />} />
           <Route path='/login' render={props => <Login {...props} />} />
           <Route path='/register' render={props => <Register {...props} />} />
           <Redirect to="/" />

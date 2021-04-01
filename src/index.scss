@@ -15,7 +15,8 @@ $orange: #FF8C00;
 $blue-light: #5B84C4;
 
 // Update Bulma's global variables
-$family-sans-serif: "Rubik", sans-serif;
+$family-sans-serif: "Rubik",
+sans-serif;
 $grey-dark: $brown;
 $grey-light: $beige-light;
 $primary: $purple;
@@ -35,8 +36,8 @@ $input-shadow: none;
 
 // base styles
 html {
-    height:100%;
-    padding-top:3.25rem!important;
+    height: 100%;
+    padding-top: 3.25rem !important;
 }
 
 h1 {
@@ -60,61 +61,68 @@ html {
 }
 
 footer {
-    padding-bottom: 2rem!important;
+    padding-bottom: 2rem !important;
 
-    .fab{
+    .fab {
         padding-right: 1.2rem;
         font-size: 1.2rem;
         cursor: pointer;
     }
 }
 
+.loader-wrapper {
+    display: flex;
+    justify-content: center;
+    transform: translateY(10vh);
+    height: 100%;
+    width: 100%;
+        .loader {
+            height: 9rem;
+            width: 9rem;
+        }
+}
+
 /* tablet styles */
-@media screen and (min-width: 769px){
-    html{
-        font-size:1rem
+@media screen and (min-width: 769px) {
+    html {
+        font-size: 1rem
     }
 
     footer {
-        .fab{
+        .fab {
             padding-right: 1.4rem;
             font-size: 1.4rem;
         }
     }
-    
+
 }
 
 /* desktop styles */
-@media screen and (min-width: 1024px){
-    html{
-        font-size:1.05rem
+@media screen and (min-width: 1024px) {
+    html {
+        font-size: 1.05rem
     }
-    
+
     footer {
-        .fab{
+        .fab {
             padding-right: 1.6rem;
             font-size: 1.6rem;
         }
     }
-    
+
 }
 
 /* widescreen styles */
-@media screen and (min-width: 1216px){
-    html{
-        font-size:1.1rem
+@media screen and (min-width: 1216px) {
+    html {
+        font-size: 1.1rem
     }
-    
+
     footer {
-        .fab{
+        .fab {
             padding-right: 1.7rem;
             font-size: 1.7rem;
         }
     }
-    
+
 }
-
-
-
-
-

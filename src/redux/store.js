@@ -2,6 +2,7 @@ import { createStore, applyMiddleware, combineReducers } from 'redux'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import thunk from 'redux-thunk'
 
+import { itemListReducer } from './reducers/itemReducers'
 import { loginReducer, registerReducer } from './reducers/userReducers'
 
 const userInfoFromStorage = localStorage.getItem('userInfo') ?
@@ -13,6 +14,7 @@ const preloadedState = {
 }
 
 const rootReducer = combineReducers({
+    itemList: itemListReducer,
     login: loginReducer,
     register: registerReducer
 })
