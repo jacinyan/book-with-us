@@ -2,7 +2,7 @@ import React from 'react'
 
 const Loader = () => {
     return (
-        <div className="section">
+        <section className="section">
             <div className="container">
                 <div className="columns is-vcentered">
                     <div className="column is-6 is-offset-3 ">
@@ -12,7 +12,7 @@ const Loader = () => {
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
     )
 }
 
