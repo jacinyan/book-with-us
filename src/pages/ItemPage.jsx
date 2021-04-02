@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import Loader from "../components/Loader";
 import Rating from "../components/Rating";
 import Error from "../components/Error";
+import { addToCart } from "../redux/actions/cartActions";
 
 const ItemPage = ({ history, match }) => {
   const dispatch = useDispatch();
@@ -13,15 +14,17 @@ const ItemPage = ({ history, match }) => {
   const { loading, error, item } = itemDetails;
 
   const [qty, setQty] = useState(1);
+  // console.log(typeof qty);
 
   useEffect(() => {
-    console.log("useEffect -- ItemPage");
+    // console.log("useEffect -- ItemPage triggered");
     // registered :id
     dispatch(listItemDetails(match.params.id));
   }, [match, dispatch]);
 
   const handleAddToCart = () => {
-    history.push(`/cart/${match.params.id}?qty=${qty}`);
+    dispatch(addToCart(item._id, Number(qty)))
+    history.push('/cart')
   };
 
   return (

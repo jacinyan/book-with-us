@@ -3,23 +3,11 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart, removeFromCart } from "../redux/actions/cartActions";
 
-const CartPage = ({ match, location, history }) => {
-  const itemId = match.params.id;
-
-  const qty = location.search ? Number(location.search.split("=")[1]) : 1;
-  
-  useEffect(() => {
-    console.log("useEffect -- CartPage");
-    if (itemId) {
-      dispatch(addToCart(itemId, qty));
-    }
-  }, [dispatch, itemId, qty]);
-  
+const CartPage = ({ match, location, history }) => {  
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
   const { cartItems } = cart;
-
-
+ 
   const handleRemoveFromCart = (id) => {
     dispatch(removeFromCart(id))
   };

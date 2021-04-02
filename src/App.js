@@ -17,7 +17,7 @@ function App() {
         <Switch>
           <Route path='/' exact render={props => <Home {...props} />} />
           <Route path='/items/:id' render={props => <ItemPage {...props} />} />
-          <Route path='/cart/:id' render={props => <CartPage {...props} />} />
+          <Route path='/cart' render={props => <CartPage {...props} />} />
           <Route path='/login' render={props => <Login {...props} />} />
           <Route path='/register' render={props => <Register {...props} />} />
           {/* <Redirect to="/" /> */}
