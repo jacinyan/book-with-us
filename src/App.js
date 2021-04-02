@@ -5,6 +5,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import Layout from './components/Layout'
 import Home from "./pages/Home";
 import ItemPage from "./pages/ItemPage";
+import CartPage from './pages/CartPage';
 import Login from './pages/Login'
 import Register from './pages/Register'
 
@@ -16,9 +17,10 @@ function App() {
         <Switch>
           <Route path='/' exact render={props => <Home {...props} />} />
           <Route path='/items/:id' render={props => <ItemPage {...props} />} />
+          <Route path='/cart/:id' render={props => <CartPage {...props} />} />
           <Route path='/login' render={props => <Login {...props} />} />
           <Route path='/register' render={props => <Register {...props} />} />
-          <Redirect to="/" />
+          {/* <Redirect to="/" /> */}
         </Switch>
       </Layout>
     </>

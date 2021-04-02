@@ -1,19 +1,19 @@
 import {
-    ITEM_LIST_REQUEST,
-    ITEM_LIST_SUCCESS,
-    ITEM_LIST_FAILURE,
+    ITEMS_LIST_REQUEST,
+    ITEMS_LIST_SUCCESS,
+    ITEMS_LIST_FAILURE,
     ITEM_DETAILS_REQUEST,
     ITEM_DETAILS_SUCCESS,
     ITEM_DETAILS_FAILURE
 } from '../constants/itemConstants'
 
-export const itemListReducer = (state = { items: [] }, action) => {
+export const itemsListReducer = (state = { items: [] }, action) => {
     switch (action.type) {
-        case ITEM_LIST_REQUEST:
+        case ITEMS_LIST_REQUEST:
             return { loading: true, items: [] }
-        case ITEM_LIST_SUCCESS:
+        case ITEMS_LIST_SUCCESS:
             return { loading: false, items: action.payload }
-        case ITEM_LIST_FAILURE:
+        case ITEMS_LIST_FAILURE:
             return { loading: false, error: action.payload }
         default:
             return state
