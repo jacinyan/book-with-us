@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { listItemDetails } from "../redux/actions/itemActions";
+import { addToCart } from "../redux/actions/cartActions";
 
-import { Link } from "react-router-dom";
 import Loader from "../components/Loader";
 import Rating from "../components/Rating";
 import Error from "../components/Error";
-import { addToCart } from "../redux/actions/cartActions";
 
 const ItemPage = ({ history, match }) => {
   const dispatch = useDispatch();

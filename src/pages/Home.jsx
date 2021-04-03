@@ -8,14 +8,13 @@ import Error from "../components/Error";
 
 const Home = () => {
   const dispatch = useDispatch();
-  // get state object
   const itemsList = useSelector((state) => state.itemsList);
   const { loading, error, items } = itemsList;
 
   useEffect(() => {
     dispatch(listItems());
   }, [dispatch]);
-
+  
   return (
     <section className="py-6">
       <div className="container is-fluid">

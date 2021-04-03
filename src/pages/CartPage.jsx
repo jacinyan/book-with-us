@@ -1,13 +1,13 @@
-import React, { useEffect, Fragment } from "react";
+import React, { Fragment } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart, removeFromCart } from "../redux/actions/cartActions";
 
-const CartPage = ({ match, location, history }) => {  
+const CartPage = ({history }) => {  
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
   const { cartItems } = cart;
- 
+  
   const handleRemoveFromCart = (id) => {
     dispatch(removeFromCart(id))
   };
@@ -15,7 +15,6 @@ const CartPage = ({ match, location, history }) => {
   const handleCheckout = () => {
       history.push(`/login?redirect=shipping`)
   }
-
   return (
     <section className="py-6">
       <div className="container is-fluid ">

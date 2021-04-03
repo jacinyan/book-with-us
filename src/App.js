@@ -20,7 +20,7 @@ function App() {
           <Route path='/cart' render={props => <CartPage {...props} />} />
           <Route path='/login' render={props => <Login {...props} />} />
           <Route path='/register' render={props => <Register {...props} />} />
-          {/* <Redirect to="/" /> */}
+          <Redirect to="/" />
         </Switch>
       </Layout>
     </>
