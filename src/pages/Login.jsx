@@ -4,7 +4,6 @@ import { useSelector, useDispatch } from "react-redux";
 import Loader from "../components/Loader";
 
 import { login } from "../redux/actions/userActions";
-import { USER_LOGIN_REQUEST } from "../redux/constants/userConstants";
 
 const Login = ({ location, history }) => {
   const [email, setEmail] = useState("");
@@ -12,19 +11,12 @@ const Login = ({ location, history }) => {
 
   const dispatch = useDispatch();
 
-  const loginState = useSelector((state) => state.login);
-  const { loading, error, userInfo } = loginState;
+  const userLogin = useSelector((state) => state.userLogin);
+  const { loading, userInfo } = userLogin;
 
-  // check login state
   const redirect = location.search ? location.search.split("=")[1] : "/";
 
-  // if logged in, login button disabled
   useEffect(() => {
-    if (error) {
-      history.push("/login");
-      return;
-    }
-
     if (userInfo) {
       history.push(redirect);
     }
@@ -40,7 +32,7 @@ const Login = ({ location, history }) => {
       {loading ? (
         <Loader />
       ) : (
-        <div className="hero is-primary is-fullheight-with-navbar">
+        <section className="hero is-primary is-fullheight-with-navbar">
           <div className="hero-body">
             <div className="container has-text-centered">
               <div className="columns">
@@ -97,7 +89,7 @@ const Login = ({ location, history }) => {
               </div>
             </div>
           </div>
-        </div>
+        </section>
       )}
     </>
   );

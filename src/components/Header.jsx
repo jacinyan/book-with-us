@@ -5,8 +5,8 @@ import { logout } from "../redux/actions/userActions";
 
 const Header = () => {
   const dispatch = useDispatch();
-  const loginState = useSelector((state) => state.login);
-  const { userInfo } = loginState;
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
 
   const handleLogout = (e) => {
     e.preventDefault();
@@ -21,19 +21,7 @@ const Header = () => {
             <Link className="navbar-item" to="/">
               <img src="/assets/logo.png" alt="BooksRUs Logo" />
             </Link>
-            <div className="navbar-item has-dropdown is-boxed is-hoverable">
-              <Link className="navbar-link has-text-primary" to="#">
-                Docs
-              </Link>
-              <div className="navbar-dropdown">
-                <Link className="navbar-item" to="#">
-                  Overview
-                </Link>
-                <Link className="navbar-item" to="#">
-                  Elements
-                </Link>
-              </div>
-            </div>
+
             <Link to="#" className="navbar-burger">
               <span aria-hidden="true"></span>
               <span aria-hidden="true"></span>
@@ -43,13 +31,12 @@ const Header = () => {
 
           <div className="navbar-menu">
             <div className="navbar-end">
-              {userInfo === null ? (
+              <Link to="/cart" className="navbar-item has-text-primary">
+                <i className="fas fa-shopping-cart"></i>
+                Cart
+              </Link>
+              {!userInfo ? (
                 <>
-                  <Link to="/cart" className="navbar-item has-text-primary">
-                    <i className="fas fa-shopping-cart"></i>
-                    Cart
-                  </Link>
-
                   <div className="navbar-item">
                     <Link
                       to="/register"
@@ -58,7 +45,6 @@ const Header = () => {
                       <strong>Sign Up</strong>
                     </Link>
                   </div>
-
                   <Link to="/login" className="navbar-item has-text-primary">
                     <i className="fas fa-user"></i>
                     Sign In
@@ -66,10 +52,24 @@ const Header = () => {
                 </>
               ) : (
                 <>
-                  <div className="navbar-item " onClick={handleLogout}>
-                    <Link to="#" className="has-text-primary">
-                      Log Out
+                  <div className="navbar-item has-dropdown is-boxed is-hoverable">
+                    <Link className="navbar-link has-text-primary" to="#">
+                      {userInfo.username}
                     </Link>
+                    <div className="navbar-dropdown">
+                      <Link
+                        className="navbar-item has-text-primary"
+                        to="/users/profile"
+                      >
+                        Profile
+                      </Link>
+                      <hr className="navbar-divider"></hr>
+                      <div className="navbar-item " onClick={handleLogout}>
+                        <Link to="#" className="has-text-grey">
+                          Log Out
+                        </Link>
+                      </div>
+                    </div>
                   </div>
                 </>
               )}

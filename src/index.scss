@@ -1,23 +1,22 @@
 @charset "utf-8";
 
 // Import a Google Font
-@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&display=swap");
 
 // Import font awesome logos
-@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css');
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css");
 
 // Set your brand colors
 $purple: #60437e;
-$brown: #757763;
-$beige-light: #D0D1CD;
+$grey: #757763;
+$beige-light: #d0d1cd;
 // $beige-lighter: #EFF0EB;
-$orange: #FF8C00;
-$blue-light: #5B84C4;
+$orange: #ff8c00;
+$blue-light: #5b84c4;
 
 // Update Bulma's global variables
-$family-sans-serif: "Rubik",
-sans-serif;
-$grey-dark: $brown;
+$family-sans-serif: "Rubik", sans-serif;
+$grey-dark: $grey;
 $grey-light: $beige-light;
 $primary: $purple;
 $warning: $orange;
@@ -32,97 +31,93 @@ $input-border-color: transparent;
 $input-shadow: none;
 
 // Import only what you need from Bulma
-@import '../node_modules/bulma/bulma.sass';
+@import "../node_modules/bulma/bulma.sass";
 
 // base styles
 html {
-    height: 100%;
-    padding-top: 3.25rem !important;
+  height: 100%;
+  padding-top: 3.25rem !important;
 }
 
 h1 {
-    font-size: 2rem
+  font-size: 2rem;
 }
 
 .navbar {
-
-    & img {
-        max-height: 4rem;
-    }
+  & img {
+    max-height: 4rem;
+  }
 }
 
 main {
-    min-height: 80vh;
+  min-height: 80vh;
 }
 
 /* mobile styles */
 html {
-    font-size: 0.95rem;
+  font-size: 0.95rem;
 }
 
 footer {
-    padding-bottom: 2rem !important;
+  padding-bottom: 2rem !important;
 
-    .fab {
-        padding-right: 1.2rem;
-        font-size: 1.2rem;
-        cursor: pointer;
-    }
+  .fab {
+    padding-right: 1.2rem;
+    font-size: 1.2rem;
+    cursor: pointer;
+  }
 }
 
 .loader-wrapper {
-    display: flex;
-    justify-content: center;
-    transform: translateY(10vh);
-    height: 100%;
-    width: 100%;
-        .loader {
-            height: 9rem;
-            width: 9rem;
-        }
+  display: flex;
+  justify-content: center;
+  transform: translateY(10vh);
+  height: 100%;
+  width: 100%;
+  .loader {
+    height: 9rem;
+    width: 9rem;
+  }
 }
 
 /* tablet styles */
 @media screen and (min-width: 769px) {
-    html {
-        font-size: 1rem
-    }
+  html {
+    font-size: 1rem;
+  }
 
-    footer {
-        .fab {
-            padding-right: 1.4rem;
-            font-size: 1.4rem;
-        }
+  footer {
+    .fab {
+      padding-right: 1.4rem;
+      font-size: 1.4rem;
     }
-
+  }
 }
 
 /* desktop styles */
 @media screen and (min-width: 1024px) {
-    html {
-        font-size: 1.05rem
-    }
+  html {
+    font-size: 1.05rem;
+  }
 
-    footer {
-        .fab {
-            padding-right: 1.6rem;
-            font-size: 1.6rem;
-        }
+  footer {
+    .fab {
+      padding-right: 1.6rem;
+      font-size: 1.6rem;
     }
-
+  }
 }
 
 /* widescreen styles */
 @media screen and (min-width: 1216px) {
-    html {
-        font-size: 1.1rem
-    }
+  html {
+    font-size: 1.1rem;
+  }
 
-    footer {
-        .fab {
-            padding-right: 1.7rem;
-            font-size: 1.7rem;
-        }
+  footer {
+    .fab {
+      padding-right: 1.7rem;
+      font-size: 1.7rem;
     }
-
+  }
 }

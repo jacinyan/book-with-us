@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 
 import { register } from "../redux/actions/userActions";
 import { toast } from "react-toastify";
+import Loader from "../components/Loader";
 
 const Register = ({ location, history }) => {
   const [username, setUsername] = useState("");
@@ -13,13 +14,11 @@ const Register = ({ location, history }) => {
 
   const dispatch = useDispatch();
 
-  // check register state
-  const registerState = useSelector((state) => state.register);
-  const { userInfo } = registerState;
+  const userRegister = useSelector((state) => state.userRegister);
+  const { loading, userInfo } = userRegister;
 
   const redirect = location.search ? location.search.split("=")[1] : "/";
 
-  // if registered and logged in, register button disabled
   useEffect(() => {
     if (userInfo) {
       history.push(redirect);
@@ -36,83 +35,89 @@ const Register = ({ location, history }) => {
   };
 
   return (
-    <section className="hero is-primary is-fullheight-with-navbar">
-      <div className="hero-body">
-        <div className="container has-text-centered">
-          <div className="columns">
-            <div className="column is-8 is-offset-2">
-              <h3 className="title has-text-white">Welcome to BooksRUS</h3>
-              <hr className="login-hr" />
-              <p className="subtitle has-text-white">
-                Pick your fav books today!
-              </p>
-              <div className="box has-shadow">
-                <form onSubmit={handleSubmit}>
-                  <div className="field">
-                    <div className="control">
-                      <input
-                        className="input"
-                        type="text"
-                        placeholder="Username"
-                        autoFocus=""
-                        value={username}
-                        onChange={(e) => setUsername(e.target.value)}
-                      />
-                    </div>
+    <>
+      {loading ? (
+        <Loader />
+      ) : (
+        <section className="hero is-primary is-fullheight-with-navbar">
+          <div className="hero-body">
+            <div className="container has-text-centered">
+              <div className="columns">
+                <div className="column is-8 is-offset-2">
+                  <h3 className="title has-text-white">Welcome to BooksRUS</h3>
+                  <hr className="login-hr" />
+                  <p className="subtitle has-text-white">
+                    Pick your fav books today!
+                  </p>
+                  <div className="box has-shadow">
+                    <form onSubmit={handleSubmit}>
+                      <div className="field">
+                        <div className="control">
+                          <input
+                            className="input"
+                            type="text"
+                            placeholder="Username"
+                            autoFocus=""
+                            value={username}
+                            onChange={(e) => setUsername(e.target.value)}
+                          />
+                        </div>
+                      </div>
+                      <div className="field">
+                        <div className="control">
+                          <input
+                            className="input"
+                            type="email"
+                            placeholder="Email"
+                            autoFocus=""
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                          />
+                        </div>
+                      </div>
+                      <div className="field">
+                        <div className="control">
+                          <input
+                            className="input "
+                            type="password"
+                            placeholder="Password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                          />
+                        </div>
+                      </div>
+                      <div className="field">
+                        <div className="control">
+                          <input
+                            className="input"
+                            type="password"
+                            placeholder="Confirm Password"
+                            value={confirmPassword}
+                            onChange={(e) => setConfirmPassword(e.target.value)}
+                          />
+                        </div>
+                      </div>
+                      <button className="button is-block is-primary is-fullwidth">
+                        <strong>Sign Up</strong>
+                      </button>
+                    </form>
                   </div>
-                  <div className="field">
-                    <div className="control">
-                      <input
-                        className="input"
-                        type="email"
-                        placeholder="Email"
-                        autoFocus=""
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                      />
-                    </div>
-                  </div>
-                  <div className="field">
-                    <div className="control">
-                      <input
-                        className="input "
-                        type="password"
-                        placeholder="Password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                      />
-                    </div>
-                  </div>
-                  <div className="field">
-                    <div className="control">
-                      <input
-                        className="input"
-                        type="password"
-                        placeholder="Confirm Password"
-                        value={confirmPassword}
-                        onChange={(e) => setConfirmPassword(e.target.value)}
-                      />
-                    </div>
-                  </div>
-                  <button className="button is-block is-primary is-fullwidth">
-                    <strong>Sign Up</strong>
-                  </button>
-                </form>
+                  <p>
+                    Have an account?{"  "}
+                    <Link
+                      to={redirect ? `/login?redirect=${redirect}` : "/login"}
+                      className="has-text-white"
+                    >
+                      Sign In
+                    </Link>
+                  </p>
+                </div>
               </div>
-              <p>
-                Already a user?{"  "}
-                <Link
-                  to={redirect ? `/login?redirect=${redirect}` : "/login"}
-                  className="has-text-white"
-                >
-                  Sign In
-                </Link>
-              </p>
             </div>
           </div>
-        </div>
-      </div>
-    </section>
+        </section>
+      )}
+    </>
   );
 };
 

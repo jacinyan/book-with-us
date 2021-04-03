@@ -23,8 +23,8 @@ const ItemPage = ({ history, match }) => {
   }, [match, dispatch]);
 
   const handleAddToCart = () => {
-    dispatch(addToCart(item._id, Number(qty)))
-    history.push('/cart')
+    dispatch(addToCart(item._id, Number(qty)));
+    history.push("/cart");
   };
 
   return (

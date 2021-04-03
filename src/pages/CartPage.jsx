@@ -3,18 +3,18 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart, removeFromCart } from "../redux/actions/cartActions";
 
-const CartPage = ({history }) => {  
+const CartPage = ({ history }) => {
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
   const { cartItems } = cart;
-  
+
   const handleRemoveFromCart = (id) => {
-    dispatch(removeFromCart(id))
+    dispatch(removeFromCart(id));
   };
 
   const handleCheckout = () => {
-      history.push(`/login?redirect=shipping`)
-  }
+    history.push(`/login?redirect=shipping`);
+  };
   return (
     <section className="py-6">
       <div className="container is-fluid ">
@@ -32,7 +32,9 @@ const CartPage = ({history }) => {
                     <div className="column is-1 ">
                       <button
                         className="button is-small"
-                        onClick={()=>{handleRemoveFromCart(cartItem.item)}}
+                        onClick={() => {
+                          handleRemoveFromCart(cartItem.item);
+                        }}
                       >
                         <i className="fas fa-trash"></i>
                       </button>
