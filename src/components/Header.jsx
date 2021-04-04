@@ -59,7 +59,7 @@ const Header = () => {
                     <div className="navbar-dropdown">
                       <Link
                         className="navbar-item has-text-primary"
-                        to="/users/profile"
+                        to="/profile"
                       >
                         Profile
                       </Link>

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link} from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { listItemDetails } from "../redux/actions/itemActions";
 import { addToCart } from "../redux/actions/cartActions";
@@ -8,7 +8,7 @@ import Loader from "../components/Loader";
 import Rating from "../components/Rating";
 import Error from "../components/Error";
 
-const ItemPage = ({ history, match }) => {
+const ItemPage = ({ history,match }) => {
   const dispatch = useDispatch();
   const itemDetails = useSelector((state) => state.itemDetails);
   const { loading, error, item } = itemDetails;

@@ -25,7 +25,7 @@ function App() {
           <Route path="/login" render={(props) => <Login {...props} />} />
           <Route path="/register" render={(props) => <Register {...props} />} />
           <Route path="/profile" render={(props) => <Profile {...props} />} />
-          <Redirect to="/" />
+          {/* <Redirect to="/" /> */}
         </Switch>
       </Layout>
     </>

@@ -6,7 +6,7 @@ import { register } from "../redux/actions/userActions";
 import { toast } from "react-toastify";
 import Loader from "../components/Loader";
 
-const Register = ({ location, history }) => {
+const Register = ({ history, location }) => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -17,7 +17,9 @@ const Register = ({ location, history }) => {
   const userRegister = useSelector((state) => state.userRegister);
   const { loading, userInfo } = userRegister;
 
-  const redirect = location.search ? location.search.split("=")[1] : "/";
+  const redirect = location.search
+    ? new URLSearchParams(location.search).get("redirect")
+    : "/";
 
   useEffect(() => {
     if (userInfo) {

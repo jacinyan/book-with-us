@@ -4,8 +4,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { getUserDetails } from "../redux/actions/userActions";
 import { toast } from "react-toastify";
 import Loader from "../components/Loader";
+import Error from "../components/Error";
 
-const Profile = ({ location, history }) => {
+const Profile = ({ history }) => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -14,8 +15,9 @@ const Profile = ({ location, history }) => {
   const dispatch = useDispatch();
 
   const userDetails = useSelector((state) => state.userDetails);
-  const { loading, user } = userDetails;
+  const { loading, error, user } = userDetails;
 
+  // avoid fetching user details should further needs come up, e.g user address
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
@@ -27,81 +29,92 @@ const Profile = ({ location, history }) => {
         dispatch(getUserDetails("profile"));
       } else {
         setUsername(user.username);
-        setUsername(user.email);
+        setEmail(user.email);
       }
     }
-  }, [dispatch, history, userInfo]);
+  }, [dispatch, history, userInfo, user]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (password !== confirmPassword) {
       toast.error("Passwords do not match");
     } else {
-      //   dispatch(register(username, email, password));
+      // dispatch update profile
     }
   };
 
   return (
-    <section className="py-6">
-      <div className="container ">
-        <div className="columns is-multiline">
-          <div className="column is-3">
-            <form onSubmit={handleSubmit}>
-              <div className="field">
-                <div className="control">
-                  <input
-                    className="input"
-                    type="text"
-                    placeholder="Username"
-                    autoFocus=""
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                  />
-                </div>
+    <>
+      {loading ? (
+        <Loader />
+      ) : error ? (
+        <Error />
+      ) : (
+        <section className="py-6">
+          <div className="container ">
+            <div className="columns is-multiline">
+              <div className="column is-4">
+                <h2 className="mb-4">Profile</h2>
+                <form onSubmit={handleSubmit}>
+                  <div className="field">
+                    <div className="control">
+                      <input
+                        className="input"
+                        type="text"
+                        placeholder="Username"
+                        autoFocus=""
+                        value={username}
+                        onChange={(e) => setUsername(e.target.value)}
+                      />
+                    </div>
+                  </div>
+                  <div className="field">
+                    <div className="control">
+                      <input
+                        className="input"
+                        type="email"
+                        placeholder="Email"
+                        autoFocus=""
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                      />
+                    </div>
+                  </div>
+                  <div className="field">
+                    <div className="control">
+                      <input
+                        className="input "
+                        type="password"
+                        placeholder="Password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                      />
+                    </div>
+                  </div>
+                  <div className="field">
+                    <div className="control">
+                      <input
+                        className="input"
+                        type="password"
+                        placeholder="Confirm Password"
+                        value={confirmPassword}
+                        onChange={(e) => setConfirmPassword(e.target.value)}
+                      />
+                    </div>
+                  </div>
+                  <button className="button is-block is-primary is-fullwidth">
+                    <strong>Update</strong>
+                  </button>
+                </form>
               </div>
-              <div className="field">
-                <div className="control">
-                  <input
-                    className="input"
-                    type="email"
-                    placeholder="Email"
-                    autoFocus=""
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                  />
-                </div>
+              <div className="column is-8 ">
+                <h2 className="mb-4">Order</h2>
               </div>
-              <div className="field">
-                <div className="control">
-                  <input
-                    className="input "
-                    type="password"
-                    placeholder="Password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                  />
-                </div>
-              </div>
-              <div className="field">
-                <div className="control">
-                  <input
-                    className="input"
-                    type="password"
-                    placeholder="Confirm Password"
-                    value={confirmPassword}
-                    onChange={(e) => setConfirmPassword(e.target.value)}
-                  />
-                </div>
-              </div>
-              <button className="button is-block is-primary is-fullwidth">
-                <strong>Sign Up</strong>
-              </button>
-            </form>
+            </div>
           </div>
-          <div className="column is-9">Profile</div>
-        </div>
-      </div>
-    </section>
+        </section>
+      )}
+    </>
   );
 };
 

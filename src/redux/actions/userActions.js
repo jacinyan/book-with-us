@@ -8,7 +8,7 @@ import {
   USER_LOGIN_REQUEST,
   USER_DETAILS_REQUEST,
   USER_DETAILS_SUCCESS,
-  USER_DETAILS_FAILURE
+  USER_DETAILS_FAILURE,
 } from "../constants/userConstants";
 
 import { toast } from "react-toastify";
@@ -127,7 +127,7 @@ export const getUserDetails = (id) => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.post(
+    const { data } = await axios.get(
       process.env.REACT_APP_API + `/users/${id}`,
       config
     );
@@ -137,12 +137,15 @@ export const getUserDetails = (id) => async (dispatch, getState) => {
       payload: data,
     });
 
-    localStorage.setItem("userInfo", JSON.stringify(data));
   } catch (error) {
     const finalMessage =
       error.response && error.response.data.message
         ? error.response.data.message
         : error.message;
+
+    if (finalMessage === "Not authorized, token failed") {
+      dispatch(logout());
+    }
     dispatch({
       type: USER_DETAILS_FAILURE,
       payload: finalMessage,
