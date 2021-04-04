@@ -16,11 +16,11 @@ const Login = ({ location, history }) => {
 
   const redirect = location.search
     ? new URLSearchParams(location.search).get("redirect")
-    : "/";
-
+    : "";
+  
   useEffect(() => {
     if (userInfo) {
-      history.push(redirect);
+      history.push(`/${redirect}`);
     }
   }, [history, userInfo, redirect]);
 

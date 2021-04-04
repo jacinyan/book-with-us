@@ -3,7 +3,12 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import thunk from "redux-thunk";
 
 import { itemDetailsReducer, itemsListReducer } from "./reducers/itemReducers";
-import { userLoginReducer, userRegisterReducer, userDetailsReducer } from "./reducers/userReducers";
+import {
+  userLoginReducer,
+  userRegisterReducer,
+  userDetailsReducer,
+  userUpdateProfileReducer,
+} from "./reducers/userReducers";
 import { cartReducer } from "../redux/reducers/cartReducers";
 
 const cartItemsFromStorage = localStorage.getItem("cartItems")
@@ -25,7 +30,8 @@ const rootReducer = combineReducers({
   cart: cartReducer,
   userLogin: userLoginReducer,
   userRegister: userRegisterReducer,
-  userDetails: userDetailsReducer
+  userDetails: userDetailsReducer,
+  userUpdateProfile: userUpdateProfileReducer,
 });
 
 export default createStore(

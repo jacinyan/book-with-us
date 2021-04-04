@@ -11,6 +11,7 @@ import Register from "./pages/Register";
 import Profile from "./pages/Profile";
 
 function App() {
+  // console.count('App rendered');
   return (
     <>
       <ToastContainer />

@@ -1,12 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
-import { getUserDetails } from "../redux/actions/userActions";
+import {
+  getUserDetails,
+  updateUserProfile,
+} from "../redux/actions/userActions";
+import { USER_UPDATE_PROFILE_RESET } from "../redux/constants/userConstants";
+
 import { toast } from "react-toastify";
 import Loader from "../components/Loader";
 import Error from "../components/Error";
 
 const Profile = ({ history }) => {
+  // console.count('Profile rendered')
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -16,42 +22,58 @@ const Profile = ({ history }) => {
 
   const userDetails = useSelector((state) => state.userDetails);
   const { loading, error, user } = userDetails;
+  // console.log(user);
 
-  // avoid fetching user details should further needs come up, e.g user address
+  // further user details, e.g. user address should be fetched by sending new requests as local storage saves only limited information,
+  // No need to fetch information from local storage either since that requires JSON.parse() that leads to code redundancy
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
+  const userUpdateProfile = useSelector((state) => state.userUpdateProfile);
+  const { success } = userUpdateProfile;
+
   useEffect(() => {
+    // console.count('useEffect --profile triggered')
     if (!userInfo) {
       history.push("/login");
     } else {
-      if (!user.username) {
+      if (!user || !user.username || success) {
+        dispatch({
+          type: USER_UPDATE_PROFILE_RESET,
+        });
         dispatch(getUserDetails("profile"));
       } else {
         setUsername(user.username);
         setEmail(user.email);
       }
     }
-  }, [dispatch, history, userInfo, user]);
+  }, [dispatch, history, userInfo, user, success]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (password !== confirmPassword) {
       toast.error("Passwords do not match");
     } else {
-      // dispatch update profile
+      dispatch(
+        updateUserProfile({
+          id: user._id,
+          username,
+          email,
+          password,
+        })
+      );
     }
   };
 
   return (
     <>
-      {loading ? (
-        <Loader />
-      ) : error ? (
-        <Error />
-      ) : (
-        <section className="py-6">
-          <div className="container ">
+      <section className="py-6">
+        <div className="container ">
+          {loading ? (
+            <Loader />
+          ) : error ? (
+            <Error />
+          ) : (
             <div className="columns is-multiline">
               <div className="column is-4">
                 <h2 className="mb-4">Profile</h2>
@@ -61,7 +83,7 @@ const Profile = ({ history }) => {
                       <input
                         className="input"
                         type="text"
-                        placeholder="Username"
+                        placeholder="Update Username"
                         autoFocus=""
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
@@ -73,7 +95,7 @@ const Profile = ({ history }) => {
                       <input
                         className="input"
                         type="email"
-                        placeholder="Email"
+                        placeholder="Update Email"
                         autoFocus=""
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
@@ -85,7 +107,7 @@ const Profile = ({ history }) => {
                       <input
                         className="input "
                         type="password"
-                        placeholder="Password"
+                        placeholder="Update Password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                       />
@@ -111,9 +133,9 @@ const Profile = ({ history }) => {
                 <h2 className="mb-4">Order</h2>
               </div>
             </div>
-          </div>
-        </section>
-      )}
+          )}
+        </div>
+      </section>
     </>
   );
 };

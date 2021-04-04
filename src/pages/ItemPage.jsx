@@ -14,10 +14,9 @@ const ItemPage = ({ history,match }) => {
   const { loading, error, item } = itemDetails;
 
   const [qty, setQty] = useState(1);
-  // console.log(typeof qty);
 
   useEffect(() => {
-    // console.log("useEffect -- ItemPage triggered");
+    // console.count("useEffect -- ItemPage triggered");
     // registered :id
     dispatch(listItemDetails(match.params.id));
   }, [match, dispatch]);

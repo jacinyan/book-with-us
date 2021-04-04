@@ -11,7 +11,7 @@ const CartPage = ({history}) => {
   const handleRemoveFromCart = (id) => {
     dispatch(removeFromCart(id));
   };
-
+  
   const handleCheckout = () => {
     history.push(`/login?redirect=shipping`);
   };

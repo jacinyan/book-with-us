@@ -15,15 +15,17 @@ const Register = ({ history, location }) => {
   const dispatch = useDispatch();
 
   const userRegister = useSelector((state) => state.userRegister);
-  const { loading, userInfo } = userRegister;
+  const { loading } = userRegister;
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
 
   const redirect = location.search
     ? new URLSearchParams(location.search).get("redirect")
-    : "/";
+    : "";
 
   useEffect(() => {
     if (userInfo) {
-      history.push(redirect);
+      history.push(`/${redirect}`);
     }
   }, [history, userInfo, redirect]);
 
