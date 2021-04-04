@@ -32,8 +32,12 @@ const Header = () => {
           <div className="navbar-menu">
             <div className="navbar-end">
               <Link to="/cart" className="navbar-item has-text-primary">
-                <i className="fas fa-shopping-cart"></i>
-                Cart
+              <span className="icon-text">
+                      <span className="icon">
+                        <i className="fas fa-shopping-cart"></i>
+                      </span>
+                      <span>Cart</span>
+                    </span>
               </Link>
               {!userInfo ? (
                 <>
@@ -46,8 +50,12 @@ const Header = () => {
                     </Link>
                   </div>
                   <Link to="/login" className="navbar-item has-text-primary">
-                    <i className="fas fa-user"></i>
-                    Sign In
+                    <span className="icon-text">
+                      <span className="icon">
+                        <i className="fas fa-user"></i>
+                      </span>
+                      <span>Sign In</span>
+                    </span>
                   </Link>
                 </>
               ) : (

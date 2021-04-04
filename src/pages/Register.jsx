@@ -56,7 +56,7 @@ const Register = ({ history, location }) => {
                   <div className="box has-shadow">
                     <form onSubmit={handleSubmit}>
                       <div className="field">
-                        <div className="control">
+                        <div className="control has-icons-left">
                           <input
                             className="input"
                             type="text"
@@ -65,10 +65,13 @@ const Register = ({ history, location }) => {
                             value={username}
                             onChange={(e) => setUsername(e.target.value)}
                           />
+                          <span class="icon is-small is-left">
+                            <i class="fas fa-user"></i>
+                          </span>
                         </div>
                       </div>
                       <div className="field">
-                        <div className="control">
+                        <div className="control has-icons-left">
                           <input
                             className="input"
                             type="email"
@@ -77,10 +80,14 @@ const Register = ({ history, location }) => {
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                           />
+                          
+                          <span class="icon is-small is-left">
+                            <i class="fas fa-envelope"></i>
+                          </span>
                         </div>
                       </div>
                       <div className="field">
-                        <div className="control">
+                        <div className="control has-icons-left">
                           <input
                             className="input "
                             type="password"
@@ -88,10 +95,13 @@ const Register = ({ history, location }) => {
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                           />
+                          <span class="icon is-small is-left">
+                            <i class="fas fa-lock"></i>
+                          </span>
                         </div>
                       </div>
                       <div className="field">
-                        <div className="control">
+                        <div className="control has-icons-left">
                           <input
                             className="input"
                             type="password"
@@ -99,6 +109,9 @@ const Register = ({ history, location }) => {
                             value={confirmPassword}
                             onChange={(e) => setConfirmPassword(e.target.value)}
                           />
+                          <span class="icon is-small is-left">
+                            <i class="fas fa-lock"></i>
+                          </span>
                         </div>
                       </div>
                       <button className="button is-block is-primary is-fullwidth">

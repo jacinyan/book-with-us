@@ -25,7 +25,7 @@ const Profile = ({ history }) => {
   // console.log(user);
 
   // further user details, e.g. user address should be fetched by sending new requests as local storage saves only limited information,
-  // No need to fetch information from local storage either since that requires JSON.parse() that leads to code redundancy
+  // No need to fetch information from local storage either, since that requires JSON.parse() that leads to code redundancy
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
@@ -77,57 +77,59 @@ const Profile = ({ history }) => {
             <div className="columns is-multiline">
               <div className="column is-4">
                 <h2 className="mb-4">Profile</h2>
-                <form onSubmit={handleSubmit}>
-                  <div className="field">
-                    <div className="control">
-                      <input
-                        className="input"
-                        type="text"
-                        placeholder="Update Username"
-                        autoFocus=""
-                        value={username}
-                        onChange={(e) => setUsername(e.target.value)}
-                      />
+                <div className="box has-shadow">
+                  <form onSubmit={handleSubmit}>
+                    <div className="field">
+                      <div className="control">
+                        <input
+                          className="input"
+                          type="text"
+                          placeholder="Update Username"
+                          autoFocus=""
+                          value={username}
+                          onChange={(e) => setUsername(e.target.value)}
+                        />
+                      </div>
                     </div>
-                  </div>
-                  <div className="field">
-                    <div className="control">
-                      <input
-                        className="input"
-                        type="email"
-                        placeholder="Update Email"
-                        autoFocus=""
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                      />
+                    <div className="field">
+                      <div className="control">
+                        <input
+                          className="input"
+                          type="email"
+                          placeholder="Update Email"
+                          autoFocus=""
+                          value={email}
+                          onChange={(e) => setEmail(e.target.value)}
+                        />
+                      </div>
                     </div>
-                  </div>
-                  <div className="field">
-                    <div className="control">
-                      <input
-                        className="input "
-                        type="password"
-                        placeholder="Update Password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                      />
+                    <div className="field">
+                      <div className="control">
+                        <input
+                          className="input "
+                          type="password"
+                          placeholder="Update Password"
+                          value={password}
+                          onChange={(e) => setPassword(e.target.value)}
+                        />
+                      </div>
                     </div>
-                  </div>
-                  <div className="field">
-                    <div className="control">
-                      <input
-                        className="input"
-                        type="password"
-                        placeholder="Confirm Password"
-                        value={confirmPassword}
-                        onChange={(e) => setConfirmPassword(e.target.value)}
-                      />
+                    <div className="field">
+                      <div className="control">
+                        <input
+                          className="input"
+                          type="password"
+                          placeholder="Confirm Password"
+                          value={confirmPassword}
+                          onChange={(e) => setConfirmPassword(e.target.value)}
+                        />
+                      </div>
                     </div>
-                  </div>
-                  <button className="button is-block is-primary is-fullwidth">
-                    <strong>Update</strong>
-                  </button>
-                </form>
+                    <button className="button is-block is-primary is-fullwidth">
+                      <strong>Update</strong>
+                    </button>
+                  </form>
+                </div>
               </div>
               <div className="column is-8 ">
                 <h2 className="mb-4">Order</h2>

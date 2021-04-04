@@ -17,7 +17,7 @@ const Login = ({ location, history }) => {
   const redirect = location.search
     ? new URLSearchParams(location.search).get("redirect")
     : "";
-  
+
   useEffect(() => {
     if (userInfo) {
       history.push(`/${redirect}`);
@@ -47,7 +47,7 @@ const Login = ({ location, history }) => {
                   <div className="box has-shadow">
                     <form onSubmit={handleSubmit}>
                       <div className="field">
-                        <div className="control">
+                        <div className="control has-icons-left">
                           <input
                             className="input"
                             type="email"
@@ -56,10 +56,13 @@ const Login = ({ location, history }) => {
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                           />
+                          <span className="icon is-small is-left">
+                            <i className="fas fa-envelope"></i>
+                          </span>
                         </div>
                       </div>
                       <div className="field">
-                        <div className="control">
+                        <div className="control has-icons-left">
                           <input
                             className="input "
                             type="password"
@@ -67,6 +70,9 @@ const Login = ({ location, history }) => {
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                           />
+                          <span className="icon is-small is-left">
+                            <i className="fas fa-lock"></i>
+                          </span>
                         </div>
                       </div>
                       <button className="button is-block is-primary is-fullwidth">
