@@ -20,7 +20,8 @@ const CartPage = ({history}) => {
       <div className="container is-fluid ">
         <div className="columns is-multiline">
           <div className="column is-8">
-            <h1 className="mb-5">Shopping Cart</h1>
+            <h1 className="mb-5 title">Shopping Cart</h1>
+            <hr/>
             {cartItems.length === 0 ? (
               <h3>
                 Your cart is empty<Link to="/">Go Back</Link>

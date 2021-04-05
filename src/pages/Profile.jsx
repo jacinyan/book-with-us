@@ -76,11 +76,12 @@ const Profile = ({ history }) => {
           ) : (
             <div className="columns is-multiline">
               <div className="column is-4">
-                <h2 className="mb-4">Profile</h2>
+                <h2 className="mb-4 title">Profile</h2>
+                <hr />
                 <div className="box has-shadow">
                   <form onSubmit={handleSubmit}>
                     <div className="field">
-                      <div className="control">
+                      <div className="control has-icons-left ">
                         <input
                           className="input"
                           type="text"
@@ -89,10 +90,13 @@ const Profile = ({ history }) => {
                           value={username}
                           onChange={(e) => setUsername(e.target.value)}
                         />
+                        <span className="icon is-small is-left">
+                          <i className="fas fa-user"></i>
+                        </span>
                       </div>
                     </div>
                     <div className="field">
-                      <div className="control">
+                      <div className="control has-icons-left">
                         <input
                           className="input"
                           type="email"
@@ -101,10 +105,13 @@ const Profile = ({ history }) => {
                           value={email}
                           onChange={(e) => setEmail(e.target.value)}
                         />
+                        <span className="icon is-small is-left">
+                          <i className="fas fa-envelope"></i>
+                        </span>
                       </div>
                     </div>
                     <div className="field">
-                      <div className="control">
+                      <div className="control has-icons-left">
                         <input
                           className="input "
                           type="password"
@@ -112,10 +119,13 @@ const Profile = ({ history }) => {
                           value={password}
                           onChange={(e) => setPassword(e.target.value)}
                         />
+                        <span className="icon is-small is-left">
+                          <i className="fas fa-lock"></i>
+                        </span>
                       </div>
                     </div>
                     <div className="field">
-                      <div className="control">
+                      <div className="control has-icons-left">
                         <input
                           className="input"
                           type="password"
@@ -123,6 +133,9 @@ const Profile = ({ history }) => {
                           value={confirmPassword}
                           onChange={(e) => setConfirmPassword(e.target.value)}
                         />
+                        <span className="icon is-small is-left">
+                          <i className="fas fa-lock"></i>
+                        </span>
                       </div>
                     </div>
                     <button className="button is-block is-primary is-fullwidth">
@@ -132,7 +145,9 @@ const Profile = ({ history }) => {
                 </div>
               </div>
               <div className="column is-8 ">
-                <h2 className="mb-4">Order</h2>
+                <h2 className="mb-4 title">Order</h2>
+              <hr className="login-hr" />
+              <p>1</p>
               </div>
             </div>
           )}
