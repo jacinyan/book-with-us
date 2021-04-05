@@ -24,31 +24,20 @@ const Profile = ({ history }) => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
-
-  // further user details, e.g. user address should be fetched by sending new requests as local storage saves only limited information,
-  // No need to fetch information from local storage either, since that requires JSON.parse() that leads to code redundancy
-  const userLogin = useSelector((state) => state.userLogin);
-  const { userInfo } = userLogin;
-
   const userUpdateProfile = useSelector((state) => state.userUpdateProfile);
   const { success } = userUpdateProfile;
 
   useEffect(() => {
-    // console.count('useEffect --profile triggered')
-    if (!userInfo) {
-      history.push("/login");
+    if (!user || !user.username || success) {
+      dispatch({
+        type: USER_UPDATE_PROFILE_RESET,
+      });
+      dispatch(getUserDetails("profile"));
     } else {
-      if (!user || !user.username || success) {
-        dispatch({
-          type: USER_UPDATE_PROFILE_RESET,
-        });
-        dispatch(getUserDetails("profile"));
-      } else {
-        setUsername(user.username);
-        setEmail(user.email);
-      }
+      setUsername(user.username);
+      setEmail(user.email);
     }
-  }, [dispatch, history, userInfo, user, success]);
+  }, [dispatch, history, user, success]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

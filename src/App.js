@@ -3,6 +3,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import Layout from "./components/Layout";
+import PrivateRoute from "./PrivateRoute";
 
 import Home from "./pages/Home";
 import ItemPage from "./pages/ItemPage";
@@ -11,7 +12,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Profile from "./pages/Profile";
 import Shipping from "./pages/Shipping";
-import Payment from './pages/Payment'
+import Payment from "./pages/Payment";
 
 function App() {
   // console.count('App rendered');
@@ -28,9 +29,19 @@ function App() {
           <Route path="/cart" render={(props) => <CartPage {...props} />} />
           <Route path="/login" render={(props) => <Login {...props} />} />
           <Route path="/register" render={(props) => <Register {...props} />} />
-          <Route path="/profile" render={(props) => <Profile {...props} />} />
-          <Route path="/shipping" render={(props) => <Shipping {...props} />} />
-          <Route path="/payment" render={(props) => <Payment {...props} />} />
+          <PrivateRoute
+            path="/profile"
+            render={(props) => <Profile {...props} />}
+          />
+
+          <PrivateRoute
+            path="/shipping"
+            render={(props) => <Shipping {...props} />}
+          />
+          <PrivateRoute
+            path="/payment"
+            render={(props) => <Payment {...props} />}
+          />
           {/* <Redirect to="/" /> */}
         </Switch>
       </Layout>
