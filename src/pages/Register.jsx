@@ -7,17 +7,17 @@ import { toast } from "react-toastify";
 import Loader from "../components/Loader";
 
 const Register = ({ history, location }) => {
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-
   const dispatch = useDispatch();
-
+  
   const userRegister = useSelector((state) => state.userRegister);
   const { loading } = userRegister;
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
+
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
   const redirect = location.search
     ? new URLSearchParams(location.search).get("redirect")
@@ -65,8 +65,8 @@ const Register = ({ history, location }) => {
                             value={username}
                             onChange={(e) => setUsername(e.target.value)}
                           />
-                          <span class="icon is-small is-left">
-                            <i class="fas fa-user"></i>
+                          <span className="icon is-small is-left">
+                            <i className="fas fa-user"></i>
                           </span>
                         </div>
                       </div>
@@ -81,8 +81,8 @@ const Register = ({ history, location }) => {
                             onChange={(e) => setEmail(e.target.value)}
                           />
                           
-                          <span class="icon is-small is-left">
-                            <i class="fas fa-envelope"></i>
+                          <span className="icon is-small is-left">
+                            <i className="fas fa-envelope"></i>
                           </span>
                         </div>
                       </div>
@@ -95,8 +95,8 @@ const Register = ({ history, location }) => {
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                           />
-                          <span class="icon is-small is-left">
-                            <i class="fas fa-lock"></i>
+                          <span className="icon is-small is-left">
+                            <i className="fas fa-lock"></i>
                           </span>
                         </div>
                       </div>
@@ -109,8 +109,8 @@ const Register = ({ history, location }) => {
                             value={confirmPassword}
                             onChange={(e) => setConfirmPassword(e.target.value)}
                           />
-                          <span class="icon is-small is-left">
-                            <i class="fas fa-lock"></i>
+                          <span className="icon is-small is-left">
+                            <i className="fas fa-lock"></i>
                           </span>
                         </div>
                       </div>

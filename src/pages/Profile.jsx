@@ -13,16 +13,17 @@ import Error from "../components/Error";
 
 const Profile = ({ history }) => {
   // console.count('Profile rendered')
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-
   const dispatch = useDispatch();
 
   const userDetails = useSelector((state) => state.userDetails);
   const { loading, error, user } = userDetails;
   // console.log(user);
+  
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+
 
   // further user details, e.g. user address should be fetched by sending new requests as local storage saves only limited information,
   // No need to fetch information from local storage either, since that requires JSON.parse() that leads to code redundancy

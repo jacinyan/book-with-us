@@ -6,13 +6,13 @@ import Loader from "../components/Loader";
 import { login } from "../redux/actions/userActions";
 
 const Login = ({ location, history }) => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
   const dispatch = useDispatch();
 
   const userLogin = useSelector((state) => state.userLogin);
   const { loading, userInfo } = userLogin;
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const redirect = location.search
     ? new URLSearchParams(location.search).get("redirect")
