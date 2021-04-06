@@ -10,22 +10,23 @@
 $purple: #60437e;
 $grey: #757763;
 $beige-light: #d0d1cd;
-// $beige-lighter: #EFF0EB;
 $orange: #ff8c00;
 $blue-light: #5b84c4;
+$black: #363636;
 
-// Update Bulma's global variables
-$family-sans-serif: "Rubik", sans-serif;
 $grey-dark: $grey;
 $grey-light: $beige-light;
+
 $primary: $purple;
 $warning: $orange;
 $link: $blue-light;
-$widescreen-enabled: false;
-$fullhd-enabled: false;
+$link-hover: $black;
+
+// Update Bulma's global variables
+$family-sans-serif: "Rubik", sans-serif;
+
 
 // Update some of Bulma's component variables
-// $body-background-color: $beige-lighter;
 $control-border-width: 2px;
 $input-border-color: transparent;
 $input-shadow: none;
@@ -39,12 +40,33 @@ html {
   // padding-top: 3.25rem !important;
 }
 
-h1 { font-size: 2rem; }
-h2 { font-size: 1.5rem; }
-h3 { font-size: 1.17rem; }
-h4 { font-size: 1.12rem; }
-h5 { font-size: .83rem; }
-h6 { font-size: .75rem; }
+h1 {
+  font-size: 2rem;
+}
+h2 {
+  font-size: 1.5rem;
+}
+h3 {
+  font-size: 1.17rem;
+}
+h4 {
+  font-size: 1.12rem;
+}
+h5 {
+  font-size: 0.83rem;
+}
+h6 {
+  font-size: 0.75rem;
+}
+
+a.has-text-primary:hover {
+  color: $link-hover !important;
+}
+
+/* mobile styles */
+html {
+  font-size: 0.95rem;
+}
 
 .navbar {
   & img {
@@ -56,21 +78,6 @@ main {
   min-height: 80vh;
 }
 
-/* mobile styles */
-html {
-  font-size: 0.95rem;
-}
-
-footer {
-  padding-bottom: 2rem !important;
-
-  .fab {
-    padding-right: 1.2rem;
-    font-size: 1.2rem;
-    cursor: pointer;
-  }
-}
-
 .loader-wrapper {
   display: flex;
   justify-content: center;
@@ -80,6 +87,20 @@ footer {
   .loader {
     height: 9rem;
     width: 9rem;
+  }
+}
+
+nav.breadcrumb[data-page="shipping-payment"] {
+  transform: translateY(3rem);
+}
+
+footer {
+  padding-bottom: 2rem !important;
+
+  .fab {
+    padding-right: 1.2rem;
+    font-size: 1.2rem;
+    cursor: pointer;
   }
 }
 

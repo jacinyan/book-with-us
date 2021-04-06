@@ -12,7 +12,7 @@ import Loader from "../components/Loader";
 import Error from "../components/Error";
 
 const Profile = ({ history }) => {
-  // console.count('Profile rendered')
+  console.count('Profile rendered')
   const dispatch = useDispatch();
 
   const userDetails = useSelector((state) => state.userDetails);
@@ -28,6 +28,7 @@ const Profile = ({ history }) => {
   const { success } = userUpdateProfile;
 
   useEffect(() => {
+    console.count('useEffect -- Profile')
     if (!user || !user.username || success) {
       dispatch({
         type: USER_UPDATE_PROFILE_RESET,

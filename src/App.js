@@ -3,7 +3,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import Layout from "./components/Layout";
-import PrivateRoute from "./PrivateRoute";
+import PrivateRoute from "./components/PrivateRoute";
 
 import Home from "./pages/Home";
 import ItemPage from "./pages/ItemPage";
@@ -13,9 +13,10 @@ import Register from "./pages/Register";
 import Profile from "./pages/Profile";
 import Shipping from "./pages/Shipping";
 import Payment from "./pages/Payment";
+import PlaceOrder from './pages/PlaceOrder'
 
 function App() {
-  // console.count('App rendered');
+  console.count('App rendered');
   return (
     <>
       <ToastContainer />
@@ -29,19 +30,10 @@ function App() {
           <Route path="/cart" render={(props) => <CartPage {...props} />} />
           <Route path="/login" render={(props) => <Login {...props} />} />
           <Route path="/register" render={(props) => <Register {...props} />} />
-          <PrivateRoute
-            path="/profile"
-            render={(props) => <Profile {...props} />}
-          />
-
-          <PrivateRoute
-            path="/shipping"
-            render={(props) => <Shipping {...props} />}
-          />
-          <PrivateRoute
-            path="/payment"
-            render={(props) => <Payment {...props} />}
-          />
+          <PrivateRoute path="/profile" component={Profile} />
+          <PrivateRoute path="/shipping" component={Shipping} />
+          <PrivateRoute path="/payment" component={Payment} />
+          <PrivateRoute path="/place-order" component={PlaceOrder} />
           {/* <Redirect to="/" /> */}
         </Switch>
       </Layout>

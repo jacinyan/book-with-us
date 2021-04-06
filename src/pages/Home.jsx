@@ -17,7 +17,7 @@ const Home = () => {
   
   return (
     <section className="py-6">
-      <div className="container is-fluid">
+      <div className="container ">
         {loading ? (
           <Loader />
         ) : error ? (

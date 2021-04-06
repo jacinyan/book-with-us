@@ -1,13 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const CheckoutSteps = ({ step1, step2, step3, step4 }) => {
+const CheckoutSteps = ({ step1, step2, step3, step4, page = null }) => {
   return (
-    <nav className="breadcrumb is-centered">
+    <nav className="breadcrumb is-centered" data-page={page} >
       <ul>
         {step1 ? (
           <li>
-            <Link to="/login">Sign In</Link>
+            <Link className="has-text-primary" to="/login">Sign In</Link>
           </li>
         ) : (
           <li>
@@ -16,7 +16,7 @@ const CheckoutSteps = ({ step1, step2, step3, step4 }) => {
         )}
         {step2 ? (
           <li>
-            <Link to="/shipping">Shipping</Link>
+            <Link className="has-text-primary" to="/shipping">Shipping</Link>
           </li>
         ) : (
           <li>
@@ -25,7 +25,7 @@ const CheckoutSteps = ({ step1, step2, step3, step4 }) => {
         )}
         {step3 ? (
           <li>
-            <Link to="/payment">Payment</Link>
+            <Link className="has-text-primary" to="/payment">Payment</Link>
           </li>
         ) : (
           <li>
@@ -34,7 +34,7 @@ const CheckoutSteps = ({ step1, step2, step3, step4 }) => {
         )}
         {step4 ? (
           <li>
-            <Link to="/place-order">Place Order</Link>
+            <Link className="has-text-primary" to="/place-order">Place Order</Link>
           </li>
         ) : (
           <li>

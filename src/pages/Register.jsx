@@ -45,7 +45,7 @@ const Register = ({ history, location }) => {
       ) : (
         <section className="hero is-primary is-fullheight-with-navbar">
           <div className="hero-body">
-            <div className="container has-text-centered">
+            <div className="container is-max-desktop has-text-centered">
               <div className="columns">
                 <div className="column is-8 is-offset-2">
                   <h3 className="title has-text-white">Welcome to BooksRUS</h3>

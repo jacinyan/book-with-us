@@ -17,7 +17,7 @@ const CartPage = ({history}) => {
   };
   return (
     <section className="py-6">
-      <div className="container is-fluid ">
+      <div className="container">
         <div className="columns is-multiline">
           <div className="column is-8">
             <h1 className="mb-5 title">Shopping Cart</h1>
@@ -48,7 +48,7 @@ const CartPage = ({history}) => {
                       />
                     </div>
                     <div className="column is-3">
-                      <Link to={`/items/${cartItem.item}`}>
+                      <Link to={`/items/${cartItem.item}`} className="has-text-primary">
                         {cartItem.name}
                       </Link>
                     </div>

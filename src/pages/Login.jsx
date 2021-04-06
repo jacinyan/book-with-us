@@ -6,6 +6,7 @@ import Loader from "../components/Loader";
 import { login } from "../redux/actions/userActions";
 
 const Login = ({ location, history }) => {
+  console.count('Login rendered')
   const dispatch = useDispatch();
 
   const userLogin = useSelector((state) => state.userLogin);
@@ -36,7 +37,7 @@ const Login = ({ location, history }) => {
       ) : (
         <section className="hero is-primary is-fullheight-with-navbar">
           <div className="hero-body">
-            <div className="container has-text-centered">
+            <div className="container is-max-desktop has-text-centered">
               <div className="columns">
                 <div className="column is-8 is-offset-2">
                   <h3 className="title has-text-white">Welcome to BooksRUS</h3>
