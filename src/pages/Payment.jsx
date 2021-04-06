@@ -45,6 +45,7 @@ const Payment = ({ history }) => {
                             checked
                             onChange={(e) => setPaymentMethod(e.target.value)}
                           />
+                          {" "}
                           PayPal or Credit Card
                         </label>
                       </div>
@@ -59,6 +60,7 @@ const Payment = ({ history }) => {
                             value="Stripe"
                             onChange={(e) => setPaymentMethod(e.target.value)}
                           />
+                          {" "}
                           Stripe
                         </label>
                       </div>

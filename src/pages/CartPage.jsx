@@ -24,7 +24,7 @@ const CartPage = ({history}) => {
             <hr/>
             {cartItems.length === 0 ? (
               <h3>
-                Your cart is empty<Link to="/">Go Back</Link>
+                Your cart is empty<Link to="/">{" "}Go Back</Link>
               </h3>
             ) : (
               cartItems.map((cartItem) => (

@@ -67,7 +67,7 @@ const Profile = ({ history }) => {
           ) : (
             <div className="columns is-multiline">
               <div className="column is-4">
-                <h2 className="mb-4 title">Profile</h2>
+                <h2 className="mb-4 ">Profile</h2>
                 <hr />
                 <div className="box has-shadow">
                   <form onSubmit={handleSubmit}>
@@ -136,7 +136,7 @@ const Profile = ({ history }) => {
                 </div>
               </div>
               <div className="column is-8 ">
-                <h2 className="mb-4 title">Order</h2>
+                <h2 className="mb-4">Order</h2>
               <hr className="login-hr" />
               <p>1</p>
               </div>

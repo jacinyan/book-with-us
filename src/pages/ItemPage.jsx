@@ -28,7 +28,7 @@ const ItemPage = ({ history,match }) => {
 
   return (
     <section className="py-6">
-      <div className="container">
+      <div className="container is-max-widescreen">
         <Link className="button is-light my-3 " to="/">
           Go Back
         </Link>
