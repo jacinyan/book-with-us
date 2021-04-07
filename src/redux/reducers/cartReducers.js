@@ -11,22 +11,23 @@ export const cartReducer = (
 ) => {
   switch (action.type) {
     case CART_ADD_ITEM:
-      const item = action.payload;
+      const currItem = action.payload;
+      // .item refers to the id of a certain book
       const existItem = state.cartItems.find(
-        (prevItem) => prevItem.item === item.item
+        (prevItem) => prevItem.item === currItem.item
       );
 
       if (existItem) {
         return {
           ...state,
           cartItems: state.cartItems.map((prevItem) =>
-            prevItem.item === existItem.item ? item : prevItem
+            prevItem.item === existItem.item ? currItem : prevItem
           ),
         };
       } else {
         return {
           ...state,
-          cartItems: [...state.cartItems, item],
+          cartItems: [...state.cartItems, currItem],
         };
       }
     case CART_REMOVE_ITEM:

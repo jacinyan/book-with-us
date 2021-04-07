@@ -126,7 +126,6 @@ export const getUserDetails = (id) => async (dispatch, getState) => {
 
     const config = {
       headers: {
-        "Content-Type": "application/json",
         Authorization: `Bearer ${userInfo.token}`,
       },
     };
@@ -190,10 +189,9 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
       payload: data,
     });
 
-    localStorage.setItem('userInfo', JSON.stringify(data))
-    
-    toast.success('User profile successfully updated')
+    localStorage.setItem("userInfo", JSON.stringify(data));
 
+    toast.success("User profile successfully updated");
   } catch (error) {
     const finalMessage =
       error.response && error.response.data.message

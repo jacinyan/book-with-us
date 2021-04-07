@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { Link} from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+
 import { listItemDetails } from "../redux/actions/itemActions";
 import { addToCart } from "../redux/actions/cartActions";
 
@@ -8,7 +9,7 @@ import Loader from "../components/Loader";
 import Rating from "../components/Rating";
 import Error from "../components/Error";
 
-const ItemPage = ({ history,match }) => {
+const ItemPage = ({ history, match }) => {
   const dispatch = useDispatch();
   const itemDetails = useSelector((state) => state.itemDetails);
   const { loading, error, item } = itemDetails;
@@ -92,16 +93,16 @@ const ItemPage = ({ history,match }) => {
                       </div>
                     </div>
                   )}
+                  <footer className="card-footer pb-0 ">
+                    <button
+                      className="card-footer-item button py-3 has-background-primary has-text-white"
+                      disabled={item.countInStock === 0}
+                      onClick={handleAddToCart}
+                    >
+                      <strong>Add to Cart</strong>
+                    </button>
+                  </footer>
                 </div>
-                <footer className="card-footer pb-0 ">
-                  <button
-                    className="card-footer-item button py-3 has-background-primary has-text-white"
-                    disabled={item.countInStock === 0}
-                    onClick={handleAddToCart}
-                  >
-                    <strong>Add to Cart</strong>
-                  </button>
-                </footer>
               </div>
             </div>
           </div>

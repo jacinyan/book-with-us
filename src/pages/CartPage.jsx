@@ -1,9 +1,10 @@
 import React, { Fragment } from "react";
-import { Link} from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+
 import { addToCart, removeFromCart } from "../redux/actions/cartActions";
 
-const CartPage = ({history}) => {
+const CartPage = ({ history }) => {
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
   const { cartItems } = cart;
@@ -11,7 +12,7 @@ const CartPage = ({history}) => {
   const handleRemoveFromCart = (id) => {
     dispatch(removeFromCart(id));
   };
-  
+
   const handleCheckout = () => {
     history.push(`/login?redirect=shipping`);
   };
@@ -21,10 +22,13 @@ const CartPage = ({history}) => {
         <div className="columns is-multiline">
           <div className="column is-8">
             <h1 className="mb-5 title">Shopping Cart</h1>
-            <hr/>
+            <hr />
             {cartItems.length === 0 ? (
               <h3>
-                Your cart is empty<Link to="/">{" "}Go Back</Link>
+                Your cart is empty{"  "}
+                <Link to="/" className="has-text-primary">
+                  Go Back
+                </Link>
               </h3>
             ) : (
               cartItems.map((cartItem) => (
@@ -48,7 +52,10 @@ const CartPage = ({history}) => {
                       />
                     </div>
                     <div className="column is-3">
-                      <Link to={`/items/${cartItem.item}`} className="has-text-primary">
+                      <Link
+                        to={`/items/${cartItem.item}`}
+                        className="has-text-primary"
+                      >
                         {cartItem.name}
                       </Link>
                     </div>
@@ -93,16 +100,16 @@ const CartPage = ({history}) => {
                     .reduce((prev, curr) => prev + curr.qty * curr.price, 0)
                     .toFixed(2)}
                 </p>
+                <footer className="card-footer pb-0 ">
+                  <button
+                    className="card-footer-item button py-3 has-background-primary has-text-white"
+                    disabled={cartItems.length === 0}
+                    onClick={handleCheckout}
+                  >
+                    <strong>Proceed to Checkout</strong>
+                  </button>
+                </footer>
               </div>
-              <footer className="card-footer pb-0 ">
-                <button
-                  className="card-footer-item button py-3 has-background-primary has-text-white"
-                  disabled={cartItems.length === 0}
-                  onClick={handleCheckout}
-                >
-                  <strong>Proceed to Checkout</strong>
-                </button>
-              </footer>
             </div>
           </div>
         </div>

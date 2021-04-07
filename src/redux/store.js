@@ -10,6 +10,10 @@ import {
   userUpdateProfileReducer,
 } from "./reducers/userReducers";
 import { cartReducer } from "../redux/reducers/cartReducers";
+import {
+  orderCreateReducer,
+  orderDetailsReducer,
+} from "../redux/reducers/orderReducers";
 
 const cartItemsFromStorage = localStorage.getItem("cartItems")
   ? JSON.parse(localStorage.getItem("cartItems"))
@@ -39,6 +43,8 @@ const rootReducer = combineReducers({
   userRegister: userRegisterReducer,
   userDetails: userDetailsReducer,
   userUpdateProfile: userUpdateProfileReducer,
+  orderCreate: orderCreateReducer,
+  orderDetails: orderDetailsReducer,
 });
 
 export default createStore(

@@ -1,11 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 
+import { createOrder } from "../redux/actions/orderActions";
 import CheckoutSteps from "../components/CheckoutSteps";
 
-const PlaceOrder = () => {
+const PlaceOrder = ({ history }) => {
+  const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
+  const orderCreate = useSelector((state) => state.orderCreate);
+  const { order, success } = orderCreate;
 
   //calculate prices
   const addDecimals = (num) => {
@@ -15,7 +19,7 @@ const PlaceOrder = () => {
   cart.itemsPrice = addDecimals(
     cart.cartItems.reduce((prev, curr) => prev + curr.price * curr.qty, 0)
   );
-  cart.shippingPrice = addDecimals(cart.itemsPrice > 100 ? 0 : 100);
+  cart.shippingPrice = addDecimals(cart.itemsPrice > 20 ? 0 : 20);
   cart.taxPrice = addDecimals(Number((0.15 * cart.itemsPrice).toFixed(2)));
   cart.totalPrice = (
     Number(cart.itemsPrice) +
@@ -23,7 +27,25 @@ const PlaceOrder = () => {
     Number(cart.taxPrice)
   ).toFixed(2);
 
-  const handlePlaceOrder = () => {};
+  useEffect(() => {
+    if (success) {
+      history.push(`/orders/${order._id}`);
+    }
+  }, [history, success, order]);
+
+  const handlePlaceOrder = () => {
+    dispatch(
+      createOrder({
+        orderItems: cart.cartItems,
+        shippingAddress: cart.shippingAddress,
+        paymentMethod: cart.paymentMethod,
+        itemsPrice: cart.itemsPrice,
+        shippingPrice: cart.shippingPrice,
+        taxPrice: cart.taxPrice,
+        totalPrice: cart.totalPrice,
+      })
+    );
+  };
 
   return (
     <>
@@ -54,8 +76,8 @@ const PlaceOrder = () => {
                     <h3>Your cart is empty</h3>
                   ) : (
                     <>
-                      {cart.cartItems.map((cartItem, index) => (
-                        <div className="columns" key={index}>
+                      {cart.cartItems.map((cartItem) => (
+                        <div className="columns" key={cartItem.item}>
                           <div className="column is-2">
                             <img src={cartItem.image} alt="" />
                           </div>

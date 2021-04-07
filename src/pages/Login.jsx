@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import Loader from "../components/Loader";
+import { Link } from "react-router-dom";
 
 import { login } from "../redux/actions/userActions";
+
+import Loader from "../components/Loader";
 
 const Login = ({ location, history }) => {
   console.count('Login rendered')
   const dispatch = useDispatch();
-
   const userLogin = useSelector((state) => state.userLogin);
   const { loading, userInfo } = userLogin;
 

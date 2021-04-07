@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
 import { register } from "../redux/actions/userActions";
-import { toast } from "react-toastify";
+
 import Loader from "../components/Loader";
 
 const Register = ({ history, location }) => {
-  const dispatch = useDispatch();
-  
+  const dispatch = useDispatch();  
   const userRegister = useSelector((state) => state.userRegister);
   const { loading } = userRegister;
   const userLogin = useSelector((state) => state.userLogin);

@@ -5,8 +5,8 @@ const Error = () => {
     <section className="hero is-medium  is-bold">
       <div className="hero-body">
         <div className="container has-text-centered">
-          <div className="columns is-vcentered is-centered">
-            <div className="column is-6">
+          <div className="columns is-centered">
+            <div className="column is-6 pt-6">
               <h1 className="title" style={{ fontSize: "5rem" }}>
                 Oops!
               </h1>
@@ -15,7 +15,7 @@ const Error = () => {
               </h3>
               <button className="button is-primary">Contact Us</button>
             </div>
-            <div className="column is-6">
+            <div className="column is-6 pb-7">
               <img src="/assets/404.png" alt="Page not found" />
             </div>
           </div>

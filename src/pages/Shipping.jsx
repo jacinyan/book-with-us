@@ -1,14 +1,15 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+
 import { saveShippingAddress } from "../redux/actions/cartActions";
+
 import CheckoutSteps from "../components/CheckoutSteps";
 
 const Shipping = ({ history }) => {
   console.count("Shipping rendered");
+  const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
   const { shippingAddress } = cart;
-
-  const dispatch = useDispatch();
 
   const [address, setAddress] = useState(shippingAddress.address || "");
   const [city, setCity] = useState(shippingAddress.city || "");

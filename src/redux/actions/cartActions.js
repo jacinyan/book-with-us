@@ -7,6 +7,7 @@ import {
 } from "../constants/cartConstants";
 
 export const addToCart = (id, qty) => async (dispatch, getState) => {
+  // make sure countInStock is the most updated before adding a certain item to cart.
   const { data } = await axios.get(process.env.REACT_APP_API + `/items/${id}`);
 
   dispatch({

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { toast } from "react-toastify";
 
 import {
   getUserDetails,
@@ -7,25 +8,22 @@ import {
 } from "../redux/actions/userActions";
 import { USER_UPDATE_PROFILE_RESET } from "../redux/constants/userConstants";
 
-import { toast } from "react-toastify";
 import Loader from "../components/Loader";
 import Error from "../components/Error";
 
 const Profile = ({ history }) => {
   console.count('Profile rendered')
   const dispatch = useDispatch();
-
   const userDetails = useSelector((state) => state.userDetails);
   const { loading, error, user } = userDetails;
   // console.log(user);
+  const userUpdateProfile = useSelector((state) => state.userUpdateProfile);
+  const { success } = userUpdateProfile;
   
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-
-  const userUpdateProfile = useSelector((state) => state.userUpdateProfile);
-  const { success } = userUpdateProfile;
 
   useEffect(() => {
     console.count('useEffect -- Profile')
@@ -66,8 +64,8 @@ const Profile = ({ history }) => {
             <Error />
           ) : (
             <div className="columns is-multiline">
-              <div className="column is-4">
-                <h2 className="mb-4 ">Profile</h2>
+              <div className="column is-8-mobile is-offset-2-mobile is-4-tablet">
+                <h2 className="mb-4 title">Profile</h2>
                 <hr />
                 <div className="box has-shadow">
                   <form onSubmit={handleSubmit}>
@@ -135,8 +133,8 @@ const Profile = ({ history }) => {
                   </form>
                 </div>
               </div>
-              <div className="column is-8 ">
-                <h2 className="mb-4">Order</h2>
+              <div className="column is-8-mobile is-offset-2-mobile is-8-tablet ">
+                <h2 className="mb-4 title">Order</h2>
               <hr className="login-hr" />
               <p>1</p>
               </div>
