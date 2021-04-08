@@ -5,6 +5,8 @@ import { Link } from "react-router-dom";
 import { createOrder } from "../redux/actions/orderActions";
 import CheckoutSteps from "../components/CheckoutSteps";
 
+import { addDecimals} from '../utils/addDecimals'
+
 const PlaceOrder = ({ history }) => {
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
@@ -12,10 +14,6 @@ const PlaceOrder = ({ history }) => {
   const { order, success } = orderCreate;
 
   //calculate prices
-  const addDecimals = (num) => {
-    return (Math.round(num * 100) / 100).toFixed(2);
-  };
-
   cart.itemsPrice = addDecimals(
     cart.cartItems.reduce((prev, curr) => prev + curr.price * curr.qty, 0)
   );
@@ -83,7 +81,7 @@ const PlaceOrder = ({ history }) => {
                           </div>
                           <div className="column is-3 has-text-centered">
                             <Link
-                              to={`/products/${cartItem.item}`}
+                              to={`/items/${cartItem.item}`}
                               className="has-text-primary"
                             >
                               {cartItem.name}

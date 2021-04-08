@@ -72,7 +72,7 @@ export const getOrderDetails = (id) => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.post(
+    const { data } = await axios.get(
       process.env.REACT_APP_API + `/orders/${id}`,
       config
     );

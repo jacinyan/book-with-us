@@ -14,9 +14,10 @@ import Profile from "./pages/Profile";
 import Shipping from "./pages/Shipping";
 import Payment from "./pages/Payment";
 import PlaceOrder from './pages/PlaceOrder'
+import OrderPage from './pages/OrderPage'
 
 function App() {
-  console.count('App rendered');
+  // console.count('App rendered');
   return (
     <>
       <ToastContainer />
@@ -34,7 +35,8 @@ function App() {
           <PrivateRoute path="/shipping" component={Shipping} />
           <PrivateRoute path="/payment" component={Payment} />
           <PrivateRoute path="/place-order" component={PlaceOrder} />
-          {/* <Redirect to="/" /> */}
+          <PrivateRoute path="/orders/:id" component={OrderPage} />
+          <Redirect to="/" />
         </Switch>
       </Layout>
     </>

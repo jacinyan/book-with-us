@@ -2,7 +2,11 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Rating from "./Rating";
 
+import { addDecimals } from "../utils/addDecimals";
+
 const Item = ({ item }) => {
+  item.price = addDecimals(item.price);
+
   return (
     <div className="card">
       <div className="card-image has-text-centered">

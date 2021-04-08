@@ -4,7 +4,6 @@ import { Route, Redirect } from "react-router-dom";
 import {toast} from 'react-toastify'
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
-  // console.log(Component, { ...rest });
   // console.count('Private Route rendered')
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
