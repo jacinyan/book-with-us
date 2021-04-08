@@ -1,8 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import { PayPalButton } from "react-paypal-button-v2";
 
-import { getOrderDetails } from "../redux/actions/orderActions";
+import { getOrderDetails, payOrder } from "../redux/actions/orderActions";
+import { ORDER_PAY_RESET } from "../redux/constants/orderConstants";
 
 import Loader from "../components/Loader";
 import Error from "../components/Error";
@@ -13,10 +16,14 @@ const OrderPage = ({ match }) => {
   const dispatch = useDispatch();
   const orderDetails = useSelector((state) => state.orderDetails);
   const { order, loading, error } = orderDetails;
+  const orderPay = useSelector((state) => state.orderPay);
+  const { loading: loadingPay, success: successPay } = orderPay;
 
   const orderId = match.params.id;
 
-  if (!loading) {
+  const [sdkReady, setSdkReady] = useState(false);
+
+  if (order && !loading) {
     //calculate prices
     order.itemsPrice = addDecimals(
       order.orderItems.reduce((prev, curr) => prev + curr.price * curr.qty, 0)
@@ -24,8 +31,36 @@ const OrderPage = ({ match }) => {
   }
 
   useEffect(() => {
-    dispatch(getOrderDetails(orderId));
-  }, [dispatch, orderId]);
+    const addPayPalScript = async () => {
+      const { data: clientId } = await axios.get(
+        process.env.REACT_APP_API + "/config/paypal"
+      );
+      const script = document.createElement("script");
+      script.type = "text/javascript";
+      script.src = `https://www.paypal.com/sdk/js?client-id=${clientId}`;
+      script.async = true;
+      script.onload = () => {
+        setSdkReady(true);
+      };
+      document.body.appendChild(script);
+    };
+
+    if (!order || order._id !== orderId || successPay) {
+      dispatch({ type: ORDER_PAY_RESET });
+      dispatch(getOrderDetails(orderId));
+    } else if (!order.isPaid) {
+      if (!window.paypal) {
+        addPayPalScript();
+      } else {
+        setSdkReady(true);
+      }
+    }
+  }, [dispatch, order, orderId, successPay]);
+
+  const handleSuccessPayment = (paymentResult) => {
+    console.log(paymentResult);
+    dispatch(payOrder(orderId, paymentResult));
+  };
 
   return (
     <>
@@ -65,7 +100,9 @@ const OrderPage = ({ match }) => {
                         {order.shippingAddress.country}
                       </p>
                       {order.isDelivered ? (
-                        <p className="has-text-success">Delivered on {order.deliveredAt}</p>
+                        <p className="has-text-success">
+                          Delivered on {order.deliveredAt}
+                        </p>
                       ) : (
                         <p className="has-text-danger">Not Delivered</p>
                       )}
@@ -77,7 +114,9 @@ const OrderPage = ({ match }) => {
                         <strong>Method: </strong> {order.paymentMethod}
                       </p>
                       {order.isPaid ? (
-                        <p className="has-text-danger">Paid on {order.paidAt}</p>
+                        <p className="has-text-success">
+                          Paid on {order.paidAt}
+                        </p>
                       ) : (
                         <p className="has-text-danger">Not paid</p>
                       )}
@@ -116,7 +155,7 @@ const OrderPage = ({ match }) => {
                 <div className="column is-4">
                   <div className="card">
                     <div className="card-content">
-                      <p className="title">Order Summary</p>
+                      <p className="title">Order&nbsp;&nbsp;&nbsp;Summary</p>
                       <div className="columns is-mobile">
                         <div className="column">
                           <strong>Items</strong>
@@ -141,14 +180,26 @@ const OrderPage = ({ match }) => {
                         </div>
                         <div className="column">${order.totalPrice}</div>
                       </div>
-                      <footer className="card-footer pb-0 ">
-                        {/* <button
-                        className="card-footer-item button py-3 has-background-primary has-text-white"
-                        disabled={order.orderItems.length === 0}
-                        onClick={handlePlaceOrder}
-                      >
-                        <strong>Place Order</strong>
-                      </button> */}
+                      <footer className="card-footer pb-0 pt-3">
+                        {!order.isPaid && (
+                          <>
+                            {loadingPay && (
+                              <button className="card-footer-item button  is-loading is-fullwidth">
+                                Loading
+                              </button>
+                            )}
+                            {!sdkReady ? (
+                              <button className="card-footer-item button is-loading is-fullwidth">
+                                Loading
+                              </button>
+                            ) : (
+                              <PayPalButton
+                                amount={order.totalPrice}
+                                onSuccess={handleSuccessPayment}
+                              />
+                            )}
+                          </>
+                        )}
                       </footer>
                     </div>
                   </div>

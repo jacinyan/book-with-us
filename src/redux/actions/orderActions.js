@@ -6,6 +6,9 @@ import {
   ORDER_DETAILS_REQUEST,
   ORDER_DETAILS_SUCCESS,
   ORDER_DETAILS_FAILURE,
+  ORDER_PAY_REQUEST,
+  ORDER_PAY_SUCCESS,
+  ORDER_PAY_FAILURE,
 } from "../constants/orderConstants";
 import { logout } from "./userActions";
 import { toast } from "react-toastify";
@@ -81,7 +84,6 @@ export const getOrderDetails = (id) => async (dispatch, getState) => {
       type: ORDER_DETAILS_SUCCESS,
       payload: data,
     });
-
   } catch (error) {
     const finalMessage =
       error.response && error.response.data.message
@@ -93,6 +95,53 @@ export const getOrderDetails = (id) => async (dispatch, getState) => {
     }
     dispatch({
       type: ORDER_DETAILS_FAILURE,
+      payload: finalMessage,
+    });
+    toast.error(finalMessage);
+  }
+};
+
+export const payOrder = (orderId, paymentResult) => async (
+  dispatch,
+  getState
+) => {
+  try {
+    dispatch({
+      type: ORDER_PAY_REQUEST,
+    });
+
+    const {
+      userLogin: { userInfo },
+    } = getState();
+
+    const config = {
+      headers: {
+        "Content-type": "application/json",
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+
+    const { data } = await axios.put(
+      process.env.REACT_APP_API + `/orders/${orderId}/pay`,
+      paymentResult,
+      config
+    );
+
+    dispatch({
+      type: ORDER_PAY_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    const finalMessage =
+      error.response && error.response.data.message
+        ? error.response.data.message
+        : error.message;
+
+    if (finalMessage === "Not authorized, token failed") {
+      dispatch(logout());
+    }
+    dispatch({
+      type: ORDER_PAY_FAILURE,
       payload: finalMessage,
     });
     toast.error(finalMessage);
