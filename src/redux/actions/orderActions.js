@@ -9,6 +9,9 @@ import {
   ORDER_PAY_REQUEST,
   ORDER_PAY_SUCCESS,
   ORDER_PAY_FAILURE,
+  ORDER_LIST_MY_REQUEST,
+  ORDER_LIST_MY_SUCCESS,
+  ORDER_LIST_MY_FAILURE,
 } from "../constants/orderConstants";
 import { logout } from "./userActions";
 import { toast } from "react-toastify";
@@ -142,6 +145,48 @@ export const payOrder = (orderId, paymentResult) => async (
     }
     dispatch({
       type: ORDER_PAY_FAILURE,
+      payload: finalMessage,
+    });
+    toast.error(finalMessage);
+  }
+};
+
+export const listMyOrders = () => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: ORDER_LIST_MY_REQUEST,
+    });
+
+    const {
+      userLogin: { userInfo },
+    } = getState();
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+
+    const { data } = await axios.get(
+      process.env.REACT_APP_API + `/orders/my-orders`,
+      config
+    );
+
+    dispatch({
+      type: ORDER_LIST_MY_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    const finalMessage =
+      error.response && error.response.data.message
+        ? error.response.data.message
+        : error.message;
+
+    if (finalMessage === "Not authorized, token failed") {
+      dispatch(logout());
+    }
+    dispatch({
+      type: ORDER_LIST_MY_FAILURE,
       payload: finalMessage,
     });
     toast.error(finalMessage);

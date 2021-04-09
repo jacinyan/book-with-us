@@ -1,37 +1,43 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import {Link} from 'react-router-dom'
 import { toast } from "react-toastify";
 
 import {
   getUserDetails,
   updateUserProfile,
 } from "../redux/actions/userActions";
+import { listMyOrders } from "../redux/actions/orderActions";
 import { USER_UPDATE_PROFILE_RESET } from "../redux/constants/userConstants";
 
 import Loader from "../components/Loader";
 import Error from "../components/Error";
 
 const Profile = ({ history }) => {
-  console.count('Profile rendered')
+  console.count("Profile rendered");
   const dispatch = useDispatch();
   const userDetails = useSelector((state) => state.userDetails);
   const { loading, error, user } = userDetails;
   // console.log(user);
   const userUpdateProfile = useSelector((state) => state.userUpdateProfile);
   const { success } = userUpdateProfile;
-  
+
+  const orderListMy = useSelector((state) => state.orderListMy);
+  const { loading: loadingOrders, orders } = orderListMy;
+
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
   useEffect(() => {
-    console.count('useEffect -- Profile')
+    console.count("useEffect -- Profile");
     if (!user || !user.username || success) {
       dispatch({
         type: USER_UPDATE_PROFILE_RESET,
       });
       dispatch(getUserDetails("profile"));
+      dispatch(listMyOrders());
     } else {
       setUsername(user.username);
       setEmail(user.email);
@@ -65,8 +71,7 @@ const Profile = ({ history }) => {
           ) : (
             <div className="columns is-multiline">
               <div className="column is-8-mobile is-offset-2-mobile is-4-tablet">
-                <h2 className="mb-4 title">Profile</h2>
-                <hr />
+                <h2 className="mb-4 title hr">My Profile</h2>
                 <div className="box has-shadow">
                   <form onSubmit={handleSubmit}>
                     <div className="field">
@@ -134,9 +139,55 @@ const Profile = ({ history }) => {
                 </div>
               </div>
               <div className="column is-8-mobile is-offset-2-mobile is-8-tablet ">
-                <h2 className="mb-4 title">Order</h2>
-              <hr className="login-hr" />
-              <p>1</p>
+                <h2 className="mb-4 title hr">My Orders</h2>
+                {loadingOrders ? (
+                  <Loader />
+                ) : (
+                  <table className="table">
+                    <thead>
+                      <tr>
+                        <th>ID</th>
+                        <th>DATE</th>
+                        <th>TOTAL</th>
+                        <th>PAID</th>
+                        <th>DELIVERED</th>
+                        <th></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {orders.map((order) => (
+                        <tr key={order._id}>
+                          <td>{order._id}</td>
+                          <td>{order.createdAt.substring(0, 10)}</td>
+                          <td>${order.totalPrice}</td>
+                          <td>
+                            {order.isPaid ? (
+                              order.paidAt.substring(0, 10)
+                            ) : (
+                              <span className="has-text-danger">
+                                <i className="fas fa-times "></i>
+                              </span>
+                            )}
+                          </td>
+                          <td>
+                            {order.isDelivered ? (
+                              order.deliveredAt.substring(0, 10)
+                            ) : (
+                              <span className="has-text-danger">
+                                <i className="fas fa-times "></i>
+                              </span>
+                            )}
+                          </td>
+                          <td>
+                            <Link to={`/orders/${order._id}`}>
+                              <button className="button is-light is-small" >Details</button>
+                            </Link>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                )}
               </div>
             </div>
           )}

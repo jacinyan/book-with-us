@@ -72,8 +72,7 @@ const OrderPage = ({ match }) => {
             <Error />
           ) : (
             <>
-              <h1 className="title">Order {order._id}</h1>
-              <hr />
+              <h1 className="title hr">Order {order._id}</h1>
               <div className="columns">
                 <div className="column is-8">
                   <ul>
@@ -155,7 +154,7 @@ const OrderPage = ({ match }) => {
                 <div className="column is-4">
                   <div className="card">
                     <div className="card-content">
-                      <p className="title">Order&nbsp;&nbsp;&nbsp;Summary</p>
+                      <p className="title">Order Summary</p>
                       <div className="columns is-mobile">
                         <div className="column">
                           <strong>Items</strong>
@@ -180,7 +179,7 @@ const OrderPage = ({ match }) => {
                         </div>
                         <div className="column">${order.totalPrice}</div>
                       </div>
-                      <footer className="card-footer pb-0 pt-3">
+                      <footer className="card-footer pb-0 pt-3" id="order-page">
                         {!order.isPaid && (
                           <>
                             {loadingPay && (

@@ -25,8 +25,7 @@ const Home = () => {
           <Error />
         ) : (
           <>
-            <h1 className="mb-5 title">New Arrivals</h1>
-            <hr/>
+            <h1 className="mb-5 title hr">New Arrivals</h1>
             <div className="columns is-multiline is-vcentered is-mobile">
               {items.map((item) => (
                 <Fragment key={item._id}>

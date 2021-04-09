@@ -25,7 +25,6 @@ $link-hover: $black;
 // Update Bulma's global variables
 $family-sans-serif: "Rubik", sans-serif;
 
-
 // Update some of Bulma's component variables
 $control-border-width: 2px;
 $input-border-color: transparent;
@@ -63,6 +62,16 @@ a.has-text-primary:hover {
   color: $link-hover !important;
 }
 
+.hr {
+  display: inline-block;
+}
+.hr:after {
+  content: '';
+  display: block;
+  border-top: 1.5px solid #363636;
+  margin-top: 0.25em;
+}
+
 /* mobile styles */
 html {
   font-size: 0.95rem;
@@ -98,8 +107,6 @@ select {
   width: 5rem;
 }
 
-
-
 footer {
   padding-bottom: 2rem !important;
 
@@ -116,9 +123,13 @@ footer {
     font-size: 1rem;
   }
 
-  .paypal-buttons.paypal-buttons-context-iframe{
-    width:14rem!important;
-    transform: translateX(0.75vw)!important;
+  footer#order-page {
+    display: flex;
+    justify-content: center;
+
+    .paypal-buttons.paypal-buttons-context-iframe {
+      max-width: 18rem !important;
+    }
   }
 
   footer {

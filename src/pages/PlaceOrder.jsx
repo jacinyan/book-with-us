@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { createOrder } from "../redux/actions/orderActions";
 import CheckoutSteps from "../components/CheckoutSteps";
 
-import { addDecimals} from '../utils/addDecimals'
+import { addDecimals } from "../utils/addDecimals";
 
 const PlaceOrder = ({ history }) => {
   const dispatch = useDispatch();
@@ -101,7 +101,7 @@ const PlaceOrder = ({ history }) => {
             <div className="column is-4">
               <div className="card">
                 <div className="card-content">
-                  <p className="title">Order&nbsp;&nbsp;&nbsp;Summary</p>
+                  <p className="title">Order Summary</p>
                   <div className="columns is-mobile">
                     <div className="column">
                       <strong>Items</strong>
