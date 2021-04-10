@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import {Link} from 'react-router-dom'
+import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 
 import {
@@ -61,88 +61,88 @@ const Profile = ({ history }) => {
   };
 
   return (
-    <>
-      <section className="py-6">
-        <div className="container ">
-          {loading ? (
-            <Loader />
-          ) : error ? (
-            <Error />
-          ) : (
-            <div className="columns is-multiline">
-              <div className="column is-8-mobile is-offset-2-mobile is-4-tablet">
-                <h2 className="mb-4 title hr">My Profile</h2>
-                <div className="box has-shadow">
-                  <form onSubmit={handleSubmit}>
-                    <div className="field">
-                      <div className="control has-icons-left ">
-                        <input
-                          className="input"
-                          type="text"
-                          placeholder="Update Username"
-                          autoFocus=""
-                          value={username}
-                          onChange={(e) => setUsername(e.target.value)}
-                        />
-                        <span className="icon is-small is-left">
-                          <i className="fas fa-user"></i>
-                        </span>
-                      </div>
+    <section className="py-6">
+      <div className="container ">
+        {loading ? (
+          <Loader />
+        ) : error ? (
+          <Error />
+        ) : (
+          <div className="columns is-multiline">
+            <div className="column is-8-mobile is-offset-1-mobile is-4-tablet">
+              <h2 className="mb-4 title hr">My Profile</h2>
+              <div className="box has-shadow">
+                <form onSubmit={handleSubmit}>
+                  <div className="field">
+                    <div className="control has-icons-left ">
+                      <input
+                        className="input"
+                        type="text"
+                        placeholder="Update Username"
+                        autoFocus=""
+                        value={username}
+                        onChange={(e) => setUsername(e.target.value)}
+                      />
+                      <span className="icon is-small is-left">
+                        <i className="fas fa-user"></i>
+                      </span>
                     </div>
-                    <div className="field">
-                      <div className="control has-icons-left">
-                        <input
-                          className="input"
-                          type="email"
-                          placeholder="Update Email"
-                          autoFocus=""
-                          value={email}
-                          onChange={(e) => setEmail(e.target.value)}
-                        />
-                        <span className="icon is-small is-left">
-                          <i className="fas fa-envelope"></i>
-                        </span>
-                      </div>
+                  </div>
+                  <div className="field">
+                    <div className="control has-icons-left">
+                      <input
+                        className="input"
+                        type="email"
+                        placeholder="Update Email"
+                        autoFocus=""
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                      />
+                      <span className="icon is-small is-left">
+                        <i className="fas fa-envelope"></i>
+                      </span>
                     </div>
-                    <div className="field">
-                      <div className="control has-icons-left">
-                        <input
-                          className="input "
-                          type="password"
-                          placeholder="Update Password"
-                          value={password}
-                          onChange={(e) => setPassword(e.target.value)}
-                        />
-                        <span className="icon is-small is-left">
-                          <i className="fas fa-lock"></i>
-                        </span>
-                      </div>
+                  </div>
+                  <div className="field">
+                    <div className="control has-icons-left">
+                      <input
+                        className="input "
+                        type="password"
+                        placeholder="Update Password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                      />
+                      <span className="icon is-small is-left">
+                        <i className="fas fa-lock"></i>
+                      </span>
                     </div>
-                    <div className="field">
-                      <div className="control has-icons-left">
-                        <input
-                          className="input"
-                          type="password"
-                          placeholder="Confirm Password"
-                          value={confirmPassword}
-                          onChange={(e) => setConfirmPassword(e.target.value)}
-                        />
-                        <span className="icon is-small is-left">
-                          <i className="fas fa-lock"></i>
-                        </span>
-                      </div>
+                  </div>
+                  <div className="field">
+                    <div className="control has-icons-left">
+                      <input
+                        className="input"
+                        type="password"
+                        placeholder="Confirm Password"
+                        value={confirmPassword}
+                        onChange={(e) => setConfirmPassword(e.target.value)}
+                      />
+                      <span className="icon is-small is-left">
+                        <i className="fas fa-lock"></i>
+                      </span>
                     </div>
-                    <button className="button is-block is-primary is-fullwidth">
-                      <strong>Update</strong>
-                    </button>
-                  </form>
-                </div>
+                  </div>
+                  <button className="button is-block is-primary is-fullwidth">
+                    <strong>Update</strong>
+                  </button>
+                </form>
               </div>
-              <div className="column is-8-mobile is-offset-2-mobile is-8-tablet ">
-                <h2 className="mb-4 title hr">My Orders</h2>
-                {loadingOrders ? (
-                  <Loader />
-                ) : (
+            </div>
+            <div className="column is-8-mobile is-offset-1-mobile is-8-tablet ">
+              <h2 className="mb-4 title hr">My Orders</h2>
+              {loadingOrders ? (
+                <Loader />
+              ) : (
+                <div className="table-container">
                   <table className="table">
                     <thead>
                       <tr>
@@ -180,20 +180,22 @@ const Profile = ({ history }) => {
                           </td>
                           <td>
                             <Link to={`/orders/${order._id}`}>
-                              <button className="button is-light is-small" >Details</button>
+                              <button className="button is-light is-small">
+                                Details
+                              </button>
                             </Link>
                           </td>
                         </tr>
                       ))}
                     </tbody>
                   </table>
-                )}
-              </div>
+                </div>
+              )}
             </div>
-          )}
-        </div>
-      </section>
-    </>
+          </div>
+        )}
+      </div>
+    </section>
   );
 };
 

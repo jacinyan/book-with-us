@@ -46,7 +46,6 @@ const PlaceOrder = ({ history }) => {
   };
 
   return (
-    <>
       <section className="py-6">
         <div className="container is-max-widescreen">
           <CheckoutSteps step1 step2 step3 step4 />
@@ -141,7 +140,6 @@ const PlaceOrder = ({ history }) => {
           </div>
         </div>
       </section>
-    </>
   );
 };
 

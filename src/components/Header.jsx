@@ -33,12 +33,12 @@ const Header = () => {
           <div className="navbar-menu">
             <div className="navbar-end">
               <Link to="/cart" className="navbar-item has-text-primary">
-              <span className="icon-text">
-                      <span className="icon">
-                        <i className="fas fa-shopping-cart"></i>
-                      </span>
-                      <span>Cart</span>
-                    </span>
+                <span className="icon-text">
+                  <span className="icon">
+                    <i className="fas fa-shopping-cart"></i>
+                  </span>
+                  <span>Cart</span>
+                </span>
               </Link>
               {!userInfo ? (
                 <>
@@ -80,6 +80,33 @@ const Header = () => {
                       </div>
                     </div>
                   </div>
+                  {userInfo.isAdmin && (
+                    <div className="navbar-item has-dropdown is-boxed is-hoverable">
+                      <Link className="navbar-link has-text-primary" to="#">
+                        Admin
+                      </Link>
+                      <div className="navbar-dropdown">
+                        <Link
+                          className="navbar-item has-text-primary"
+                          to="/admin/user-list"
+                        >
+                          Users
+                        </Link>
+                        <Link
+                          to="/admin/product-list"
+                          className="navbar-item has-text-primary"
+                        >
+                          Products
+                        </Link>
+                        <Link
+                          to="/admin/order-list"
+                          className="navbar-item has-text-primary"
+                        >
+                          Orders
+                        </Link>
+                      </div>
+                    </div>
+                  )}
                 </>
               )}
             </div>
