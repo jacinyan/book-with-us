@@ -9,8 +9,8 @@ import Error from "../components/Error";
 
 const UserList = ({ history }) => {
   const dispatch = useDispatch();
-  const userList = useSelector((state) => state.userList);
-  const { loading, error, users } = userList;
+  const usersList = useSelector((state) => state.usersList);
+  const { loading, error, users } = usersList;
 
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
@@ -27,7 +27,9 @@ const UserList = ({ history }) => {
   }, [dispatch, history, userInfo, successDelete]);
 
   const handleDeleteUser = (id) => {
-    dispatch(deleteUser(id));
+    if(window.confirm("Are you sure")){
+      dispatch(deleteUser(id));
+    }
   };
 
   return (

@@ -14,10 +14,10 @@ import {
   USER_UPDATE_PROFILE_SUCCESS,
   USER_UPDATE_PROFILE_FAILURE,
   USER_DETAILS_RESET,
-  USER_LIST_REQUEST,
-  USER_LIST_SUCCESS,
-  USER_LIST_FAILURE,
-  USER_LIST_RESET,
+  USERS_LIST_REQUEST,
+  USERS_LIST_SUCCESS,
+  USERS_LIST_FAILURE,
+  USERS_LIST_RESET,
   USER_DELETE_REQUEST,
   USER_DELETE_SUCCESS,
   USER_DELETE_FAILURE,
@@ -77,7 +77,7 @@ export const logout = () => (dispatch) => {
   dispatch({ type: USER_LOGOUT });
   dispatch({ type: USER_DETAILS_RESET });
   dispatch({ type: ORDER_LIST_MY_RESET });
-  dispatch({type: USER_LIST_RESET})
+  dispatch({type: USERS_LIST_RESET})
   document.location.href = "/login";
 };
 
@@ -227,7 +227,7 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
 export const listUsers = () => async (dispatch, getState) => {
   try {
     dispatch({
-      type: USER_LIST_REQUEST,
+      type: USERS_LIST_REQUEST,
     });
 
     const {
@@ -246,7 +246,7 @@ export const listUsers = () => async (dispatch, getState) => {
     );
 
     dispatch({
-      type: USER_LIST_SUCCESS,
+      type: USERS_LIST_SUCCESS,
       payload: data,
     });
   } catch (error) {
@@ -259,7 +259,7 @@ export const listUsers = () => async (dispatch, getState) => {
       dispatch(logout());
     }
     dispatch({
-      type: USER_LIST_FAILURE,
+      type: USERS_LIST_FAILURE,
       payload: finalMessage,
     });
     toast.error(finalMessage);

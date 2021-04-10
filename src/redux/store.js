@@ -8,7 +8,7 @@ import {
   userRegisterReducer,
   userDetailsReducer,
   userUpdateProfileReducer,
-  userListReducer,
+  usersListReducer,
   userDeleteReducer,
 } from "./reducers/userReducers";
 import { cartReducer } from "../redux/reducers/cartReducers";
@@ -47,7 +47,7 @@ const rootReducer = combineReducers({
   userRegister: userRegisterReducer,
   userDetails: userDetailsReducer,
   userUpdateProfile: userUpdateProfileReducer,
-  userList: userListReducer,
+  usersList: usersListReducer,
   userDelete: userDeleteReducer,
   orderCreate: orderCreateReducer,
   orderDetails: orderDetailsReducer,

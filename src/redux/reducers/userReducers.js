@@ -14,10 +14,10 @@ import {
   USER_UPDATE_PROFILE_FAILURE,
   USER_UPDATE_PROFILE_RESET,
   USER_DETAILS_RESET,
-  USER_LIST_REQUEST,
-  USER_LIST_SUCCESS,
-  USER_LIST_FAILURE,
-  USER_LIST_RESET,
+  USERS_LIST_REQUEST,
+  USERS_LIST_SUCCESS,
+  USERS_LIST_FAILURE,
+  USERS_LIST_RESET,
   USER_DELETE_REQUEST,
   USER_DELETE_SUCCESS,
   USER_DELETE_FAILURE
@@ -104,22 +104,22 @@ const userUpdateProfileReducer = (state = {}, action) => {
   }
 };
 
-const userListReducer = (state = { users: [] }, action) => {
+const usersListReducer = (state = { users: [] }, action) => {
   // console.log(state, action);
   switch (action.type) {
-    case USER_LIST_REQUEST:
+    case USERS_LIST_REQUEST:
       return { loading: true };
-    case USER_LIST_SUCCESS:
+    case USERS_LIST_SUCCESS:
       return {
         loading: false,
         users: action.payload,
       };
-    case USER_LIST_FAILURE:
+    case USERS_LIST_FAILURE:
       return {
         loading: false,
         error: action.payload,
       };
-    case USER_LIST_RESET:
+    case USERS_LIST_RESET:
       return {
         users:[]
       }
@@ -153,6 +153,6 @@ export {
   userRegisterReducer,
   userDetailsReducer,
   userUpdateProfileReducer,
-  userListReducer,
+  usersListReducer,
   userDeleteReducer
 };
