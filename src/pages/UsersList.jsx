@@ -7,7 +7,7 @@ import { listUsers, deleteUser } from "../redux/actions/userActions";
 import Loader from "../components/Loader";
 import Error from "../components/Error";
 
-const UserList = ({ history }) => {
+const UsersList = ({ history }) => {
   const dispatch = useDispatch();
   const usersList = useSelector((state) => state.usersList);
   const { loading, error, users } = usersList;
@@ -97,4 +97,4 @@ const UserList = ({ history }) => {
   );
 };
 
-export default UserList;
+export default UsersList;

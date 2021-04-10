@@ -15,7 +15,7 @@ import Shipping from "./pages/Shipping";
 import Payment from "./pages/Payment";
 import PlaceOrder from "./pages/PlaceOrder";
 import OrderPage from "./pages/OrderPage";
-import UserList from "./pages/UserList";
+import UsersList from "./pages/UsersList";
 
 function App() {
   // console.count('App rendered');
@@ -37,7 +37,7 @@ function App() {
           <PrivateRoute path="/payment" component={Payment} />
           <PrivateRoute path="/place-order" component={PlaceOrder} />
           <PrivateRoute path="/orders/:id" component={OrderPage} />
-          <PrivateRoute path="/admin/user-list" component={UserList} />
+          <PrivateRoute path="/admin/users-list" component={UsersList} />
           <Redirect to="/" />
         </Switch>
       </Layout>

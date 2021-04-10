@@ -88,7 +88,7 @@ const Header = () => {
                       <div className="navbar-dropdown">
                         <Link
                           className="navbar-item has-text-primary"
-                          to="/admin/user-list"
+                          to="/admin/users-list"
                         >
                           Users
                         </Link>
