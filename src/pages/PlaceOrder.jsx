@@ -127,7 +127,7 @@ const PlaceOrder = ({ history }) => {
                   </div>
                   <footer className="card-footer pb-0 ">
                     <button
-                      className="card-footer-item button py-3 has-background-primary has-text-white"
+                      className="card-footer-item button is-rounded py-3 has-background-primary has-text-white"
                       disabled={cart.cartItems.length === 0}
                       onClick={handlePlaceOrder}
                     >

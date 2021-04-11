@@ -35,7 +35,7 @@ const CartPage = ({ history }) => {
                   <div className="columns is-vcentered">
                     <div className="column is-1 ">
                       <button
-                        className="button is-small"
+                        className="button is-rounded is-small"
                         onClick={() => {
                           handleRemoveFromCart(cartItem.item);
                         }}
@@ -101,7 +101,7 @@ const CartPage = ({ history }) => {
                 </p>
                 <footer className="card-footer pb-0 ">
                   <button
-                    className="card-footer-item button py-3 has-background-primary has-text-white"
+                    className="card-footer-item button is-rounded py-3 has-background-primary has-text-white"
                     disabled={cartItems.length === 0}
                     onClick={handleCheckout}
                   >

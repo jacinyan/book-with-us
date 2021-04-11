@@ -282,7 +282,7 @@ export const deleteUser = (id) => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.delete(
+    await axios.delete(
       process.env.REACT_APP_API + `/users/${id}`,
       config
     );
@@ -308,3 +308,7 @@ export const deleteUser = (id) => async (dispatch, getState) => {
     toast.error(finalMessage);
   }
 };
+
+export const updateUser = () => {
+  
+} 

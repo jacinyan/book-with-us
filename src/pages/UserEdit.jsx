@@ -1,64 +1,59 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { toast } from "react-toastify";
 
-import { register } from "../redux/actions/userActions";
+import { getUserDetails, updateUser } from "../redux/actions/userActions";
 
 import Loader from "../components/Loader";
+import Error from "../components/Error";
 
-const Register = ({ history, location }) => {
+const UserEdit = ({ history, match }) => {
   const dispatch = useDispatch();
-  const userRegister = useSelector((state) => state.userRegister);
-  const { loading } = userRegister;
-  const userLogin = useSelector((state) => state.userLogin);
-  const { userInfo } = userLogin;
+  const userDetails = useSelector((state) => state.userDetails);
+  const { loading, error, user } = userDetails;
 
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+  const [isAdmin, setIsAdmin] = useState(false);
 
-  const redirect = location.search
-    ? new URLSearchParams(location.search).get("redirect")
-    : "";
+  const userId = match.params.id;
 
   useEffect(() => {
-    if (userInfo) {
-      history.push(`/${redirect}`);
+    if (!user.username || user._id !== userId) {
+      dispatch(getUserDetails(userId));
+    } else {
+      setUsername(user.username);
+      setEmail(user.email);
+      setIsAdmin(user.isAdmin);
     }
-  }, [history, userInfo, redirect]);
+  }, [dispatch, user, userId]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (password !== confirmPassword) {
-      toast.error("Passwords do not match");
-    } else {
-      dispatch(register(username, email, password));
-    }
+    dispatch(updateUser({ _id: userId, username, email, isAdmin }));
   };
 
   return (
     <>
       {loading ? (
         <Loader />
+      ) : error ? (
+        <Error />
       ) : (
-        <section className="hero is-primary is-fullheight-with-navbar">
+        <section className="hero is-fullheight-with-navbar">
           <div className="hero-body">
             <div className="container is-max-desktop has-text-centered">
               <div className="columns">
                 <div className="column is-8 is-offset-2">
-                  <h3 className="title has-text-white">Welcome to BooksRUS</h3>
+                  <h2 className="mb-4 title">Edit User</h2>
                   <hr className="login-hr" />
-                  <p className="subtitle has-text-white">
-                    Pick your fav books today!
-                  </p>
                   <div className="box has-shadow">
                     <form onSubmit={handleSubmit}>
                       <div className="field">
                         <div className="control has-icons-left">
                           <input
-                            className="input "
+                            className="input"
                             type="text"
                             placeholder="Username"
                             autoFocus=""
@@ -100,34 +95,36 @@ const Register = ({ history, location }) => {
                           </span>
                         </div>
                       </div>
-                      <div className="field">
-                        <div className="control has-icons-left">
-                          <input
-                            className="input"
-                            type="password"
-                            placeholder="Confirm Password"
-                            value={confirmPassword}
-                            onChange={(e) => setConfirmPassword(e.target.value)}
-                          />
-                          <span className="icon is-small is-left">
-                            <i className="fas fa-lock"></i>
-                          </span>
+                      <div className="field has-text-left">
+                        <div className="control">
+                          <label htmlFor="isAdmin" className="checkbox">
+                            <input
+                              type="checkbox"
+                              checked={isAdmin}
+                              onChange={(e) => setIsAdmin(e.target.checked)}
+                              id="isAdmin"
+                            />{" "}
+                            Is Admin
+                          </label>
                         </div>
                       </div>
-                      <button className="button is-rounded is-block is-primary is-fullwidth is-rounded">
-                        <strong>Sign Up</strong>
-                      </button>
+                      <div className="field is-grouped is-grouped-right">
+                        <p className="control">
+                          <Link className="button is-rounded  is-primary">
+                            <strong>Update</strong>
+                          </Link>
+                        </p>
+                        <p className="control">
+                          <Link
+                            to="/admin/users-list"
+                            className="button is-rounded is-light "
+                          >
+                            Go Back
+                          </Link>
+                        </p>
+                      </div>
                     </form>
                   </div>
-                  <p>
-                    Have an account?{"  "}
-                    <Link
-                      to={redirect ? `/login?redirect=${redirect}` : "/login"}
-                      className="has-text-white"
-                    >
-                      Sign In
-                    </Link>
-                  </p>
                 </div>
               </div>
             </div>
@@ -138,4 +135,4 @@ const Register = ({ history, location }) => {
   );
 };
 
-export default Register;
+export default UserEdit;

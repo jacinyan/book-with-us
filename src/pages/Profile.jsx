@@ -76,7 +76,7 @@ const Profile = ({ history }) => {
                   <div className="field">
                     <div className="control has-icons-left ">
                       <input
-                        className="input"
+                        className="input "
                         type="text"
                         placeholder="Update Username"
                         autoFocus=""
@@ -91,7 +91,7 @@ const Profile = ({ history }) => {
                   <div className="field">
                     <div className="control has-icons-left">
                       <input
-                        className="input"
+                        className="input "
                         type="email"
                         placeholder="Update Email"
                         autoFocus=""
@@ -120,7 +120,7 @@ const Profile = ({ history }) => {
                   <div className="field">
                     <div className="control has-icons-left">
                       <input
-                        className="input"
+                        className="input "
                         type="password"
                         placeholder="Confirm Password"
                         value={confirmPassword}
@@ -131,7 +131,7 @@ const Profile = ({ history }) => {
                       </span>
                     </div>
                   </div>
-                  <button className="button is-block is-primary is-fullwidth">
+                  <button className="button is-rounded is-block is-primary is-fullwidth">
                     <strong>Update</strong>
                   </button>
                 </form>
@@ -180,7 +180,7 @@ const Profile = ({ history }) => {
                           </td>
                           <td>
                             <Link to={`/orders/${order._id}`}>
-                              <button className="button is-light is-small">
+                              <button className="button is-rounded is-light is-small">
                                 Details
                               </button>
                             </Link>

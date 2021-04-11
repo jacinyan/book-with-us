@@ -30,10 +30,9 @@ const ItemPage = ({ history, match }) => {
   return (
     <section className="py-6">
       <div className="container is-max-widescreen">
-        <Link className="button is-light my-3 " to="/">
+        <Link className="button is-rounded is-light my-3 " to="/">
           Go Back
         </Link>
-
         {loading ? (
           <Loader />
         ) : error ? (
@@ -95,7 +94,7 @@ const ItemPage = ({ history, match }) => {
                   )}
                   <footer className="card-footer pb-0 ">
                     <button
-                      className="card-footer-item button py-3 has-background-primary has-text-white"
+                      className="card-footer-item button py-3 has-background-primary has-text-white is-rounded"
                       disabled={item.countInStock === 0}
                       onClick={handleAddToCart}
                     >

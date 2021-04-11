@@ -9,7 +9,7 @@
 // Set your brand colors
 $purple: #60437e;
 $grey: #757763;
-$beige-light: #d0d1cd;
+$beige-light: #c7c8c6;
 $orange: #ff8c00;
 $blue-light: #5b84c4;
 $black: #363636;
@@ -60,6 +60,19 @@ h6 {
 
 a.has-text-primary:hover {
   color: $link-hover !important;
+}
+
+.input {
+  border-color: $grey-lighter;
+  &:hover {
+    border-color: $grey-light;
+  }
+  &:active{
+    border-color:$primary
+  }
+  &:focus{
+    border-color:$primary
+  }
 }
 
 .hr {

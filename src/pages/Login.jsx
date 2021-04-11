@@ -65,7 +65,7 @@ const Login = ({ location, history }) => {
                       <div className="field">
                         <div className="control has-icons-left">
                           <input
-                            className="input "
+                            className="input"
                             type="password"
                             placeholder="Password"
                             value={password}
@@ -76,7 +76,7 @@ const Login = ({ location, history }) => {
                           </span>
                         </div>
                       </div>
-                      <button className="button is-block is-primary is-fullwidth">
+                      <button className="button is-rounded is-block is-primary is-fullwidth is-rounded">
                         <strong>Sign In</strong>
                       </button>
                     </form>

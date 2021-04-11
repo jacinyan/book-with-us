@@ -16,6 +16,7 @@ import Payment from "./pages/Payment";
 import PlaceOrder from "./pages/PlaceOrder";
 import OrderPage from "./pages/OrderPage";
 import UsersList from "./pages/UsersList";
+import UserEdit from "./pages/UserEdit";
 
 function App() {
   // console.count('App rendered');
@@ -38,6 +39,7 @@ function App() {
           <PrivateRoute path="/place-order" component={PlaceOrder} />
           <PrivateRoute path="/orders/:id" component={OrderPage} />
           <PrivateRoute path="/admin/users-list" component={UsersList} />
+          <PrivateRoute path="/admin/users/:id/edit" component={UserEdit} />
           <Redirect to="/" />
         </Switch>
       </Layout>

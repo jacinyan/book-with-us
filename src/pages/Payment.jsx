@@ -68,7 +68,7 @@ const Payment = ({ history }) => {
                       </div>
                     </div>
 
-                    <button className="button is-block is-primary is-fullwidth">
+                    <button className="button is-rounded is-block is-primary is-fullwidth">
                       <strong>Continue</strong>
                     </button>
                   </form>

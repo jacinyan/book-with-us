@@ -45,7 +45,7 @@ const Header = () => {
                   <div className="navbar-item">
                     <Link
                       to="/register"
-                      className="button has-text-white is-primary"
+                      className="button is-rounded has-text-white is-primary"
                     >
                       <strong>Sign Up</strong>
                     </Link>

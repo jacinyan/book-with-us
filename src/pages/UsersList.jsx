@@ -73,13 +73,13 @@ const UsersList = ({ history }) => {
                         )}
                       </td>
                       <td>
-                        <Link to={`/users/${user._id}`}>
-                          <button className="button is-light is-small">
+                        <Link to={`/admin/users/${user._id}/edit`}>
+                          <button className="button is-rounded is-light is-small">
                             <i className="fas fa-edit"></i>
                           </button>
                         </Link>
                         <button
-                          className="button is-danger is-small"
+                          className="button is-rounded is-danger is-small"
                           onClick={()=>{handleDeleteUser(user._id)}}
                         >
                           <i className="fas fa-trash"></i>

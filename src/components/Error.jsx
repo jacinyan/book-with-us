@@ -13,7 +13,7 @@ const Error = () => {
               <h3 className="subtitle">
                 We can't seem to find the page you're looking for
               </h3>
-              <button className="button is-primary">Contact Us</button>
+              <button className="button is-rounded is-primary">Contact Us</button>
             </div>
             <div className="column is-6 pb-7">
               <img src="/assets/404.png" alt="Page not found" />
