@@ -2,14 +2,14 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
-import { listItemDetails } from "../redux/actions/itemActions";
+import { listItemDetails} from "../redux/actions/itemActions";
 import { addToCart } from "../redux/actions/cartActions";
 
 import Loader from "../components/Loader";
 import Rating from "../components/Rating";
 import Error from "../components/Error";
 
-const ItemPage = ({ history, match }) => {
+const ItemDetails = ({ history, match }) => {
   const dispatch = useDispatch();
   const itemDetails = useSelector((state) => state.itemDetails);
   const { loading, error, item } = itemDetails;
@@ -17,7 +17,7 @@ const ItemPage = ({ history, match }) => {
   const [qty, setQty] = useState(1);
 
   useEffect(() => {
-    // console.count("useEffect -- ItemPage triggered");
+    // console.count("useEffect -- ItemDetails triggered");
     // registered :id
     dispatch(listItemDetails(match.params.id));
   }, [match, dispatch]);
@@ -111,4 +111,4 @@ const ItemPage = ({ history, match }) => {
   );
 };
 
-export default ItemPage;
+export default ItemDetails;

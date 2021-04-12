@@ -1,36 +1,42 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import {addDecimals} from '../utils/addDecimals'
 
-import { listUsers, deleteUser } from "../redux/actions/userActions";
+import { listItems, deleteItem } from "../redux/actions/itemActions";
 
 import Loader from "../components/Loader";
 import Error from "../components/Error";
 
-const UsersList = ({ history }) => {
+const ItemsList = ({ history, match }) => {
   const dispatch = useDispatch();
-  const usersList = useSelector((state) => state.usersList);
-  const { loading, error, users } = usersList;
+
+  const itemsList = useSelector((state) => state.itemsList);
+  const { loading, error, items } = itemsList;
+
+  const itemDelete = useSelector((state) => state.itemDelete);
+  const { success } = itemDelete;
 
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
-  const userDelete = useSelector((state) => state.userDelete);
-  const { success: successDelete } = userDelete;
-
   useEffect(() => {
     if (userInfo && userInfo.isAdmin) {
-      dispatch(listUsers());
+      dispatch(listItems());
     } else {
       history.push('/')
     }
-  }, [dispatch, history, userInfo, successDelete]);
+  }, [dispatch, history, userInfo, success]);
 
-  const handleDeleteUser = (id) => {
-    if(window.confirm("Are you sure")){
-      dispatch(deleteUser(id));
+  const handleDeleteItem = (id) => {
+    if (window.confirm("Are you sure")) {
+        dispatch(deleteItem(id));
     }
   };
+
+  const handleCreateItem = (item) => {
+      // create item
+  }
 
   return (
     <section className="py-6">
@@ -41,46 +47,51 @@ const UsersList = ({ history }) => {
           <Error />
         ) : (
           <>
-            <h1 className="mb-5 title hr">Users</h1>
+            <div className="columns">
+              <div className="column">
+                <h1 className="mb-5 title hr">Items</h1>
+              </div>
+              <div className="column has-text-right">
+                <button className="button is-rounded has-text-primary is-light " onClick={handleCreateItem}><i className="fas fa-plus"></i>&nbsp;&nbsp;Create Item</button>
+              </div>
+            </div>
             <div className="table-container">
               <table className="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
                 <thead>
                   <tr>
                     <th>ID</th>
                     <th>NAME</th>
-                    <th>EMAIL</th>
-                    <th>ADMIN</th>
+                    <th>PRICE</th>
+                    <th>GENRE</th>
+                    <th>AUTHOR</th>
                     <th></th>
                   </tr>
                 </thead>
                 <tbody>
-                  {users.map((user) => (
-                    <tr key={user._id}>
-                      <td>{user._id}</td>
-                      <td>{user.username}</td>
+                  {items.map((item) => (
+                    <tr key={item._id}>
+                      <td>{item._id}</td>
+                      <td>{item.name}</td>
                       <td>
-                        <a href={`mailto:${user.email}`}>{user.email}</a>
+                        ${addDecimals(item.price)}
                       </td>
                       <td>
-                        {user.isAdmin ? (
-                          <span className="has-text-success">
-                            <i className="fas fa-check"></i>
-                          </span>
-                        ) : (
-                          <span className="has-text-danger">
-                            <i className="fas fa-times"></i>
-                          </span>
-                        )}
+                        {item.genre}
                       </td>
                       <td>
-                        <Link to={`/admin/users/${user._id}/edit`}>
+                        {item.author}
+                      </td>
+                      <td>
+                        <Link to={`/admin/items/${item._id}/edit`}>
                           <button className="button is-rounded is-light is-small">
                             <i className="fas fa-edit"></i>
                           </button>
                         </Link>
                         <button
                           className="button is-rounded is-danger is-small"
-                          onClick={()=>{handleDeleteUser(user._id)}}
+                          onClick={() => {
+                            handleDeleteItem(item._id);
+                          }}
                         >
                           <i className="fas fa-trash"></i>
                         </button>
@@ -97,4 +108,4 @@ const UsersList = ({ history }) => {
   );
 };
 
-export default UsersList;
+export default ItemsList;

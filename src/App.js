@@ -6,7 +6,7 @@ import Layout from "./components/Layout";
 import PrivateRoute from "./components/PrivateRoute";
 
 import Home from "./pages/Home";
-import ItemPage from "./pages/ItemPage";
+import ItemDetails from "./pages/ItemDetails";
 import CartPage from "./pages/CartPage";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
@@ -14,9 +14,10 @@ import Profile from "./pages/Profile";
 import Shipping from "./pages/Shipping";
 import Payment from "./pages/Payment";
 import PlaceOrder from "./pages/PlaceOrder";
-import OrderPage from "./pages/OrderPage";
+import OrderDetails from "./pages/OrderDetails";
 import UsersList from "./pages/UsersList";
 import UserEdit from "./pages/UserEdit";
+import ItemsList from "./pages/ItemsList";
 
 function App() {
   // console.count('App rendered');
@@ -28,7 +29,7 @@ function App() {
           <Route path="/" exact render={(props) => <Home {...props} />} />
           <Route
             path="/items/:id"
-            render={(props) => <ItemPage {...props} />}
+            render={(props) => <ItemDetails {...props} />}
           />
           <Route path="/cart" render={(props) => <CartPage {...props} />} />
           <Route path="/login" render={(props) => <Login {...props} />} />
@@ -37,9 +38,10 @@ function App() {
           <PrivateRoute path="/shipping" component={Shipping} />
           <PrivateRoute path="/payment" component={Payment} />
           <PrivateRoute path="/place-order" component={PlaceOrder} />
-          <PrivateRoute path="/orders/:id" component={OrderPage} />
+          <PrivateRoute path="/orders/:id" component={OrderDetails} />
           <PrivateRoute path="/admin/users-list" component={UsersList} />
           <PrivateRoute path="/admin/users/:id/edit" component={UserEdit} />
+          <PrivateRoute path="/admin/items-list" component={ItemsList} />
           <Redirect to="/" />
         </Switch>
       </Layout>

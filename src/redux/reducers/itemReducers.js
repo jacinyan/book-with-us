@@ -5,6 +5,9 @@ import {
   ITEM_DETAILS_REQUEST,
   ITEM_DETAILS_SUCCESS,
   ITEM_DETAILS_FAILURE,
+  ITEM_DELETE_REQUEST,
+  ITEM_DELETE_SUCCESS,
+  ITEM_DELETE_FAILURE,
 } from "../constants/itemConstants";
 
 export const itemsListReducer = (state = { items: [] }, action) => {
@@ -30,6 +33,19 @@ export const itemDetailsReducer = (
     case ITEM_DETAILS_SUCCESS:
       return { loading: false, item: action.payload };
     case ITEM_DETAILS_FAILURE:
+      return { loading: false, error: action.payload };
+    default:
+      return state;
+  }
+};
+
+export const itemDeleteReducer = (state = {}, action) => {
+  switch (action.type) {
+    case ITEM_DELETE_REQUEST:
+      return { loading: true };
+    case ITEM_DELETE_SUCCESS:
+      return { loading: false, success: true };
+    case ITEM_DELETE_FAILURE:
       return { loading: false, error: action.payload };
     default:
       return state;

@@ -4,7 +4,7 @@ import Rating from "./Rating";
 
 import { addDecimals } from "../utils/addDecimals";
 
-const Item = ({ item }) => {
+const ItemCard = ({ item }) => {
   item.price = addDecimals(item.price);
 
   return (
@@ -37,4 +37,4 @@ const Item = ({ item }) => {
   );
 };
 
-export default Item;
+export default ItemCard;

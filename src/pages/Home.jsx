@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 
 import { listItems } from "../redux/actions/itemActions";
 
-import Item from "../components/Item";
+import ItemCard from "../components/ItemCard";
 import Loader from "../components/Loader";
 import Error from "../components/Error";
 
@@ -30,7 +30,7 @@ const Home = () => {
               {items.map((item) => (
                 <Fragment key={item._id}>
                   <div className="column is-half-mobile is-one-third-tablet is-one-quarter-desktop">
-                    <Item item={item} />
+                    <ItemCard item={item} />
                   </div>
                 </Fragment>
               ))}

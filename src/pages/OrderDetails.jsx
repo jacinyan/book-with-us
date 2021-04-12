@@ -12,7 +12,7 @@ import Error from "../components/Error";
 
 import { addDecimals } from "../utils/addDecimals";
 
-const OrderPage = ({ match }) => {
+const OrderDetails = ({ match }) => {
   const dispatch = useDispatch();
   const orderDetails = useSelector((state) => state.orderDetails);
   const { order, loading, error } = orderDetails;
@@ -212,4 +212,4 @@ const OrderPage = ({ match }) => {
   );
 };
 
-export default OrderPage;
+export default OrderDetails;

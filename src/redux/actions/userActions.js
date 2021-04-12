@@ -21,6 +21,9 @@ import {
   USER_DELETE_REQUEST,
   USER_DELETE_SUCCESS,
   USER_DELETE_FAILURE,
+  USER_UPDATE_REQUEST,
+  USER_UPDATE_SUCCESS,
+  USER_UPDATE_FAILURE,
 } from "../constants/userConstants";
 import { ORDER_LIST_MY_RESET } from "../constants/orderConstants";
 
@@ -77,7 +80,7 @@ export const logout = () => (dispatch) => {
   dispatch({ type: USER_LOGOUT });
   dispatch({ type: USER_DETAILS_RESET });
   dispatch({ type: ORDER_LIST_MY_RESET });
-  dispatch({type: USERS_LIST_RESET})
+  dispatch({ type: USERS_LIST_RESET });
   document.location.href = "/login";
 };
 
@@ -282,16 +285,13 @@ export const deleteUser = (id) => async (dispatch, getState) => {
       },
     };
 
-    await axios.delete(
-      process.env.REACT_APP_API + `/users/${id}`,
-      config
-    );
+    await axios.delete(process.env.REACT_APP_API + `/users/${id}`, config);
 
     dispatch({
       type: USER_DELETE_SUCCESS,
     });
 
-    toast.success('User removed')
+    toast.success("User removed");
   } catch (error) {
     const finalMessage =
       error.response && error.response.data.message
@@ -309,6 +309,52 @@ export const deleteUser = (id) => async (dispatch, getState) => {
   }
 };
 
-export const updateUser = () => {
-  
-} 
+export const updateUser = (user) => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: USER_UPDATE_REQUEST,
+    });
+
+    const {
+      userLogin: { userInfo },
+    } = getState();
+
+    const config = {
+      headers: {
+        "Content-type": "application/json",
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+
+    const { data } = await axios.put(
+      process.env.REACT_APP_API + `/users/${user._id}`,
+      user,
+      config
+    );
+
+    dispatch({
+      type: USER_UPDATE_SUCCESS,
+    });
+
+    dispatch({
+      type: USER_DETAILS_SUCCESS,
+      payload: data,
+    });
+
+    toast.success("User updated successfully");
+  } catch (error) {
+    const finalMessage =
+      error.response && error.response.data.message
+        ? error.response.data.message
+        : error.message;
+
+    if (finalMessage === "Not authorized, token failed") {
+      dispatch(logout());
+    }
+    dispatch({
+      type: USER_UPDATE_FAILURE,
+      payload: finalMessage,
+    });
+    toast.error(finalMessage);
+  }
+};

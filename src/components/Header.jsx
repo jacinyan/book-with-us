@@ -61,25 +61,27 @@ const Header = () => {
                 </>
               ) : (
                 <>
-                  <div className="navbar-item has-dropdown is-boxed is-hoverable">
-                    <Link className="navbar-link has-text-primary" to="#">
-                      {userInfo.username}
-                    </Link>
-                    <div className="navbar-dropdown">
-                      <Link
-                        className="navbar-item has-text-primary"
-                        to="/profile"
-                      >
-                        Profile
+                  {!userInfo.isAdmin && (
+                    <div className="navbar-item has-dropdown is-boxed is-hoverable">
+                      <Link className="navbar-link has-text-primary" to="#">
+                        {userInfo.username}
                       </Link>
-                      <hr className="navbar-divider"></hr>
-                      <div className="navbar-item " onClick={handleLogout}>
-                        <Link to="#" className="has-text-grey">
-                          Log Out
+                      <div className="navbar-dropdown">
+                        <Link
+                          className="navbar-item has-text-primary"
+                          to="/profile"
+                        >
+                          Profile
                         </Link>
+                        <hr className="navbar-divider"></hr>
+                        <div className="navbar-item " onClick={handleLogout}>
+                          <Link to="#" className="has-text-grey">
+                            Log Out
+                          </Link>
+                        </div>
                       </div>
                     </div>
-                  </div>
+                  )}
                   {userInfo.isAdmin && (
                     <div className="navbar-item has-dropdown is-boxed is-hoverable">
                       <Link className="navbar-link has-text-primary" to="#">
@@ -93,17 +95,23 @@ const Header = () => {
                           Users
                         </Link>
                         <Link
-                          to="/admin/product-list"
+                          to="/admin/items-list"
                           className="navbar-item has-text-primary"
                         >
-                          Products
+                          Items
                         </Link>
                         <Link
-                          to="/admin/order-list"
+                          to="/admin/orders-list"
                           className="navbar-item has-text-primary"
                         >
                           Orders
                         </Link>
+                        <hr className="navbar-divider"></hr>
+                        <div className="navbar-item " onClick={handleLogout}>
+                          <Link to="#" className="has-text-grey">
+                            Log Out
+                          </Link>
+                        </div>
                       </div>
                     </div>
                   )}

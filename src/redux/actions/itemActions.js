@@ -6,7 +6,14 @@ import {
   ITEM_DETAILS_REQUEST,
   ITEM_DETAILS_SUCCESS,
   ITEM_DETAILS_FAILURE,
+  ITEM_DELETE_FAILURE,
+  ITEM_DELETE_REQUEST,
+  ITEM_DELETE_SUCCESS,
 } from "../constants/itemConstants";
+import { logout } from "./userActions";
+import {toast} from 'react-toastify'
+
+
 
 export const listItems = () => async (dispatch) => {
   try {
@@ -55,5 +62,46 @@ export const listItemDetails = (id) => async (dispatch) => {
       type: ITEM_DETAILS_FAILURE,
       payload: finalMessage,
     });
+  }
+};
+
+export const deleteItem = (id) => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: ITEM_DELETE_REQUEST,
+    });
+
+    const {
+      userLogin: { userInfo },
+    } = getState();
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+
+    await axios.delete(
+      process.env.REACT_APP_API + `/items/${id}`,
+      config
+    );
+
+    dispatch({
+      type: ITEM_DELETE_SUCCESS,
+    });
+  } catch (error) {
+    const finalMessage =
+      error.response && error.response.data.message
+        ? error.response.data.message
+        : error.message;
+
+    if (finalMessage === "Not authorized, token failed") {
+      dispatch(logout());
+    }
+    dispatch({
+      type: ITEM_DELETE_FAILURE,
+      payload: finalMessage,
+    });
+    toast.error(finalMessage);
   }
 };

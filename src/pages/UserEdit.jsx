@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 
 import { getUserDetails, updateUser } from "../redux/actions/userActions";
+import { USER_UPDATE_RESET } from "../redux/constants/userConstants";
 
 import Loader from "../components/Loader";
 import Error from "../components/Error";
@@ -11,6 +12,10 @@ const UserEdit = ({ history, match }) => {
   const dispatch = useDispatch();
   const userDetails = useSelector((state) => state.userDetails);
   const { loading, error, user } = userDetails;
+  const userUpdate = useSelector((state) => state.userUpdate);
+  const {
+    success: successUpdate,
+  } = userUpdate;
 
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
@@ -20,14 +25,19 @@ const UserEdit = ({ history, match }) => {
   const userId = match.params.id;
 
   useEffect(() => {
-    if (!user.username || user._id !== userId) {
-      dispatch(getUserDetails(userId));
+    if (successUpdate) {
+      dispatch({ type: USER_UPDATE_RESET });
+      history.push("/admin/users-list");
     } else {
-      setUsername(user.username);
-      setEmail(user.email);
-      setIsAdmin(user.isAdmin);
+      if (!user.username || user._id !== userId) {
+        dispatch(getUserDetails(userId));
+      } else {
+        setUsername(user.username);
+        setEmail(user.email);
+        setIsAdmin(user.isAdmin);
+      }
     }
-  }, [dispatch, user, userId]);
+  }, [dispatch, user, userId, successUpdate, history]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -110,9 +120,9 @@ const UserEdit = ({ history, match }) => {
                       </div>
                       <div className="field is-grouped is-grouped-right">
                         <p className="control">
-                          <Link className="button is-rounded  is-primary">
+                          <button className="button is-rounded  is-primary">
                             <strong>Update</strong>
-                          </Link>
+                          </button>
                         </p>
                         <p className="control">
                           <Link
