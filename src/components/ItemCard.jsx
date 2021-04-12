@@ -5,8 +5,6 @@ import Rating from "./Rating";
 import { addDecimals } from "../utils/addDecimals";
 
 const ItemCard = ({ item }) => {
-  item.price = addDecimals(item.price);
-
   return (
     <div className="card">
       <div className="card-image has-text-centered">
@@ -31,7 +29,7 @@ const ItemCard = ({ item }) => {
             color="#f8d125"
           />
         </div>
-        <div className="content is-medium">${item.price}</div>
+        <div className="content is-medium">${addDecimals(item.price)}</div>
       </div>
     </div>
   );
