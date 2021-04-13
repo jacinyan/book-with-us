@@ -13,13 +13,15 @@ import Error from "../components/Error";
 import { addDecimals } from "../utils/addDecimals";
 
 const OrderDetails = ({ match }) => {
+  const orderId = match.params.id;
+
   const dispatch = useDispatch();
+
   const orderDetails = useSelector((state) => state.orderDetails);
   const { order, loading, error } = orderDetails;
+
   const orderPay = useSelector((state) => state.orderPay);
   const { loading: loadingPay, success: successPay } = orderPay;
-
-  const orderId = match.params.id;
 
   const [sdkReady, setSdkReady] = useState(false);
 

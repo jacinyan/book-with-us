@@ -9,6 +9,7 @@ import Loader from "../components/Loader";
 
 const Register = ({ history, location }) => {
   const dispatch = useDispatch();
+  
   const userRegister = useSelector((state) => state.userRegister);
   const { loading } = userRegister;
   const userLogin = useSelector((state) => state.userLogin);

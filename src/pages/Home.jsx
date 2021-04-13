@@ -9,6 +9,7 @@ import Error from "../components/Error";
 
 const Home = () => {
   const dispatch = useDispatch();
+  
   const itemsList = useSelector((state) => state.itemsList);
   const { loading, error, items } = itemsList;
 

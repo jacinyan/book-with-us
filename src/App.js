@@ -18,6 +18,7 @@ import OrderDetails from "./pages/OrderDetails";
 import UsersList from "./pages/UsersList";
 import UserEdit from "./pages/UserEdit";
 import ItemsList from "./pages/ItemsList";
+import ItemEdit from "./pages/ItemEdit";
 
 function App() {
   // console.count('App rendered');
@@ -41,7 +42,8 @@ function App() {
           <PrivateRoute path="/orders/:id" component={OrderDetails} />
           <PrivateRoute path="/admin/users-list" component={UsersList} />
           <PrivateRoute path="/admin/users/:id/edit" component={UserEdit} />
-          <PrivateRoute path="/admin/items-list" component={ItemsList} />
+          <PrivateRoute path="/admin/items-list" exact component={ItemsList} />
+          <PrivateRoute path="/admin/items/:id/edit" component={ItemEdit} />
           <Redirect to="/" />
         </Switch>
       </Layout>

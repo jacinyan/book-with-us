@@ -9,9 +9,13 @@ import Loader from "../components/Loader";
 import Error from "../components/Error";
 
 const UserEdit = ({ history, match }) => {
+  const userId = match.params.id;
+
   const dispatch = useDispatch();
+
   const userDetails = useSelector((state) => state.userDetails);
   const { loading, error, user } = userDetails;
+
   const userUpdate = useSelector((state) => state.userUpdate);
   const {
     success: successUpdate,
@@ -21,8 +25,6 @@ const UserEdit = ({ history, match }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isAdmin, setIsAdmin] = useState(false);
-
-  const userId = match.params.id;
 
   useEffect(() => {
     if (successUpdate) {

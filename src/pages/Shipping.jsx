@@ -8,6 +8,7 @@ import CheckoutSteps from "../components/CheckoutSteps";
 const Shipping = ({ history }) => {
   console.count("Shipping rendered");
   const dispatch = useDispatch();
+  
   const cart = useSelector((state) => state.cart);
   const { shippingAddress } = cart;
 

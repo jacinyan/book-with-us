@@ -9,6 +9,7 @@ import Error from "../components/Error";
 
 const UsersList = ({ history }) => {
   const dispatch = useDispatch();
+  
   const usersList = useSelector((state) => state.usersList);
   const { loading, error, users } = usersList;
 
@@ -24,6 +25,7 @@ const UsersList = ({ history }) => {
     } else {
       history.push('/')
     }
+    //successDelete added to trigger useEffect
   }, [dispatch, history, userInfo, successDelete]);
 
   const handleDeleteUser = (id) => {

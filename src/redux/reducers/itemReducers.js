@@ -8,6 +8,10 @@ import {
   ITEM_DELETE_REQUEST,
   ITEM_DELETE_SUCCESS,
   ITEM_DELETE_FAILURE,
+  ITEM_CREATE_REQUEST,
+  ITEM_CREATE_SUCCESS,
+  ITEM_CREATE_FAILURE,
+  ITEM_CREATE_RESET,
 } from "../constants/itemConstants";
 
 export const itemsListReducer = (state = { items: [] }, action) => {
@@ -47,6 +51,21 @@ export const itemDeleteReducer = (state = {}, action) => {
       return { loading: false, success: true };
     case ITEM_DELETE_FAILURE:
       return { loading: false, error: action.payload };
+    default:
+      return state;
+  }
+};
+
+export const itemCreateReducer = (state = {}, action) => {
+  switch (action.type) {
+    case ITEM_CREATE_REQUEST:
+      return { loading: true };
+    case ITEM_CREATE_SUCCESS:
+      return { loading: false, success: true, item: action.payload };
+    case ITEM_CREATE_FAILURE:
+      return { loading: false, error: action.payload };
+    case ITEM_CREATE_RESET:
+      return {};
     default:
       return state;
   }

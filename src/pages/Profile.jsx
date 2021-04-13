@@ -14,13 +14,15 @@ import Loader from "../components/Loader";
 import Error from "../components/Error";
 
 const Profile = ({ history }) => {
-  console.count("Profile rendered");
+  // console.log("Profile rendered");
   const dispatch = useDispatch();
+  
   const userDetails = useSelector((state) => state.userDetails);
   const { loading, error, user } = userDetails;
   // console.log(user);
   const userUpdateProfile = useSelector((state) => state.userUpdateProfile);
   const { success } = userUpdateProfile;
+  // console.log(success)
 
   const orderListMy = useSelector((state) => state.orderListMy);
   const { loading: loadingOrders, orders } = orderListMy;
@@ -31,8 +33,9 @@ const Profile = ({ history }) => {
   const [confirmPassword, setConfirmPassword] = useState("");
 
   useEffect(() => {
-    console.count("useEffect -- Profile");
+    // console.log("useEffect -- Profile");
     if (!user || !user.username || success) {
+      // console.log("useEffect -- Profile -- success");
       dispatch({
         type: USER_UPDATE_PROFILE_RESET,
       });

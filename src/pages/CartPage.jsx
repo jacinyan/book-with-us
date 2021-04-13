@@ -6,6 +6,7 @@ import { addToCart, removeFromCart } from "../redux/actions/cartActions";
 
 const CartPage = ({ history }) => {
   const dispatch = useDispatch();
+  
   const cart = useSelector((state) => state.cart);
   const { cartItems } = cart;
 

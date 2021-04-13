@@ -9,11 +9,12 @@ import {
   ITEM_DELETE_FAILURE,
   ITEM_DELETE_REQUEST,
   ITEM_DELETE_SUCCESS,
+  ITEM_CREATE_REQUEST,
+  ITEM_CREATE_SUCCESS,
+  ITEM_CREATE_FAILURE,
 } from "../constants/itemConstants";
 import { logout } from "./userActions";
-import {toast} from 'react-toastify'
-
-
+import { toast } from "react-toastify";
 
 export const listItems = () => async (dispatch) => {
   try {
@@ -81,11 +82,7 @@ export const deleteItem = (id) => async (dispatch, getState) => {
       },
     };
 
-    await axios.delete(
-      process.env.REACT_APP_API + `/items/${id}`,
-      config
-    );
-
+    await axios.delete(process.env.REACT_APP_API + `/items/${id}`, config);
     dispatch({
       type: ITEM_DELETE_SUCCESS,
     });
@@ -100,6 +97,51 @@ export const deleteItem = (id) => async (dispatch, getState) => {
     }
     dispatch({
       type: ITEM_DELETE_FAILURE,
+      payload: finalMessage,
+    });
+    toast.error(finalMessage);
+  }
+};
+
+export const createItem = () => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: ITEM_CREATE_REQUEST,
+    });
+
+    const {
+      userLogin: { userInfo },
+    } = getState();
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+
+    const { data } = await axios.post(
+      process.env.REACT_APP_API + `/items`,
+      {},
+      config
+    );
+    console.log('before Item create success');
+    dispatch({
+      type: ITEM_CREATE_SUCCESS,
+      payload: data,
+    });
+    console.log('after Item create success');
+  } catch (error) {
+    console.log(error);
+    const finalMessage =
+      error.response && error.response.data.message
+        ? error.response.data.message
+        : error.message;
+
+    if (finalMessage === "Not authorized, token failed") {
+      dispatch(logout());
+    }
+    dispatch({
+      type: ITEM_CREATE_FAILURE,
       payload: finalMessage,
     });
     toast.error(finalMessage);

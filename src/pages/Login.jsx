@@ -7,8 +7,9 @@ import { login } from "../redux/actions/userActions";
 import Loader from "../components/Loader";
 
 const Login = ({ location, history }) => {
-  console.count('Login rendered')
+  // console.count('Login rendered')
   const dispatch = useDispatch();
+  
   const userLogin = useSelector((state) => state.userLogin);
   const { loading, userInfo } = userLogin;
 

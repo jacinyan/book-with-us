@@ -1,9 +1,14 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import {addDecimals} from '../utils/addDecimals'
+import { addDecimals } from "../utils/addDecimals";
 
-import { listItems, deleteItem } from "../redux/actions/itemActions";
+import {
+  listItems,
+  deleteItem,
+  createItem,
+} from "../redux/actions/itemActions";
+import { ITEM_CREATE_RESET } from "../redux/constants/itemConstants";
 
 import Loader from "../components/Loader";
 import Error from "../components/Error";
@@ -15,28 +20,40 @@ const ItemsList = ({ history, match }) => {
   const { loading, error, items } = itemsList;
 
   const itemDelete = useSelector((state) => state.itemDelete);
-  const { success } = itemDelete;
+  const { success: successDelete } = itemDelete;
+
+  const itemCreate = useSelector((state) => state.itemCreate);
+  const { success: successCreate, item: createdItem } = itemCreate;
 
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
   useEffect(() => {
-    if (userInfo && userInfo.isAdmin) {
-      dispatch(listItems());
-    } else {
-      history.push('/')
+    console.log('before ITEM_CREATE_RESET');
+    dispatch({ type: ITEM_CREATE_RESET });
+    if (!userInfo.isAdmin) {
+      history.push("/");
     }
-  }, [dispatch, history, userInfo, success]);
+
+    if (successCreate) {
+      history.push(`/admin/items/${createdItem._id}/edit`);
+    } else {
+      dispatch(listItems())
+    }
+    //successDelete added to trigger useEffect
+  }, [dispatch, history, userInfo, successDelete, successCreate, createdItem]);
 
   const handleDeleteItem = (id) => {
+    // console.log('Item delete handler');
     if (window.confirm("Are you sure")) {
-        dispatch(deleteItem(id));
+      dispatch(deleteItem(id));
     }
   };
 
-  const handleCreateItem = (item) => {
-      // create item
-  }
+  const handleCreateItem = () => {
+    // console.log('Item create handler');
+    dispatch(createItem());
+  };
 
   return (
     <section className="py-6">
@@ -52,7 +69,12 @@ const ItemsList = ({ history, match }) => {
                 <h1 className="mb-5 title hr">Items</h1>
               </div>
               <div className="column has-text-right">
-                <button className="button is-rounded has-text-primary is-light " onClick={handleCreateItem}><i className="fas fa-plus"></i>&nbsp;&nbsp;Create Item</button>
+                <button
+                  className="button is-rounded has-text-primary is-light "
+                  onClick={handleCreateItem}
+                >
+                  <i className="fas fa-plus"></i>&nbsp;&nbsp;Create Item
+                </button>
               </div>
             </div>
             <div className="table-container">
@@ -72,15 +94,9 @@ const ItemsList = ({ history, match }) => {
                     <tr key={item._id}>
                       <td>{item._id}</td>
                       <td>{item.name}</td>
-                      <td>
-                        ${addDecimals(item.price)}
-                      </td>
-                      <td>
-                        {item.genre}
-                      </td>
-                      <td>
-                        {item.author}
-                      </td>
+                      <td>${addDecimals(item.price)}</td>
+                      <td>{item.genre}</td>
+                      <td>{item.author}</td>
                       <td>
                         <Link to={`/admin/items/${item._id}/edit`}>
                           <button className="button is-rounded is-light is-small">

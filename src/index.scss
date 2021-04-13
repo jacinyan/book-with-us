@@ -34,7 +34,8 @@ $input-shadow: none;
 @import "../node_modules/bulma/bulma.sass";
 
 // base styles
-html {
+html,
+body {
   height: 100%;
 }
 
@@ -61,7 +62,7 @@ a.has-text-primary:hover {
   color: $link-hover !important;
 }
 
-.input {
+.input, .textarea {
   border-color: $grey-lighter;
   &:hover {
     border-color: $grey-light;
@@ -74,14 +75,18 @@ a.has-text-primary:hover {
   }
 }
 
+select {
+  width: 5rem;
+}
+
 .hr {
   display: inline-block;
 }
 .hr:after {
   content: "";
   display: block;
-  border-top: 0.15rem solid #363636;
-  margin-top: 0.1em;
+  border-top: 0.15rem solid $primary;
+  margin-top: 0.15em;
 }
 
 /* mobile styles */
@@ -115,9 +120,6 @@ nav.breadcrumb[data-page="shipping-payment"] {
   transform: translateY(3rem);
 }
 
-select {
-  width: 5rem;
-}
 
 footer.footer {
   padding-top: 2.7rem;
