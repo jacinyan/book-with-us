@@ -24,7 +24,7 @@ function App() {
   // console.count('App rendered');
   return (
     <>
-      <ToastContainer />
+      <ToastContainer position="top-center"/>
       <Layout>
         <Switch>
           <Route path="/" exact render={(props) => <Home {...props} />} />

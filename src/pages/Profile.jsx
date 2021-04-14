@@ -21,7 +21,7 @@ const Profile = ({ history }) => {
   const { loading, error, user } = userDetails;
   // console.log(user);
   const userUpdateProfile = useSelector((state) => state.userUpdateProfile);
-  const { success } = userUpdateProfile;
+  const { success: successUpdate } = userUpdateProfile;
   // console.log(success)
 
   const orderListMy = useSelector((state) => state.orderListMy);
@@ -34,7 +34,7 @@ const Profile = ({ history }) => {
 
   useEffect(() => {
     // console.log("useEffect -- Profile");
-    if (!user || !user.username || success) {
+    if (!user || !user.username || successUpdate) {
       // console.log("useEffect -- Profile -- success");
       dispatch({
         type: USER_UPDATE_PROFILE_RESET,
@@ -45,7 +45,7 @@ const Profile = ({ history }) => {
       setUsername(user.username);
       setEmail(user.email);
     }
-  }, [dispatch, history, user, success]);
+  }, [dispatch, history, user, successUpdate]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

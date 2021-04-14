@@ -2,10 +2,12 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 
-import { listItemDetails } from "../redux/actions/itemActions";
+import { listItemDetails, updateItem } from "../redux/actions/itemActions";
 
 import Loader from "../components/Loader";
 import Error from "../components/Error";
+import { ITEM_UPDATE_RESET } from "../redux/constants/itemConstants";
+import axios from "axios";
 
 const ItemEdit = ({ history, match }) => {
   const itemId = match.params.id;
@@ -15,6 +17,12 @@ const ItemEdit = ({ history, match }) => {
   const itemDetails = useSelector((state) => state.itemDetails);
   const { loading, error, item } = itemDetails;
 
+  const itemUpdate = useSelector((state) => state.itemUpdate);
+  const { success: successUpdate } = itemUpdate;
+
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
+
   const [name, setName] = useState("");
   const [price, setPrice] = useState(0);
   const [image, setImage] = useState("");
@@ -22,24 +30,68 @@ const ItemEdit = ({ history, match }) => {
   const [author, setAuthor] = useState(false);
   const [countInStock, setCountInStock] = useState(0);
   const [description, setDescription] = useState(false);
+  const [uploading, setUploading] = useState(false);
 
   useEffect(() => {
-    if (!item.name || item._id !== itemId) {
-      dispatch(listItemDetails(itemId));
+    if (successUpdate) {
+      dispatch({ type: ITEM_UPDATE_RESET });
+      history.push("/admin/items-list");
     } else {
-      setName(item.name);
-      setPrice(item.price);
-      setGenre(item.genre);
-      setAuthor(item.author);
-      setImage(item.image);
-      setCountInStock(item.countInStock);
-      setDescription(item.description);
+      if (!item.name || item._id !== itemId) {
+        dispatch(listItemDetails(itemId));
+      } else {
+        setName(item.name);
+        setPrice(item.price);
+        setGenre(item.genre);
+        setAuthor(item.author);
+        setImage(item.image);
+        setCountInStock(item.countInStock);
+        setDescription(item.description);
+      }
     }
-  }, [dispatch, item, itemId, history]);
+  }, [dispatch, item, itemId, history, successUpdate]);
+
+  const handleUploadFile = async (e) => {
+    const file = e.target.files[0];
+    const formData = new FormData();
+    formData.append("image", file);
+    setUploading(true);
+
+    try {
+      const config = {
+        headers: {
+          "Content-type": "multipart/form-data",
+          Authorization: `Bearer ${userInfo.token}`,
+        },
+      };
+      const { data } = await axios.post(
+        process.env.REACT_APP_API + "/upload",
+        formData,
+        config
+      );
+      
+      setImage(data);
+      setUploading(false);
+    } catch (error) {
+      console.log(error);
+      setUploading(false);
+    }
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // update item
+    dispatch(
+      updateItem({
+        _id: itemId,
+        name,
+        price,
+        genre,
+        author,
+        image,
+        countInStock,
+        description,
+      })
+    );
   };
 
   return (
@@ -145,18 +197,40 @@ const ItemEdit = ({ history, match }) => {
                             <i className="fas fa-images"></i>
                           </span>
                         </div>
+                        <div className="file has-name is-fullwidth is-right">
+                          <label className="file-label">
+                            <input
+                              className="file-input"
+                              type="file"
+                              name="uploadImage"
+                              onChange={handleUploadFile}
+                            />
+                            <span className="file-cta">
+                              <span className="file-icon">
+                                <i className="fas fa-upload"></i>
+                              </span>
+                              <span className="file-label">Choose a file…</span>
+                            </span>
+                            {uploading ? (
+                              <span className="file-name button is-loading"></span>
+                            ) : (
+                              <span className="file-name">
+                                No file uploaded
+                              </span>
+                            )}
+                          </label>
+                        </div>
                       </div>
                       <div className="field">
                         <div className="control">
                           <textarea
-                            class="textarea"
-                            placeholder='Description...'
+                            className="textarea"
+                            placeholder="Description..."
                             value={description}
                             onChange={(e) => setDescription(e.target.value)}
                           ></textarea>
                         </div>
                       </div>
-
                       <div className="field is-grouped is-grouped-right">
                         <p className="control">
                           <button className="button is-rounded  is-primary">

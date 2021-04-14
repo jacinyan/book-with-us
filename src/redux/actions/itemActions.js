@@ -12,6 +12,9 @@ import {
   ITEM_CREATE_REQUEST,
   ITEM_CREATE_SUCCESS,
   ITEM_CREATE_FAILURE,
+  ITEM_UPDATE_REQUEST,
+  ITEM_UPDATE_SUCCESS,
+  ITEM_UPDATE_FAILURE,
 } from "../constants/itemConstants";
 import { logout } from "./userActions";
 import { toast } from "react-toastify";
@@ -99,7 +102,7 @@ export const deleteItem = (id) => async (dispatch, getState) => {
       type: ITEM_DELETE_FAILURE,
       payload: finalMessage,
     });
-    toast.error(finalMessage);
+    toast.error(finalMessage, {autoClose: false});
   }
 };
 
@@ -124,14 +127,13 @@ export const createItem = () => async (dispatch, getState) => {
       {},
       config
     );
-    console.log('before Item create success');
     dispatch({
       type: ITEM_CREATE_SUCCESS,
       payload: data,
     });
-    console.log('after Item create success');
+
+    toast.success("Item successfully created");
   } catch (error) {
-    console.log(error);
     const finalMessage =
       error.response && error.response.data.message
         ? error.response.data.message
@@ -144,6 +146,52 @@ export const createItem = () => async (dispatch, getState) => {
       type: ITEM_CREATE_FAILURE,
       payload: finalMessage,
     });
-    toast.error(finalMessage);
+    toast.error(finalMessage, {autoClose: false});
+  }
+};
+
+export const updateItem = (item) => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: ITEM_UPDATE_REQUEST,
+    });
+
+    const {
+      userLogin: { userInfo },
+    } = getState();
+
+    const config = {
+      headers: {
+        "Content-type": "application/json",
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+
+    const { data } = await axios.put(
+      process.env.REACT_APP_API + `/items/${item._id}`,
+      item,
+      config
+    );
+    // console.log('before Item UPDATE success');
+    dispatch({
+      type: ITEM_UPDATE_SUCCESS,
+      payload: data,
+    });
+    // console.log('after Item UPDATE success');
+    toast.success("Item successfully updated");
+  } catch (error) {
+    const finalMessage =
+      error.response && error.response.data.message
+        ? error.response.data.message
+        : error.message;
+
+    if (finalMessage === "Not authorized, token failed") {
+      dispatch(logout());
+    }
+    dispatch({
+      type: ITEM_UPDATE_FAILURE,
+      payload: finalMessage,
+    });
+    toast.error(finalMessage, {autoClose: false});
   }
 };

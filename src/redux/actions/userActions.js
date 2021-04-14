@@ -68,7 +68,7 @@ export const login = (email, password) => async (dispatch) => {
       payload: finalMessage,
     });
 
-    toast.error(finalMessage);
+    toast.error(finalMessage, {autoClose: false});
   }
 };
 
@@ -128,7 +128,7 @@ export const register = (username, email, password) => async (dispatch) => {
       type: USER_REGISTER_FAILURE,
       payload: finalMessage,
     });
-    toast.error(finalMessage);
+    toast.error(finalMessage, {autoClose: false});
   }
 };
 
@@ -170,7 +170,7 @@ export const getUserDetails = (id) => async (dispatch, getState) => {
       type: USER_DETAILS_FAILURE,
       payload: finalMessage,
     });
-    toast.error(finalMessage);
+    toast.error(finalMessage, {autoClose: false});
   }
 };
 
@@ -223,7 +223,7 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
       type: USER_UPDATE_PROFILE_FAILURE,
       payload: finalMessage,
     });
-    toast.error(finalMessage);
+    toast.error(finalMessage, {autoClose: false});
   }
 };
 
@@ -265,7 +265,7 @@ export const listUsers = () => async (dispatch, getState) => {
       type: USERS_LIST_FAILURE,
       payload: finalMessage,
     });
-    toast.error(finalMessage);
+    toast.error(finalMessage, {autoClose: false});
   }
 };
 
@@ -305,7 +305,7 @@ export const deleteUser = (id) => async (dispatch, getState) => {
       type: USER_DELETE_FAILURE,
       payload: finalMessage,
     });
-    toast.error(finalMessage);
+    toast.error(finalMessage, {autoClose: false});
   }
 };
 
@@ -355,6 +355,6 @@ export const updateUser = (user) => async (dispatch, getState) => {
       type: USER_UPDATE_FAILURE,
       payload: finalMessage,
     });
-    toast.error(finalMessage);
+    toast.error(finalMessage, {autoClose: false});
   }
 };

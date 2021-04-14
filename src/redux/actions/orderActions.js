@@ -58,7 +58,7 @@ export const createOrder = (order) => async (dispatch, getState) => {
       type: ORDER_CREATE_FAILURE,
       payload: finalMessage,
     });
-    toast.error(finalMessage);
+    toast.error(finalMessage, { autoClose: false });
   }
 };
 
@@ -100,7 +100,7 @@ export const getOrderDetails = (id) => async (dispatch, getState) => {
       type: ORDER_DETAILS_FAILURE,
       payload: finalMessage,
     });
-    toast.error(finalMessage);
+    toast.error(finalMessage, { autoClose: false });
   }
 };
 
@@ -147,7 +147,7 @@ export const payOrder = (orderId, paymentResult) => async (
       type: ORDER_PAY_FAILURE,
       payload: finalMessage,
     });
-    toast.error(finalMessage);
+    toast.error(finalMessage, { autoClose: false });
   }
 };
 
@@ -189,6 +189,6 @@ export const listMyOrders = () => async (dispatch, getState) => {
       type: ORDER_LIST_MY_FAILURE,
       payload: finalMessage,
     });
-    toast.error(finalMessage);
+    toast.error(finalMessage, { autoClose: false });
   }
 };
