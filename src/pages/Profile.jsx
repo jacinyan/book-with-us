@@ -24,8 +24,8 @@ const Profile = ({ history }) => {
   const { success: successUpdate } = userUpdateProfile;
   // console.log(success)
 
-  const orderListMy = useSelector((state) => state.orderListMy);
-  const { loading: loadingOrders, orders } = orderListMy;
+  const ordersListMy = useSelector((state) => state.ordersListMy);
+  const { loading: loadingOrders, orders } = ordersListMy;
 
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
@@ -36,12 +36,15 @@ const Profile = ({ history }) => {
     // console.log("useEffect -- Profile");
     if (!user || !user.username || successUpdate) {
       // console.log("useEffect -- Profile -- success");
+      // reset each update 
       dispatch({
         type: USER_UPDATE_PROFILE_RESET,
       });
+      //if user info does not exist fetch it from backend
       dispatch(getUserDetails("profile"));
       dispatch(listMyOrders());
     } else {
+      //if it does (from backend already), fill out the form with it
       setUsername(user.username);
       setEmail(user.email);
     }
@@ -125,7 +128,7 @@ const Profile = ({ history }) => {
                       <input
                         className="input "
                         type="password"
-                        placeholder="Confirm Password"
+                        placeholder="Confirm Updated Password"
                         value={confirmPassword}
                         onChange={(e) => setConfirmPassword(e.target.value)}
                       />

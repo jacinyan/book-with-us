@@ -22,7 +22,8 @@ import { cartReducer } from "../redux/reducers/cartReducers";
 import {
   orderCreateReducer,
   orderDetailsReducer,
-  orderListMyReducer,
+  ordersListMyReducer,
+  ordersListReducer,
   orderPayReducer,
 } from "../redux/reducers/orderReducers";
 
@@ -63,7 +64,8 @@ const rootReducer = combineReducers({
   orderCreate: orderCreateReducer,
   orderDetails: orderDetailsReducer,
   orderPay: orderPayReducer,
-  orderListMy: orderListMyReducer,
+  ordersListMy: ordersListMyReducer,
+  ordersList: ordersListReducer
 });
 
 export default createStore(

@@ -132,7 +132,7 @@ export const createItem = () => async (dispatch, getState) => {
       payload: data,
     });
 
-    toast.success("Item successfully created");
+    toast.success("Item created");
   } catch (error) {
     const finalMessage =
       error.response && error.response.data.message
@@ -178,7 +178,7 @@ export const updateItem = (item) => async (dispatch, getState) => {
       payload: data,
     });
     // console.log('after Item UPDATE success');
-    toast.success("Item successfully updated");
+    toast.success("Item updated");
   } catch (error) {
     const finalMessage =
       error.response && error.response.data.message

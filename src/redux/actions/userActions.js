@@ -56,7 +56,7 @@ export const login = (email, password) => async (dispatch) => {
 
     localStorage.setItem("userInfo", JSON.stringify(data));
 
-    toast.success("Logged in successfully ");
+    toast.success("You've logged in successfully!");
   } catch (error) {
     const finalMessage =
       error.response && error.response.data.message
@@ -68,7 +68,7 @@ export const login = (email, password) => async (dispatch) => {
       payload: finalMessage,
     });
 
-    toast.error(finalMessage, {autoClose: false});
+    toast.error(finalMessage, { autoClose: false });
   }
 };
 
@@ -118,7 +118,7 @@ export const register = (username, email, password) => async (dispatch) => {
 
     localStorage.setItem("userInfo", JSON.stringify(data));
 
-    toast.success("Signed up successfully ");
+    toast.success("You've signed up successfully!");
   } catch (error) {
     const finalMessage =
       error.response && error.response.data.message
@@ -128,7 +128,7 @@ export const register = (username, email, password) => async (dispatch) => {
       type: USER_REGISTER_FAILURE,
       payload: finalMessage,
     });
-    toast.error(finalMessage, {autoClose: false});
+    toast.error(finalMessage, { autoClose: false });
   }
 };
 
@@ -170,7 +170,7 @@ export const getUserDetails = (id) => async (dispatch, getState) => {
       type: USER_DETAILS_FAILURE,
       payload: finalMessage,
     });
-    toast.error(finalMessage, {autoClose: false});
+    toast.error(finalMessage, { autoClose: false });
   }
 };
 
@@ -209,7 +209,7 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
 
     localStorage.setItem("userInfo", JSON.stringify(data));
 
-    toast.success("User profile successfully updated");
+    toast.success("Your profile's successfully been updated!");
   } catch (error) {
     const finalMessage =
       error.response && error.response.data.message
@@ -223,7 +223,7 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
       type: USER_UPDATE_PROFILE_FAILURE,
       payload: finalMessage,
     });
-    toast.error(finalMessage, {autoClose: false});
+    toast.error(finalMessage, { autoClose: false });
   }
 };
 
@@ -265,7 +265,7 @@ export const listUsers = () => async (dispatch, getState) => {
       type: USERS_LIST_FAILURE,
       payload: finalMessage,
     });
-    toast.error(finalMessage, {autoClose: false});
+    toast.error(finalMessage, { autoClose: false });
   }
 };
 
@@ -305,7 +305,7 @@ export const deleteUser = (id) => async (dispatch, getState) => {
       type: USER_DELETE_FAILURE,
       payload: finalMessage,
     });
-    toast.error(finalMessage, {autoClose: false});
+    toast.error(finalMessage, { autoClose: false });
   }
 };
 
@@ -341,7 +341,7 @@ export const updateUser = (user) => async (dispatch, getState) => {
       payload: data,
     });
 
-    toast.success("User updated successfully");
+    toast.success("User updated");
   } catch (error) {
     const finalMessage =
       error.response && error.response.data.message
@@ -355,6 +355,6 @@ export const updateUser = (user) => async (dispatch, getState) => {
       type: USER_UPDATE_FAILURE,
       payload: finalMessage,
     });
-    toast.error(finalMessage, {autoClose: false});
+    toast.error(finalMessage, { autoClose: false });
   }
 };
