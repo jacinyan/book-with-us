@@ -15,6 +15,9 @@ import {
   ORDER_LIST_REQUEST,
   ORDER_LIST_SUCCESS,
   ORDER_LIST_FAILURE,
+  ORDER_DELIVER_REQUEST,
+  ORDER_DELIVER_SUCCESS,
+  ORDER_DELIVER_FAILURE,
 } from "../constants/orderConstants";
 import { logout } from "./userActions";
 import { toast } from "react-toastify";
@@ -148,6 +151,52 @@ export const payOrder = (orderId, paymentResult) => async (
     }
     dispatch({
       type: ORDER_PAY_FAILURE,
+      payload: finalMessage,
+    });
+    toast.error(finalMessage, { autoClose: false });
+  }
+};
+
+export const deliverOrder = (order) => async (
+  dispatch,
+  getState
+) => {
+  try {
+    dispatch({
+      type: ORDER_DELIVER_REQUEST,
+    });
+
+    const {
+      userLogin: { userInfo },
+    } = getState();
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+
+    const { data } = await axios.put(
+      process.env.REACT_APP_API + `/orders/${order._id}/deliver`,
+      {},
+      config
+    );
+
+    dispatch({
+      type: ORDER_DELIVER_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    const finalMessage =
+      error.response && error.response.data.message
+        ? error.response.data.message
+        : error.message;
+
+    if (finalMessage === "Not authorized, token failed") {
+      dispatch(logout());
+    }
+    dispatch({
+      type: ORDER_DELIVER_FAILURE,
       payload: finalMessage,
     });
     toast.error(finalMessage, { autoClose: false });

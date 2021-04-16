@@ -25,6 +25,7 @@ import {
   ordersListMyReducer,
   ordersListReducer,
   orderPayReducer,
+  orderDeliverReducer
 } from "../redux/reducers/orderReducers";
 
 const cartItemsFromStorage = localStorage.getItem("cartItems")
@@ -65,7 +66,8 @@ const rootReducer = combineReducers({
   orderDetails: orderDetailsReducer,
   orderPay: orderPayReducer,
   ordersListMy: ordersListMyReducer,
-  ordersList: ordersListReducer
+  ordersList: ordersListReducer,
+  orderDeliver: orderDeliverReducer
 });
 
 export default createStore(

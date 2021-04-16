@@ -4,24 +4,37 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { PayPalButton } from "react-paypal-button-v2";
 
-import { getOrderDetails, payOrder } from "../redux/actions/orderActions";
-import { ORDER_PAY_RESET } from "../redux/constants/orderConstants";
+import {
+  getOrderDetails,
+  payOrder,
+  deliverOrder,
+} from "../redux/actions/orderActions";
+import {
+  ORDER_PAY_RESET,
+  ORDER_DELIVER_RESET,
+} from "../redux/constants/orderConstants";
 
 import Loader from "../components/Loader";
 import Error from "../components/Error";
 
 import { addDecimals } from "../utils/addDecimals";
 
-const OrderDetails = ({ match }) => {
+const OrderDetails = ({ match, history }) => {
   const orderId = match.params.id;
 
   const dispatch = useDispatch();
+
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
 
   const orderDetails = useSelector((state) => state.orderDetails);
   const { order, loading, error } = orderDetails;
 
   const orderPay = useSelector((state) => state.orderPay);
   const { loading: loadingPay, success: successPay } = orderPay;
+
+  const orderDeliver = useSelector((state) => state.orderDeliver);
+  const { loading: loadingDeliver, success: successDeliver } = orderDeliver;
 
   const [sdkReady, setSdkReady] = useState(false);
 
@@ -47,8 +60,9 @@ const OrderDetails = ({ match }) => {
       document.body.appendChild(script);
     };
 
-    if (!order || order._id !== orderId || successPay) {
+    if (!order || order._id !== orderId || successPay || successDeliver) {
       dispatch({ type: ORDER_PAY_RESET });
+      dispatch({ type: ORDER_DELIVER_RESET });
       dispatch(getOrderDetails(orderId));
     } else if (!order.isPaid) {
       if (!window.paypal) {
@@ -57,11 +71,15 @@ const OrderDetails = ({ match }) => {
         setSdkReady(true);
       }
     }
-  }, [dispatch, order, orderId, successPay]);
+  }, [dispatch, order, orderId, successPay, successDeliver, history, userInfo]);
 
   const handleSuccessPayment = (paymentResult) => {
     console.log(paymentResult);
     dispatch(payOrder(orderId, paymentResult));
+  };
+
+  const handleDeliver = () => {
+    dispatch(deliverOrder(order));
   };
 
   return (
@@ -201,6 +219,22 @@ const OrderDetails = ({ match }) => {
                             )}
                           </>
                         )}
+                        {loadingDeliver && (
+                          <button className="card-footer-item button is-loading is-fullwidth">
+                            Loading
+                          </button>
+                        )}
+                        {userInfo &&
+                          userInfo.isAdmin &&
+                          order.isPaid &&
+                          !order.isDelivered && (
+                            <button
+                              className="button is-primary"
+                              onClick={handleDeliver}
+                            >
+                              Mark as delivered
+                            </button>
+                          )}
                       </footer>
                     </div>
                   </div>
