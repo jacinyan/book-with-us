@@ -95,8 +95,7 @@ const OrderDetails = ({ match, history }) => {
               <h1 className="title hr">Order {order._id}</h1>
               <div className="columns">
                 <div className="column is-8">
-                  <ul>
-                    <li className="content">
+                    <div className="content">
                       <h3>Shipping</h3>
                       <p>
                         <strong>Name: </strong>
@@ -125,9 +124,9 @@ const OrderDetails = ({ match, history }) => {
                       ) : (
                         <p className="has-text-danger">Not Delivered</p>
                       )}
-                    </li>
+                    </div>
                     <hr />
-                    <li className="content">
+                    <div className="content">
                       <h3>Payment Method</h3>
                       <p>
                         <strong>Method: </strong> {order.paymentMethod}
@@ -139,9 +138,9 @@ const OrderDetails = ({ match, history }) => {
                       ) : (
                         <p className="has-text-danger">Not paid</p>
                       )}
-                    </li>
+                    </div>
                     <hr />
-                    <li className="content">
+                    <div className="content">
                       <h3>Order Items</h3>
                       {order.orderItems.length === 0 ? (
                         <h3>Order is empty</h3>
@@ -168,8 +167,7 @@ const OrderDetails = ({ match, history }) => {
                           ))}
                         </>
                       )}
-                    </li>
-                  </ul>
+                    </div>
                 </div>
                 <div className="column is-4">
                   <div className="card">

@@ -52,22 +52,21 @@ const PlaceOrder = ({ history }) => {
         <CheckoutSteps step1 step2 step3 step4 />
         <div className="columns">
           <div className="column is-8">
-            <ul>
-              <li className="content">
+              <div className="content">
                 <h2>Shipping</h2>
                 <p>
                   <strong>Address:</strong> {cart.shippingAddress.address},{" "}
                   {cart.shippingAddress.city}, {cart.shippingAddress.postalCode}
                   , {cart.shippingAddress.country}
                 </p>
-              </li>
-              <li className="content">
+              </div>
+              <div className="content">
                 <h2>Payment Method</h2>
                 <p>
                   <strong>Method:</strong> {cart.paymentMethod}
                 </p>
-              </li>
-              <li className="content">
+              </div>
+              <div className="content">
                 <h2>Order Items</h2>
                 {cart.cartItems.length === 0 ? (
                   <h3>Your cart is empty</h3>
@@ -94,8 +93,7 @@ const PlaceOrder = ({ history }) => {
                     ))}
                   </>
                 )}
-              </li>
-            </ul>
+              </div>
           </div>
           <div className="column is-4">
             <div className="card">

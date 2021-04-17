@@ -15,6 +15,9 @@ import {
   ITEM_UPDATE_REQUEST,
   ITEM_UPDATE_SUCCESS,
   ITEM_UPDATE_FAILURE,
+  ITEM_CREATE_REVIEW_REQUEST,
+  ITEM_CREATE_REVIEW_SUCCESS,
+  ITEM_CREATE_REVIEW_FAILURE,
 } from "../constants/itemConstants";
 import { logout } from "./userActions";
 import { toast } from "react-toastify";
@@ -102,7 +105,7 @@ export const deleteItem = (id) => async (dispatch, getState) => {
       type: ITEM_DELETE_FAILURE,
       payload: finalMessage,
     });
-    toast.error(finalMessage, {autoClose: false});
+    toast.error(finalMessage, { autoClose: false });
   }
 };
 
@@ -146,7 +149,7 @@ export const createItem = () => async (dispatch, getState) => {
       type: ITEM_CREATE_FAILURE,
       payload: finalMessage,
     });
-    toast.error(finalMessage, {autoClose: false});
+    toast.error(finalMessage, { autoClose: false });
   }
 };
 
@@ -192,6 +195,51 @@ export const updateItem = (item) => async (dispatch, getState) => {
       type: ITEM_UPDATE_FAILURE,
       payload: finalMessage,
     });
-    toast.error(finalMessage, {autoClose: false});
+    toast.error(finalMessage, { autoClose: false });
+  }
+};
+
+export const createItemReview = (itemId, review) => async (
+  dispatch,
+  getState
+) => {
+  try {
+    dispatch({
+      type: ITEM_CREATE_REVIEW_REQUEST,
+    });
+
+    const {
+      userLogin: { userInfo },
+    } = getState();
+
+    const config = {
+      headers: {
+        "Content-type": "application/json",
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+
+    await axios.post(
+      process.env.REACT_APP_API + `/items/${itemId}/reviews`,
+      review,
+      config
+    );
+    dispatch({
+      type: ITEM_CREATE_REVIEW_SUCCESS,
+    });
+  } catch (error) {
+    const finalMessage =
+      error.response && error.response.data.message
+        ? error.response.data.message
+        : error.message;
+
+    if (finalMessage === "Not authorized, token failed") {
+      dispatch(logout());
+    }
+    dispatch({
+      type: ITEM_CREATE_REVIEW_FAILURE,
+      payload: finalMessage,
+    });
+    toast.error(finalMessage, { autoClose: false });
   }
 };

@@ -1,9 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
-import { listItemDetails} from "../redux/actions/itemActions";
+import {
+  listItemDetails,
+  createItemReview,
+} from "../redux/actions/itemActions";
 import { addToCart } from "../redux/actions/cartActions";
+
+import { ITEM_CREATE_REVIEW_RESET } from "../redux/constants/itemConstants";
 
 import Loader from "../components/Loader";
 import Rating from "../components/Rating";
@@ -11,10 +16,22 @@ import Error from "../components/Error";
 
 const ItemDetails = ({ history, match }) => {
   const dispatch = useDispatch();
+
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
+
   const itemDetails = useSelector((state) => state.itemDetails);
   const { loading, error, item } = itemDetails;
 
+  const itemReviewCreate = useSelector((state) => state.itemReviewCreate);
+  const {
+    success: successItemReview,
+    error: errorItemReview,
+  } = itemReviewCreate;
+
   const [qty, setQty] = useState(1);
+  const [rating, setRating] = useState(0);
+  const [comment, setComment] = useState("");
 
   useEffect(() => {
     // console.count("useEffect -- ItemDetails triggered");
@@ -26,6 +43,8 @@ const ItemDetails = ({ history, match }) => {
     dispatch(addToCart(item._id, Number(qty)));
     history.push("/cart");
   };
+
+  const handleSubmit = () => {};
 
   return (
     <section className="py-6">
@@ -43,24 +62,20 @@ const ItemDetails = ({ history, match }) => {
               <img
                 src={item.image}
                 alt={item.name}
-                style={{ maxHeight: "75vh" }}
+                style={{ maxHeight: "42vh" }}
               />
             </div>
             <div className="column is-8-mobile is-offset-2-mobile is-6-tablet is-4-desktop">
-              <ul className="content">
-                <li>
-                  <h3>{item.name}</h3>
-                </li>
-                <li>
-                  <Rating
-                    value={item.rating}
-                    text={`${item.numReviews} reviews`}
-                    color="#f8d125"
-                  />
-                </li>
-                <li>Price: ${item.price}</li>
-                <li>Description: {item.description}</li>
-              </ul>
+              <div className="content">
+                <h3>{item.name}</h3>
+                <Rating
+                  value={item.rating}
+                  text={`${item.numReviews} reviews`}
+                  color="#f8d125"
+                />
+                <p>Price: ${item.price}</p>
+                <p>Description: {item.description}</p>
+              </div>
             </div>
             <div className="column is-8-mobile is-offset-2-mobile is-6-tablet is-3-desktop">
               <div className="card">
@@ -70,12 +85,12 @@ const ItemDetails = ({ history, match }) => {
                     {item.countInStock > 0 ? "In Stock" : "Out of Stock"}
                   </p>
                   {item.countInStock > 0 && (
-                    <div className="columns is-mobile is-2 is-vcentered">
-                      <div className="column">
-                        <p>Qty</p>
+                    <div className="columns is-mobile is-2 is-vcentered is-centered">
+                      <div className="column is-5">
+                        <p>Quantity</p>
                       </div>
-                      <div className="column is-8">
-                        <div className="select is-primary">
+                      <div className="column is-7 ">
+                        <div className="select is-primary is-fullwidth">
                           <select
                             value={qty}
                             onChange={(e) => setQty(e.target.value)}
@@ -102,6 +117,61 @@ const ItemDetails = ({ history, match }) => {
                     </button>
                   </footer>
                 </div>
+              </div>
+            </div>
+            <div className="column is-8-mobile is-offset-2-mobile is-6-tablet is-5-desktop">
+              <div className="content">
+                <h3>Reviews</h3>
+                {item.reviews.length === 0 && (
+                  <p className="has-text-info">No Reviews</p>
+                )}
+                {item.reviews.map((review) => (
+                  <Fragment key={review._id}>
+                    <strong>{review.username}</strong>
+                    <Rating value={review.rating}></Rating>
+                    <p>{review.createdAt.substring(0, 10)}</p>
+                  </Fragment>
+                ))}
+                <h3>Write a customer review</h3>
+                {userInfo ? (
+                  <form onSubmit={handleSubmit}>
+                    <div className="field">
+                      <div className="control is-expanded">
+                        <div className="select is-primary is-fullwidth">
+                          <select
+                            value={rating}
+                            onChange={(e) => setRating(e.target.value)}
+                          >
+                            <option value="">Select...</option>
+                            <option value="1">1 - Poor</option>
+                            <option value="2">2 - Fair</option>
+                            <option value="3">3 - Good</option>
+                            <option value="4">4 - Very Good</option>
+                            <option value="5">5 - Excellent</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="field">
+                      <div className="control">
+                        <textarea
+                          className="textarea"
+                          placeholder="Comment..."
+                          value={comment}
+                          onChange={(e) => setComment(e.target.value)}
+                        ></textarea>
+                      </div>
+                    </div>
+                  </form>
+                ) : (
+                  <p>
+                    Please{" "}
+                    <Link to="/login" className="has-text-primary">
+                      sign in
+                    </Link>{" "}
+                    to write a review
+                  </p>
+                )}
               </div>
             </div>
           </div>

@@ -6,7 +6,7 @@ import { addToCart, removeFromCart } from "../redux/actions/cartActions";
 
 const CartPage = ({ history }) => {
   const dispatch = useDispatch();
-  
+
   const cart = useSelector((state) => state.cart);
   const { cartItems } = cart;
 
@@ -63,24 +63,24 @@ const CartPage = ({ history }) => {
                       <span className="price">${cartItem.price}</span>
                     </div>
                     <div className="column is-2 ">
-                      <div className="select is-primary">
-                        <select
-                          value={cartItem.qty}
-                          onChange={(e) =>
-                            dispatch(
-                              addToCart(cartItem.item, Number(e.target.value))
-                            )
-                          }
-                        >
-                          {[...Array(cartItem.countInStock).keys()].map(
-                            (index) => (
-                              <option key={index + 1} value={index + 1}>
-                                {index + 1}
-                              </option>
-                            )
-                          )}
-                        </select>
-                      </div>
+                        <div className="select is-primary is-fullwidth">
+                          <select
+                            value={cartItem.qty}
+                            onChange={(e) =>
+                              dispatch(
+                                addToCart(cartItem.item, Number(e.target.value))
+                              )
+                            }
+                          >
+                            {[...Array(cartItem.countInStock).keys()].map(
+                              (index) => (
+                                <option key={index + 1} value={index + 1}>
+                                  {index + 1}
+                                </option>
+                              )
+                            )}
+                          </select>
+                        </div>
                     </div>
                   </div>
                 </Fragment>
