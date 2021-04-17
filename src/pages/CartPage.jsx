@@ -24,12 +24,12 @@ const CartPage = ({ history }) => {
           <div className="column is-8">
             <h1 className="mb-5 title hr">Shopping Cart</h1>
             {cartItems.length === 0 ? (
-              <h3>
+              <p>
                 Your cart is empty{"  "}
                 <Link to="/" className="has-text-primary">
                   Go Back
                 </Link>
-              </h3>
+              </p>
             ) : (
               cartItems.map((cartItem) => (
                 <Fragment key={cartItem.item}>

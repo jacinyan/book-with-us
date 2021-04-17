@@ -24,10 +24,7 @@ const ItemDetails = ({ history, match }) => {
   const { loading, error, item } = itemDetails;
 
   const itemReviewCreate = useSelector((state) => state.itemReviewCreate);
-  const {
-    success: successItemReview,
-    error: errorItemReview,
-  } = itemReviewCreate;
+  const { success: successItemReview } = itemReviewCreate;
 
   const [qty, setQty] = useState(1);
   const [rating, setRating] = useState(0);
@@ -36,15 +33,29 @@ const ItemDetails = ({ history, match }) => {
   useEffect(() => {
     // console.count("useEffect -- ItemDetails triggered");
     // registered :id
+    if (successItemReview) {
+      alert("Review submitted");
+      setRating(0);
+      setComment("");
+      dispatch({ type: ITEM_CREATE_REVIEW_RESET });
+    }
     dispatch(listItemDetails(match.params.id));
-  }, [match, dispatch]);
+  }, [match, dispatch, successItemReview]);
 
   const handleAddToCart = () => {
     dispatch(addToCart(item._id, Number(qty)));
     history.push("/cart");
   };
 
-  const handleSubmit = () => {};
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(
+      createItemReview(match.params.id, {
+        rating,
+        comment,
+      })
+    );
+  };
 
   return (
     <section className="py-6">
@@ -128,8 +139,9 @@ const ItemDetails = ({ history, match }) => {
                 {item.reviews.map((review) => (
                   <Fragment key={review._id}>
                     <strong>{review.username}</strong>
-                    <Rating value={review.rating}></Rating>
+                    <Rating value={review.rating} color="#f8d125"></Rating>
                     <p>{review.createdAt.substring(0, 10)}</p>
+                    <p>{review.comment}</p>
                   </Fragment>
                 ))}
                 <h3>Write a customer review</h3>
@@ -162,6 +174,9 @@ const ItemDetails = ({ history, match }) => {
                         ></textarea>
                       </div>
                     </div>
+                    <button className="button is-primary is-rounded">
+                      <strong>Submit Review</strong>
+                    </button>
                   </form>
                 ) : (
                   <p>

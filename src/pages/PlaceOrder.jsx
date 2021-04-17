@@ -5,6 +5,9 @@ import { Link } from "react-router-dom";
 import { createOrder } from "../redux/actions/orderActions";
 import CheckoutSteps from "../components/CheckoutSteps";
 
+import { ORDER_CREATE_RESET } from "../redux/constants/orderConstants";
+import { USER_DETAILS_RESET } from "../redux/constants/userConstants";
+
 import { addDecimals } from "../utils/addDecimals";
 
 const PlaceOrder = ({ history }) => {
@@ -13,6 +16,12 @@ const PlaceOrder = ({ history }) => {
   const cart = useSelector((state) => state.cart);
   const orderCreate = useSelector((state) => state.orderCreate);
   const { order, success } = orderCreate;
+
+  if (!cart.shippingAddress.address) {
+    history.push("/shipping");
+  } else if (!cart.paymentMethod) {
+    history.push("/payment");
+  }
 
   //calculate prices
   cart.itemsPrice = addDecimals(
@@ -29,8 +38,10 @@ const PlaceOrder = ({ history }) => {
   useEffect(() => {
     if (success) {
       history.push(`/orders/${order._id}`);
+      dispatch({ type: USER_DETAILS_RESET });
+      dispatch({ type: ORDER_CREATE_RESET });
     }
-  }, [history, success, order]);
+  }, [history, success, order, dispatch]);
 
   const handlePlaceOrder = () => {
     dispatch(
@@ -52,48 +63,48 @@ const PlaceOrder = ({ history }) => {
         <CheckoutSteps step1 step2 step3 step4 />
         <div className="columns">
           <div className="column is-8">
-              <div className="content">
-                <h2>Shipping</h2>
-                <p>
-                  <strong>Address:</strong> {cart.shippingAddress.address},{" "}
-                  {cart.shippingAddress.city}, {cart.shippingAddress.postalCode}
-                  , {cart.shippingAddress.country}
-                </p>
-              </div>
-              <div className="content">
-                <h2>Payment Method</h2>
-                <p>
-                  <strong>Method:</strong> {cart.paymentMethod}
-                </p>
-              </div>
-              <div className="content">
-                <h2>Order Items</h2>
-                {cart.cartItems.length === 0 ? (
-                  <h3>Your cart is empty</h3>
-                ) : (
-                  <>
-                    {cart.cartItems.map((cartItem) => (
-                      <div className="columns" key={cartItem.item}>
-                        <div className="column is-2">
-                          <img src={cartItem.image} alt="" />
-                        </div>
-                        <div className="column is-3 has-text-centered">
-                          <Link
-                            to={`/items/${cartItem.item}`}
-                            className="has-text-primary"
-                          >
-                            {cartItem.name}
-                          </Link>
-                        </div>
-                        <div className="column is-8 has-text-centered">
-                          {cartItem.qty} x $ {cartItem.price} = ${" "}
-                          {cartItem.qty * cartItem.price}
-                        </div>
+            <div className="content">
+              <h2>Shipping</h2>
+              <p>
+                <strong>Address:</strong> {cart.shippingAddress.address},{" "}
+                {cart.shippingAddress.city}, {cart.shippingAddress.postalCode},{" "}
+                {cart.shippingAddress.country}
+              </p>
+            </div>
+            <div className="content">
+              <h2>Payment Method</h2>
+              <p>
+                <strong>Method:</strong> {cart.paymentMethod}
+              </p>
+            </div>
+            <div className="content">
+              <h2>Order Items</h2>
+              {cart.cartItems.length === 0 ? (
+                <h3>Your cart is empty</h3>
+              ) : (
+                <>
+                  {cart.cartItems.map((cartItem) => (
+                    <div className="columns" key={cartItem.item}>
+                      <div className="column is-2">
+                        <img src={cartItem.image} alt="" />
                       </div>
-                    ))}
-                  </>
-                )}
-              </div>
+                      <div className="column is-3 has-text-centered">
+                        <Link
+                          to={`/items/${cartItem.item}`}
+                          className="has-text-primary"
+                        >
+                          {cartItem.name}
+                        </Link>
+                      </div>
+                      <div className="column is-8 has-text-centered">
+                        {cartItem.qty} x $ {cartItem.price} = ${" "}
+                        {cartItem.qty * cartItem.price}
+                      </div>
+                    </div>
+                  ))}
+                </>
+              )}
+            </div>
           </div>
           <div className="column is-4">
             <div className="card">
