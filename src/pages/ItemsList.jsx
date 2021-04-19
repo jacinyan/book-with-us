@@ -12,12 +12,15 @@ import { ITEM_CREATE_RESET } from "../redux/constants/itemConstants";
 
 import Loader from "../components/Loader";
 import Error from "../components/Error";
+import Pagination from "../components/Pagination";
 
 const ItemsList = ({ history, match }) => {
+  const pageNumber = match.params.pageNumber || 1
+
   const dispatch = useDispatch();
 
   const itemsList = useSelector((state) => state.itemsList);
-  const { loading, error, items } = itemsList;
+  const { loading, error, items, page, pages } = itemsList;
 
   const itemDelete = useSelector((state) => state.itemDelete);
   const { success: successDelete } = itemDelete;
@@ -28,8 +31,9 @@ const ItemsList = ({ history, match }) => {
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
+
   useEffect(() => {
-    console.log('before ITEM_CREATE_RESET');
+    // console.log("before ITEM_CREATE_RESET");
     dispatch({ type: ITEM_CREATE_RESET });
     if (!userInfo.isAdmin) {
       history.push("/");
@@ -38,10 +42,10 @@ const ItemsList = ({ history, match }) => {
     if (successCreate) {
       history.push(`/admin/items/${createdItem._id}/edit`);
     } else {
-      dispatch(listItems())
+      dispatch(listItems("", pageNumber));
     }
     //successDelete added to trigger useEffect
-  }, [dispatch, history, userInfo, successDelete, successCreate, createdItem]);
+  }, [dispatch, history, userInfo, successDelete, successCreate, createdItem, pageNumber]);
 
   const handleDeleteItem = (id) => {
     // console.log('Item delete handler');
@@ -119,6 +123,7 @@ const ItemsList = ({ history, match }) => {
             </div>
           </>
         )}
+        <Pagination pages={pages} page={page} isAdmin={true} />
       </div>
     </section>
   );

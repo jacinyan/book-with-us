@@ -15,7 +15,7 @@ const Home = ({ match }) => {
   const { loading, error, items, page, pages } = itemsList;
 
   const keyword = match.params.keyword;
-  const pageNumber = match.params.pageNumber || 1
+  const pageNumber = match.params.pageNumber || 1;
 
   useEffect(() => {
     dispatch(listItems(keyword, pageNumber));
@@ -40,12 +40,10 @@ const Home = ({ match }) => {
                 </Fragment>
               ))}
             </div>
-            
           </>
         )}
-        
+        <Pagination pages={pages} page={page} keyword={keyword ? keyword : ""} />
       </div>
-      <Pagination pages={pages} page={page} keyword={keyword ? keyword : ''}/>
     </section>
   );
 };

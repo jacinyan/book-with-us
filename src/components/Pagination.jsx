@@ -4,19 +4,33 @@ import { Link } from "react-router-dom";
 const Pagination = ({ pages, page, isAdmin = false, keyword = "" }) => {
   return (
     pages > 1 && (
-      <nav
-        className="pagination"
-      >
+      <nav className="pagination">
         <Link
           className="pagination-previous"
-          to={page !== 1 ? `/page/${page - 1}` : `/page/${page}`}
+          to={
+            !isAdmin
+              ? page !== 1
+                ? `/page/${page - 1}`
+                : `/page/${page}`
+              : page !== 1
+              ? `/admin/items-list/${page - 1}`
+              : `/admin/items-list/${page}`
+          }
           disabled={page === 1}
         >
           Previous
         </Link>
         <Link
           className="pagination-next"
-          to={page !== pages ? `/page/${page + 1}` : `/page/${pages}`}
+          to={
+            !isAdmin
+              ? page !== pages
+                ? `/page/${page + 1}`
+                : `/page/${pages}`
+              : page !== pages
+              ? `/admin/items-list/${page + 1}`
+              : `/admin/items-list/${pages}`
+          }
           disabled={page === pages}
         >
           Next page
@@ -31,9 +45,11 @@ const Pagination = ({ pages, page, isAdmin = false, keyword = "" }) => {
                     : "pagination-link"
                 }
                 to={
-                  keyword
-                    ? `/search/${keyword}/page/${index + 1}`
-                    : `/page/${index + 1}`
+                  !isAdmin
+                    ? keyword
+                      ? `/search/${keyword}/page/${index + 1}`
+                      : `/page/${index + 1}`
+                    : `/admin/items-list/${index + 1}`
                 }
               >
                 {index + 1}
