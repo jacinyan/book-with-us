@@ -30,7 +30,16 @@ function App() {
         <Switch>
           <Route path="/" exact render={(props) => <Home {...props} />} />
           <Route
+            path="/page/:pageNumber"
+            render={(props) => <Home {...props} />}
+          />
+          <Route
             path="/search/:keyword"
+            render={(props) => <Home {...props} />}
+            exact
+          />
+          <Route
+            path="/search/:keyword/page/:pageNumber"
             render={(props) => <Home {...props} />}
           />
           <Route

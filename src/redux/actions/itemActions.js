@@ -22,14 +22,14 @@ import {
 import { logout } from "./userActions";
 import { toast } from "react-toastify";
 
-export const listItems = (keyword = "") => async (dispatch) => {
+export const listItems = (keyword = "", pageNumber="") => async (dispatch) => {
   try {
     dispatch({
       type: ITEMS_LIST_REQUEST,
     });
 
     const { data } = await axios.get(
-      process.env.REACT_APP_API + `/items?keyword=${keyword}`
+      process.env.REACT_APP_API + `/items?search=${keyword}&pageNumber=${pageNumber}`
     );
 
     dispatch({

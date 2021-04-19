@@ -6,18 +6,20 @@ import { listItems } from "../redux/actions/itemActions";
 import ItemCard from "../components/ItemCard";
 import Loader from "../components/Loader";
 import Error from "../components/Error";
+import Pagination from "../components/Pagination";
 
 const Home = ({ match }) => {
   const dispatch = useDispatch();
 
   const itemsList = useSelector((state) => state.itemsList);
-  const { loading, error, items } = itemsList;
+  const { loading, error, items, page, pages } = itemsList;
 
   const keyword = match.params.keyword;
+  const pageNumber = match.params.pageNumber || 1
 
   useEffect(() => {
-    dispatch(listItems(keyword));
-  }, [dispatch, keyword]);
+    dispatch(listItems(keyword, pageNumber));
+  }, [dispatch, keyword, pageNumber]);
 
   return (
     <section className="py-6">
@@ -38,9 +40,12 @@ const Home = ({ match }) => {
                 </Fragment>
               ))}
             </div>
+            
           </>
         )}
+        
       </div>
+      <Pagination pages={pages} page={page} keyword={keyword ? keyword : ''}/>
     </section>
   );
 };
