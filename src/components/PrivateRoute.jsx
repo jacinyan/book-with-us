@@ -9,7 +9,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
   const { userInfo } = userLogin;
 
   if (!userInfo || !userInfo.token) {
-    toast.error("Please log in before continuing");
+    toast.error("Please log in before continuing",{ autoClose: false });
   }
 
   return userInfo && userInfo.token ? (

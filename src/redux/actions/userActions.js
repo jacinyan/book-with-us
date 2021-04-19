@@ -81,7 +81,7 @@ export const logout = () => (dispatch) => {
   dispatch({ type: USER_DETAILS_RESET });
   dispatch({ type: ORDER_LIST_MY_RESET });
   dispatch({ type: USERS_LIST_RESET });
-  document.location.href = "/login";
+  // document.location.href = "/login";
 };
 
 export const register = (username, email, password) => async (dispatch) => {
@@ -163,7 +163,7 @@ export const getUserDetails = (id) => async (dispatch, getState) => {
         ? error.response.data.message
         : error.message;
 
-    if (finalMessage === "Not authorised, token failed") {
+    if (finalMessage === "Your token has epxired") {
       dispatch(logout());
     }
     dispatch({
@@ -216,7 +216,7 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
         ? error.response.data.message
         : error.message;
 
-    if (finalMessage === "Not authorised, token failed") {
+    if (finalMessage === "Your token has epxired") {
       dispatch(logout());
     }
     dispatch({
@@ -258,7 +258,7 @@ export const listUsers = () => async (dispatch, getState) => {
         ? error.response.data.message
         : error.message;
 
-    if (finalMessage === "Not authorised, token failed") {
+    if (finalMessage === "Your token has epxired") {
       dispatch(logout());
     }
     dispatch({
@@ -298,7 +298,7 @@ export const deleteUser = (id) => async (dispatch, getState) => {
         ? error.response.data.message
         : error.message;
 
-    if (finalMessage === "Not authorised, token failed") {
+    if (finalMessage === "Your token has epxired") {
       dispatch(logout());
     }
     dispatch({
@@ -348,7 +348,7 @@ export const updateUser = (user) => async (dispatch, getState) => {
         ? error.response.data.message
         : error.message;
 
-    if (finalMessage === "Not authorised, token failed") {
+    if (finalMessage === "Your token has epxired") {
       dispatch(logout());
     }
     dispatch({

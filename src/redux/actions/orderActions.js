@@ -65,7 +65,7 @@ export const createOrder = (order) => async (dispatch, getState) => {
         ? error.response.data.message
         : error.message;
 
-    if (finalMessage === "Not authorised, token failed") {
+    if (finalMessage === "Your token has epxired") {
       dispatch(logout());
     }
     dispatch({
@@ -107,7 +107,7 @@ export const getOrderDetails = (id) => async (dispatch, getState) => {
         ? error.response.data.message
         : error.message;
 
-    if (finalMessage === "Not authorised, token failed") {
+    if (finalMessage === "Your token has epxired") {
       dispatch(logout());
     }
     dispatch({
@@ -154,7 +154,7 @@ export const payOrder = (orderId, paymentResult) => async (
         ? error.response.data.message
         : error.message;
 
-    if (finalMessage === "Not authorised, token failed") {
+    if (finalMessage === "Your token has epxired") {
       dispatch(logout());
     }
     dispatch({
@@ -200,7 +200,7 @@ export const deliverOrder = (order) => async (
         ? error.response.data.message
         : error.message;
 
-    if (finalMessage === "Not authorised, token failed") {
+    if (finalMessage === "Your token has epxired") {
       dispatch(logout());
     }
     dispatch({
@@ -242,7 +242,7 @@ export const listMyOrders = () => async (dispatch, getState) => {
         ? error.response.data.message
         : error.message;
 
-    if (finalMessage === "Not authorised, token failed") {
+    if (finalMessage === "Your token has epxired") {
       dispatch(logout());
     }
     dispatch({
@@ -284,7 +284,7 @@ export const listOrders = () => async (dispatch, getState) => {
         ? error.response.data.message
         : error.message;
 
-    if (finalMessage === "Not authorised, token failed") {
+    if (finalMessage === "Your token has epxired") {
       dispatch(logout());
     }
     dispatch({

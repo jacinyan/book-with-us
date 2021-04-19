@@ -100,7 +100,7 @@ export const deleteItem = (id) => async (dispatch, getState) => {
         ? error.response.data.message
         : error.message;
 
-    if (finalMessage === "Not authorised, token failed") {
+    if (finalMessage === "Your token has epxired") {
       dispatch(logout());
     }
     dispatch({
@@ -144,7 +144,7 @@ export const createItem = () => async (dispatch, getState) => {
         ? error.response.data.message
         : error.message;
 
-    if (finalMessage === "Not authorised, token failed") {
+    if (finalMessage === "Your token has epxired") {
       dispatch(logout());
     }
     dispatch({
@@ -190,7 +190,7 @@ export const updateItem = (item) => async (dispatch, getState) => {
         ? error.response.data.message
         : error.message;
 
-    if (finalMessage === "Not authorised, token failed") {
+    if (finalMessage === "Your token has epxired") {
       dispatch(logout());
     }
     dispatch({
@@ -235,7 +235,7 @@ export const createItemReview = (itemId, review) => async (
         ? error.response.data.message
         : error.message;
 
-    if (finalMessage === "Not authorised, token failed") {
+    if (finalMessage === "Your token has epxired") {
       dispatch(logout());
     }
     dispatch({
