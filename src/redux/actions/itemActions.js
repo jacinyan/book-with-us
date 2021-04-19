@@ -29,7 +29,7 @@ export const listItems = (keyword = "", pageNumber="") => async (dispatch) => {
     });
 
     const { data } = await axios.get(
-      process.env.REACT_APP_API + `/items?search=${keyword}&pageNumber=${pageNumber}`
+      process.env.REACT_APP_API + `/items?search=${keyword}&page=${pageNumber}`
     );
 
     dispatch({
@@ -100,7 +100,7 @@ export const deleteItem = (id) => async (dispatch, getState) => {
         ? error.response.data.message
         : error.message;
 
-    if (finalMessage === "Not authorized, token failed") {
+    if (finalMessage === "Not authorised, token failed") {
       dispatch(logout());
     }
     dispatch({
@@ -144,7 +144,7 @@ export const createItem = () => async (dispatch, getState) => {
         ? error.response.data.message
         : error.message;
 
-    if (finalMessage === "Not authorized, token failed") {
+    if (finalMessage === "Not authorised, token failed") {
       dispatch(logout());
     }
     dispatch({
@@ -190,7 +190,7 @@ export const updateItem = (item) => async (dispatch, getState) => {
         ? error.response.data.message
         : error.message;
 
-    if (finalMessage === "Not authorized, token failed") {
+    if (finalMessage === "Not authorised, token failed") {
       dispatch(logout());
     }
     dispatch({
@@ -235,7 +235,7 @@ export const createItemReview = (itemId, review) => async (
         ? error.response.data.message
         : error.message;
 
-    if (finalMessage === "Not authorized, token failed") {
+    if (finalMessage === "Not authorised, token failed") {
       dispatch(logout());
     }
     dispatch({
