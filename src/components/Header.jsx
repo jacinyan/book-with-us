@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 
 import { logout } from "../redux/actions/userActions";
 
+import SearchBox from "./SearchBox";
+
 const Header = () => {
   const dispatch = useDispatch();
   const userLogin = useSelector((state) => state.userLogin);
@@ -31,6 +33,9 @@ const Header = () => {
           </div>
 
           <div className="navbar-menu">
+            <div className="navbar-start">
+              <SearchBox />
+            </div>
             <div className="navbar-end">
               <Link to="/cart" className="navbar-item has-text-primary">
                 <span className="icon-text">

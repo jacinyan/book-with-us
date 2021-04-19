@@ -7,16 +7,18 @@ import ItemCard from "../components/ItemCard";
 import Loader from "../components/Loader";
 import Error from "../components/Error";
 
-const Home = () => {
+const Home = ({ match }) => {
   const dispatch = useDispatch();
-  
+
   const itemsList = useSelector((state) => state.itemsList);
   const { loading, error, items } = itemsList;
 
+  const keyword = match.params.keyword;
+
   useEffect(() => {
-    dispatch(listItems());
-  }, [dispatch]);
-  
+    dispatch(listItems(keyword));
+  }, [dispatch, keyword]);
+
   return (
     <section className="py-6">
       <div className="container ">
@@ -27,10 +29,10 @@ const Home = () => {
         ) : (
           <>
             <h1 className="mb-5 title hr">New Arrivals</h1>
-            <div className="columns is-multiline is-vcentered is-mobile">
+            <div className="columns is-multiline is-vcentered">
               {items.map((item) => (
                 <Fragment key={item._id}>
-                  <div className="column is-half-mobile is-one-third-tablet is-one-quarter-desktop">
+                  <div className="column is-8-mobile is-offset-2-mobile is-one-third-tablet is-one-quarter-desktop">
                     <ItemCard item={item} />
                   </div>
                 </Fragment>

@@ -25,10 +25,14 @@ function App() {
   // console.count('App rendered');
   return (
     <>
-      <ToastContainer position="top-center"/>
+      <ToastContainer position="top-center" />
       <Layout>
         <Switch>
           <Route path="/" exact render={(props) => <Home {...props} />} />
+          <Route
+            path="/search/:keyword"
+            render={(props) => <Home {...props} />}
+          />
           <Route
             path="/items/:id"
             render={(props) => <ItemDetails {...props} />}

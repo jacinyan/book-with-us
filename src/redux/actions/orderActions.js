@@ -55,6 +55,7 @@ export const createOrder = (order) => async (dispatch, getState) => {
       type: CART_CLEAR_ITEMS,
       payload: data,
     })
+    
     localStorage.removeItem('cartItems')
 
     toast.success("Your order's successfully created");
