@@ -17,20 +17,20 @@ const Carousel = () => {
 
   const [activeIndex, setActiveIndex] = useState(0);
 
-  const index = localStorage.getItem("numTopItems")
-    ? Number(localStorage.getItem("numTopItems"))
+  const maxIndex = localStorage.getItem("numTopItems")
+    ? Number(localStorage.getItem("numTopItems")) - 1
     : 0;
 
   useEffect(() => {
     dispatch(listTopItems());
 
     const timer = setInterval(() => {
-      setActiveIndex(activeIndex === index ? 0 : activeIndex + 1);
-    }, 5000);
+      setActiveIndex(activeIndex === maxIndex ? 0 : activeIndex + 1);
+    }, 10000);
     return () => {
       clearInterval(timer);
     };
-  }, [dispatch, activeIndex, index]);
+  }, [dispatch, activeIndex, maxIndex]);
 
   return loading ? (
     <Loader />
@@ -56,7 +56,7 @@ const Carousel = () => {
         <span
           className="prev"
           onClick={() =>
-            setActiveIndex(activeIndex < 1 ? index : activeIndex - 1)
+            setActiveIndex(activeIndex < 1 ? maxIndex : activeIndex - 1)
           }
         >
           &#10094;
@@ -64,7 +64,7 @@ const Carousel = () => {
         <span
           className="next"
           onClick={() =>
-            setActiveIndex(activeIndex === index ? 0 : activeIndex + 1)
+            setActiveIndex(activeIndex === maxIndex ? 0 : activeIndex + 1)
           }
         >
           &#10095;
