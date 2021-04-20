@@ -33,7 +33,6 @@ const ItemsList = ({ history, match }) => {
 
 
   useEffect(() => {
-    // console.log("before ITEM_CREATE_RESET");
     dispatch({ type: ITEM_CREATE_RESET });
     if (!userInfo.isAdmin) {
       history.push("/");
@@ -48,14 +47,12 @@ const ItemsList = ({ history, match }) => {
   }, [dispatch, history, userInfo, successDelete, successCreate, createdItem, pageNumber]);
 
   const handleDeleteItem = (id) => {
-    // console.log('Item delete handler');
     if (window.confirm("Are you sure")) {
       dispatch(deleteItem(id));
     }
   };
 
   const handleCreateItem = () => {
-    // console.log('Item create handler');
     dispatch(createItem());
   };
 

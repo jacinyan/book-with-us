@@ -62,7 +62,6 @@ const userRegisterReducer = (state = {}, action) => {
 };
 
 const userDetailsReducer = (state = { user: {} }, action) => {
-  // console.log(state, action);
   switch (action.type) {
     case USER_DETAILS_REQUEST:
       return { ...state, loading: true };
@@ -86,7 +85,6 @@ const userDetailsReducer = (state = { user: {} }, action) => {
 };
 
 const userUpdateProfileReducer = (state = {}, action) => {
-  // console.log(state, action);
   switch (action.type) {
     case USER_UPDATE_PROFILE_REQUEST:
       return { loading: true };
@@ -109,7 +107,6 @@ const userUpdateProfileReducer = (state = {}, action) => {
 };
 
 const usersListReducer = (state = { users: [] }, action) => {
-  // console.log(state, action);
   switch (action.type) {
     case USERS_LIST_REQUEST:
       return { loading: true };
@@ -153,7 +150,6 @@ const userDeleteReducer = (state = {}, action) => {
 };
 
 const userUpdateReducer = (state = { user: {} }, action) => {
-  // console.log(state, action);
   switch (action.type) {
     case USER_UPDATE_REQUEST:
       return { loading: true };

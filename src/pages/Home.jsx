@@ -7,6 +7,7 @@ import ItemCard from "../components/ItemCard";
 import Loader from "../components/Loader";
 import Error from "../components/Error";
 import Pagination from "../components/Pagination";
+import Carousel from "../components/Carousel";
 
 const Home = ({ match }) => {
   const dispatch = useDispatch();
@@ -22,8 +23,10 @@ const Home = ({ match }) => {
   }, [dispatch, keyword, pageNumber]);
 
   return (
+    <>
     <section className="py-6">
       <div className="container ">
+        {!keyword && <Carousel/>}
         {loading ? (
           <Loader />
         ) : error ? (
@@ -45,6 +48,7 @@ const Home = ({ match }) => {
         <Pagination pages={pages} page={page} keyword={keyword ? keyword : ""} />
       </div>
     </section>
+    </>
   );
 };
 

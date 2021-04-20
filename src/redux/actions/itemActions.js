@@ -18,11 +18,16 @@ import {
   ITEM_CREATE_REVIEW_REQUEST,
   ITEM_CREATE_REVIEW_SUCCESS,
   ITEM_CREATE_REVIEW_FAILURE,
+  ITEMS_TOP_REQUEST,
+  ITEMS_TOP_SUCCESS,
+  ITEMS_TOP_FAILURE,
 } from "../constants/itemConstants";
 import { logout } from "./userActions";
 import { toast } from "react-toastify";
 
-export const listItems = (keyword = "", pageNumber="") => async (dispatch) => {
+export const listItems = (keyword = "", pageNumber = "") => async (
+  dispatch
+) => {
   try {
     dispatch({
       type: ITEMS_LIST_REQUEST,
@@ -177,12 +182,10 @@ export const updateItem = (item) => async (dispatch, getState) => {
       item,
       config
     );
-    // console.log('before Item UPDATE success');
     dispatch({
       type: ITEM_UPDATE_SUCCESS,
       payload: data,
     });
-    // console.log('after Item UPDATE success');
     toast.success("Item updated");
   } catch (error) {
     const finalMessage =
@@ -243,5 +246,34 @@ export const createItemReview = (itemId, review) => async (
       payload: finalMessage,
     });
     toast.error(finalMessage, { autoClose: false });
+  }
+};
+
+export const listTopItems = () => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: ITEMS_TOP_REQUEST,
+    });
+
+    const { data } = await axios.get(process.env.REACT_APP_API + `/items/top`);
+
+    dispatch({
+      type: ITEMS_TOP_SUCCESS,
+      payload: data,
+    });
+
+    localStorage.setItem(
+      "numTopItems",
+      JSON.stringify(getState().itemsTopRated.items.length)
+    );
+  } catch (error) {
+    const finalMessage =
+      error.response && error.response.data.message
+        ? error.response.data.message
+        : error.message;
+    dispatch({
+      type: ITEMS_TOP_FAILURE,
+      payload: finalMessage,
+    });
   }
 };
