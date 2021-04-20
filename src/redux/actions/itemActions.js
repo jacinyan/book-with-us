@@ -186,6 +186,11 @@ export const updateItem = (item) => async (dispatch, getState) => {
       type: ITEM_UPDATE_SUCCESS,
       payload: data,
     });
+    dispatch({
+      type: ITEM_DETAILS_SUCCESS,
+      payload: data,
+    });
+
     toast.success("Item updated");
   } catch (error) {
     const finalMessage =

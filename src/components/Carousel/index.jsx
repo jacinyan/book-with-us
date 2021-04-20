@@ -2,10 +2,12 @@ import React, { useState, useEffect } from "react";
 // import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
-import Loader from "../components/Loader";
-import Error from "../components/Error";
+import Loader from "../Loader";
+import Error from "../Error";
 
-import { listTopItems } from "../redux/actions/itemActions";
+import { listTopItems } from "../../redux/actions/itemActions";
+
+import "./index.scss";
 
 const Carousel = () => {
   const dispatch = useDispatch();
@@ -21,9 +23,10 @@ const Carousel = () => {
 
   useEffect(() => {
     dispatch(listTopItems());
+
     const timer = setInterval(() => {
       setActiveIndex(activeIndex === index ? 0 : activeIndex + 1);
-    }, 10000);
+    }, 5000);
     return () => {
       clearInterval(timer);
     };
@@ -34,8 +37,8 @@ const Carousel = () => {
   ) : error ? (
     <Error />
   ) : (
-    <>
-      <section>
+    <div className="carousel">
+      <section className="slide">
         {items.map((item, index) => (
           <div
             key={index}
@@ -67,16 +70,16 @@ const Carousel = () => {
           &#10095;
         </span>
       </div>
-      <div className="dots-group">
+      <div className="dots">
         {items.map((_, index) => (
           <span
             key={index}
             className={activeIndex === index ? "dot active" : "dot"}
-            onClick={(activeIndex) => setActiveIndex(activeIndex)}
+            onClick={() => setActiveIndex(index)}
           ></span>
         ))}
       </div>
-    </>
+    </div>
   );
 };
 
