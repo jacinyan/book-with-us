@@ -1,53 +1,30 @@
 .carousel {
-  // height: 80vh;
   width: 100%;
   position: relative;
-  margin: 0px auto 0.75rem auto;
+  margin: 0px auto 1rem auto;
   overflow: hidden;
   z-index: 10;
   transition: all 0.2s ease-in-out;
 }
 
-.slide {
+.slides {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   height: 42vh;
   width: 100%;
-  position: relative;
+  font-family: cursive;
+  color: #60437e;
 
-  &.active {
-    display: inline-block;
+  .slide.active {
+    opacity: 1;
+    transition: all 1s ease-in-out ;
+  }
+
+  .slide {
+    opacity: 0;
     transition: all 1s ease-in-out;
-  }
-
-  &.inactive {
-    display: none;
-    transition: all 1s ease-in-out;
-  }
-
-  &-image {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    object-fit: cover;
-  }
-
-  &-title,
-  &-text {
-    width: 100%;
-    height: 100%;
-    color: white;
-    position: absolute;
-    text-align: center;
-    top: 32%;
-    z-index: 9;
-    font-family: cursive;
-  }
-
-  &-title {
-    font-size: 8.5rem;
-  }
-
-  &-text {
-    top: 70%;
   }
 }
 
@@ -68,7 +45,7 @@
     &:hover {
       color: white;
       background-color: rgba(0, 0, 0, 0.6);
-      transition: all 0.5s ease-in;
+      transition: all 0.3s ease-in;
     }
   }
 
@@ -83,7 +60,7 @@
   height: 100%;
   position: absolute;
   display: flex;
-  top: 80%;
+  top: 93%;
   justify-content: center;
   z-index: 200;
 
@@ -97,11 +74,11 @@
     display: inline-block;
 
     &:hover {
-      background-color: rgba(255, 255, 255, 0.5);
+      background-color: rgba(96, 67, 126, 0.6);
     }
 
     &.active {
-      background-color: rgba(255, 255, 255, 0.5);
+      background-color: rgba(96, 67, 126, 1);
     }
   }
 }

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 // import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
-import Loader from "../Loader";
+// import Loader from "../Loader";
 import Error from "../Error";
 
 import { listTopItems } from "../../redux/actions/itemActions";
@@ -13,45 +13,71 @@ const Carousel = () => {
   const dispatch = useDispatch();
 
   const itemsTopRated = useSelector((state) => state.itemsTopRated);
-  const { loading, error, items } = itemsTopRated;
+  const { error, items } = itemsTopRated;
 
   const [activeIndex, setActiveIndex] = useState(0);
 
   const maxIndex = localStorage.getItem("numTopItems")
     ? Number(localStorage.getItem("numTopItems")) - 1
-    : 0;
+    : null;
 
   useEffect(() => {
     dispatch(listTopItems());
+    
+  }, [dispatch]);
 
+  useEffect(() => {
     const timer = setInterval(() => {
       setActiveIndex(activeIndex === maxIndex ? 0 : activeIndex + 1);
-    }, 10000);
+    }, 5000);
     return () => {
       clearInterval(timer);
     };
-  }, [dispatch, activeIndex, maxIndex]);
+  },[activeIndex, maxIndex])
 
-  return loading ? (
-    <Loader />
-  ) : error ? (
+  return error ? (
     <Error />
   ) : (
     <div className="carousel">
-      <section className="slide">
-        {items.map((item, index) => (
-          <div
-            key={index}
-            className={
-              index === activeIndex ? "slide active" : "slide inactive"
-            }
-          >
-            <img className="slide-image" src={item.image} alt={item.name} />
-            <div className="slide-title">Top sellers</div>
-            <p className="slide-text">{item.author}</p>
+      <section className="slides">
+        <div className="columns is-vcentered">
+          <div className="column is-6 ">
+            <div style={{ fontSize: "4rem" }}>Best Sellers</div>
           </div>
-        ))}
+          <div className="column is-6">
+            {items.map((item, index) => (
+              <div
+                key={index}
+                className={index === activeIndex ? "slide active" : "slide"}
+              >
+                {index === activeIndex && (
+                  <div className="columns ">
+                    <div className="column ">
+                      <img
+                        src={item.image}
+                        alt={item.name}
+                        style={{ height: 250 }}
+                      />
+                    </div>
+                    <div className="column">
+                      <p style={{color:"#363636"}}>-- By {item.author}</p>
+                    </div>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
       </section>
+      <div className="dots">
+        {items.map((_, index) => (
+          <span
+            key={index}
+            className={activeIndex === index ? "dot active" : "dot"}
+            onClick={() => setActiveIndex(index)}
+          ></span>
+        ))}
+      </div>
       <div className="arrows">
         <span
           className="prev"
@@ -69,15 +95,6 @@ const Carousel = () => {
         >
           &#10095;
         </span>
-      </div>
-      <div className="dots">
-        {items.map((_, index) => (
-          <span
-            key={index}
-            className={activeIndex === index ? "dot active" : "dot"}
-            onClick={() => setActiveIndex(index)}
-          ></span>
-        ))}
       </div>
     </div>
   );
