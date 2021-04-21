@@ -6,7 +6,7 @@ import { savePaymentMethod } from "../redux/actions/cartActions";
 import CheckoutSteps from "../components/CheckoutSteps";
 
 const Payment = ({ history }) => {
-  console.count("Payment rendered");
+  // console.count("Payment rendered");
   const dispatch = useDispatch();
   
   const cart = useSelector((state) => state.cart);

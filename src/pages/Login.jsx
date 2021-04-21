@@ -5,11 +5,12 @@ import { Link } from "react-router-dom";
 import { login } from "../redux/actions/userActions";
 
 import Loader from "../components/Loader";
+import { toast } from "react-toastify";
 
 const Login = ({ location, history }) => {
   // console.count('Login rendered')
   const dispatch = useDispatch();
-  
+
   const userLogin = useSelector((state) => state.userLogin);
   const { loading, userInfo } = userLogin;
 
@@ -23,6 +24,8 @@ const Login = ({ location, history }) => {
   useEffect(() => {
     if (userInfo) {
       history.push(`/${redirect}`);
+    } else if (!userInfo && redirect === "shipping") {
+      toast.info("Please login before checkout");
     }
   }, [history, userInfo, redirect]);
 

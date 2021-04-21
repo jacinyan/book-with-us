@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import TypeWriter from "typewriter-effect";
 
@@ -38,7 +39,10 @@ const Carousel = () => {
   ) : (
     <div className="carousel">
       <section className="slides">
-        <div className="columns is-vcentered is-mobile" style={{width: "60%"}}>
+        <div
+          className="columns is-vcentered is-mobile"
+          style={{ width: "60%" }}
+        >
           <div className="column is-6 ">
             <div style={{ fontSize: "3.5rem" }}>
               <TypeWriter
@@ -48,13 +52,13 @@ const Carousel = () => {
                 }}
                 onInit={(typewriter) => {
                   typewriter
-                    .typeString('Books R US')
+                    .typeString("Books R US")
                     .pauseFor(2700)
                     .deleteAll()
-                    .typeString('Best Sellers')
+                    .typeString("Best Sellers")
                     .pauseFor(2700)
                     .deleteAll()
-                    .typeString('Pick your Favs')
+                    .typeString("Pick your Favs")
                     .pauseFor(2700)
                     .deleteAll()
                     .start();
@@ -70,15 +74,17 @@ const Carousel = () => {
               >
                 {index === activeIndex && (
                   <div className="columns">
-                    <div className="column is-mobile-8 is-mobile-offset-2 is-6-tablet is-6-desktop is-6-widescreen">
-                      <img
-                        src={item.image}
-                        alt={item.name}
-                        style={{ maxHeight: "14rem" }}
-                      />
+                    <div className="column is-mobile-8 is-mobile-offset-2 is-6-tablet">
+                      <Link to={`/items/${item._id}`}>
+                        <img
+                          src={item.image}
+                          alt={item.name}
+                          style={{ maxHeight: "14rem" }}
+                        />
+                      </Link>
                     </div>
-                    <div className="column has-text-centered is-6-tablet is-6-desktop is-6-widescreen">
-                      <p style={{ color: "#363636" }}>-- {item.author}</p>
+                    <div className="column has-text-centered is-6-tablet">
+                      <p style={{ color: "#363636" }}>-- By {item.author}</p>
                     </div>
                   </div>
                 )}
