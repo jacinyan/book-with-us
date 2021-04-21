@@ -4,7 +4,7 @@
   margin: 0px auto 1rem auto;
   overflow: hidden;
   z-index: 10;
-  transition: all 0.2s ease-in-out;
+  // transition: all 0.2s ease-in-out;
 }
 
 .slides {
@@ -19,7 +19,7 @@
 
   .slide.active {
     opacity: 1;
-    transition: all 1s ease-in-out ;
+    transition: all 1s ease-in-out;
   }
 
   .slide {

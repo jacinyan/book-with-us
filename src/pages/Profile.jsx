@@ -15,7 +15,7 @@ import Error from "../components/Error";
 
 const Profile = ({ history }) => {
   const dispatch = useDispatch();
-  
+
   const userDetails = useSelector((state) => state.userDetails);
   const { loading, error, user } = userDetails;
   const userUpdateProfile = useSelector((state) => state.userUpdateProfile);
@@ -31,7 +31,7 @@ const Profile = ({ history }) => {
 
   useEffect(() => {
     if (!user || !user.username || successUpdate) {
-      // reset each update 
+      // reset each update
       dispatch({
         type: USER_UPDATE_PROFILE_RESET,
       });
@@ -43,7 +43,7 @@ const Profile = ({ history }) => {
       setUsername(user.username);
       setEmail(user.email);
     }
-  }, [dispatch, history, user, successUpdate]);
+  }, [dispatch, user, successUpdate]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

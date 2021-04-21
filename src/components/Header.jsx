@@ -1,12 +1,13 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 import { logout } from "../redux/actions/userActions";
 
 import SearchBox from "./SearchBox";
 
 const Header = () => {
+  const history = useHistory()
   const dispatch = useDispatch();
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
@@ -14,6 +15,7 @@ const Header = () => {
   const handleLogout = (e) => {
     e.preventDefault();
     dispatch(logout());
+    history.replace('/login')
   };
 
   return (

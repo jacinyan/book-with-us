@@ -60,7 +60,7 @@ function App() {
           <PrivateRoute path="/admin/items-list/:pageNumber" exact component={ItemsList} />
           <PrivateRoute path="/admin/items/:id/edit" component={ItemEdit} />
           <PrivateRoute path="/admin/orders-list" component={OrdersList} />
-          <Redirect to="/" />
+          <Redirect to="/login" />
         </Switch>
       </Layout>
     </>

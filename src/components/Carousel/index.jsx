@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
-// import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+import TypeWriter from "typewriter-effect";
 
-// import Loader from "../Loader";
 import Error from "../Error";
 
 import { listTopItems } from "../../redux/actions/itemActions";
@@ -23,26 +22,45 @@ const Carousel = () => {
 
   useEffect(() => {
     dispatch(listTopItems());
-    
   }, [dispatch]);
 
   useEffect(() => {
     const timer = setInterval(() => {
       setActiveIndex(activeIndex === maxIndex ? 0 : activeIndex + 1);
-    }, 5000);
+    }, 7000);
     return () => {
       clearInterval(timer);
     };
-  },[activeIndex, maxIndex])
+  }, [activeIndex, maxIndex]);
 
   return error ? (
     <Error />
   ) : (
     <div className="carousel">
       <section className="slides">
-        <div className="columns is-vcentered">
+        <div className="columns is-vcentered is-mobile" style={{width: "60%"}}>
           <div className="column is-6 ">
-            <div style={{ fontSize: "4rem" }}>Best Sellers</div>
+            <div style={{ fontSize: "3.5rem" }}>
+              <TypeWriter
+                options={{
+                  autoStart: true,
+                  loop: true,
+                }}
+                onInit={(typewriter) => {
+                  typewriter
+                    .typeString('Books R US')
+                    .pauseFor(2700)
+                    .deleteAll()
+                    .typeString('Best Sellers')
+                    .pauseFor(2700)
+                    .deleteAll()
+                    .typeString('Pick your Favs')
+                    .pauseFor(2700)
+                    .deleteAll()
+                    .start();
+                }}
+              />
+            </div>
           </div>
           <div className="column is-6">
             {items.map((item, index) => (
@@ -51,16 +69,16 @@ const Carousel = () => {
                 className={index === activeIndex ? "slide active" : "slide"}
               >
                 {index === activeIndex && (
-                  <div className="columns ">
-                    <div className="column ">
+                  <div className="columns">
+                    <div className="column is-mobile-8 is-mobile-offset-2 is-6-tablet is-6-desktop is-6-widescreen">
                       <img
                         src={item.image}
                         alt={item.name}
-                        style={{ height: 250 }}
+                        style={{ maxHeight: "14rem" }}
                       />
                     </div>
-                    <div className="column">
-                      <p style={{color:"#363636"}}>-- By {item.author}</p>
+                    <div className="column has-text-centered is-6-tablet is-6-desktop is-6-widescreen">
+                      <p style={{ color: "#363636" }}>-- {item.author}</p>
                     </div>
                   </div>
                 )}
