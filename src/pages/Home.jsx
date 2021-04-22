@@ -9,7 +9,7 @@ import Loader from "../components/Loader";
 import Error from "../components/Error";
 import Pagination from "../components/Pagination";
 import Carousel from "../components/Carousel/index";
-import Meta from "../components/Meta";
+import Meta from "../components/Meta"; 
 
 const Home = ({ match }) => {
   const dispatch = useDispatch();
