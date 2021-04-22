@@ -8,6 +8,7 @@ import Loader from "../components/Loader";
 import Error from "../components/Error";
 import { ITEM_UPDATE_RESET } from "../redux/constants/itemConstants";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 const ItemEdit = ({ history, match }) => {
   const itemId = match.params.id;
@@ -64,16 +65,17 @@ const ItemEdit = ({ history, match }) => {
           Authorization: `Bearer ${userInfo.token}`,
         },
       };
+      // get image url
       const { data } = await axios.post(
         process.env.REACT_APP_API + "/upload",
         formData,
         config
       );
-      
+
       setImage(data);
       setUploading(false);
     } catch (error) {
-      console.log(error);
+      toast.warning(error.response.data.message);
       setUploading(false);
     }
   };
@@ -215,7 +217,7 @@ const ItemEdit = ({ history, match }) => {
                               <span className="file-name button is-loading"></span>
                             ) : (
                               <span className="file-name">
-                                No file uploaded
+                                ---
                               </span>
                             )}
                           </label>
