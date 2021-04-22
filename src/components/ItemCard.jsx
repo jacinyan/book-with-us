@@ -25,7 +25,11 @@ const ItemCard = ({ item }) => {
         <div className="content is-small">
           <Rating
             value={item.rating}
-            text={`${item.numReviews} reviews`}
+            text={
+              item.numReviews > 1
+                ? `${item.numReviews} reviews`
+                : `${item.numReviews} review`
+            }
             color="#f8d125"
           />
         </div>

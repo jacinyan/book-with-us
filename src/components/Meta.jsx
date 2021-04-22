@@ -13,8 +13,8 @@ const Meta = ({ title, description, keywords }) => {
 
 Meta.defaultProps = {
   title: "Welcome to BooksRUs",
-  description: "Pick your favorite books today!",
-  keywords: "books, best selling books, excellent choices",
+  description: "Pick Your Favorite Books Today!",
+  keywords: "books, fantastic books, excellent choices",
 };
 
 export default Meta;
