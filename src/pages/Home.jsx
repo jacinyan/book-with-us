@@ -1,5 +1,6 @@
 import React, { Fragment, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 
 import { listItems } from "../redux/actions/itemActions";
 
@@ -8,6 +9,7 @@ import Loader from "../components/Loader";
 import Error from "../components/Error";
 import Pagination from "../components/Pagination";
 import Carousel from "../components/Carousel/index";
+import Meta from "../components/Meta";
 
 const Home = ({ match }) => {
   const dispatch = useDispatch();
@@ -23,9 +25,16 @@ const Home = ({ match }) => {
   }, [dispatch, keyword, pageNumber]);
 
   return (
+    <>
+      <Meta />
       <section className="py-6">
-          {!keyword && <Carousel />}
+        {!keyword && <Carousel />}
         <div className="container ">
+          {keyword && (
+            <Link className="button is-rounded is-light my-3 " to="/">
+              Go Back
+            </Link>
+          )}
           {loading ? (
             <Loader />
           ) : error ? (
@@ -51,6 +60,7 @@ const Home = ({ match }) => {
           />
         </div>
       </section>
+    </>
   );
 };
 

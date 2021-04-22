@@ -13,6 +13,8 @@ import { ITEM_CREATE_REVIEW_RESET } from "../redux/constants/itemConstants";
 import Loader from "../components/Loader";
 import Rating from "../components/Rating";
 import Error from "../components/Error";
+import Meta from '../components/Meta'
+
 
 const ItemDetails = ({ history, match }) => {
   const dispatch = useDispatch();
@@ -68,6 +70,8 @@ const ItemDetails = ({ history, match }) => {
         ) : error ? (
           <Error />
         ) : (
+          <>
+          <Meta title={item.name}/>
           <div className="columns is-multiline">
             <div className="column has-text-centered is-6-tablet is-5-desktop ">
               <img
@@ -190,6 +194,7 @@ const ItemDetails = ({ history, match }) => {
               </div>
             </div>
           </div>
+          </>
         )}
       </div>
     </section>

@@ -15,7 +15,7 @@ const Carousel = () => {
   const itemsTopRated = useSelector((state) => state.itemsTopRated);
   const { error, items } = itemsTopRated;
 
-  const [activeIndex, setActiveIndex] = useState(0);
+  const [current, setCurrent] = useState(0);
 
   const maxIndex = localStorage.getItem("numTopItems")
     ? Number(localStorage.getItem("numTopItems")) - 1
@@ -27,12 +27,12 @@ const Carousel = () => {
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setActiveIndex(activeIndex === maxIndex ? 0 : activeIndex + 1);
+      setCurrent(current === maxIndex ? 0 : current + 1);
     }, 7000);
     return () => {
       clearInterval(timer);
     };
-  }, [activeIndex, maxIndex]);
+  }, [current, maxIndex]);
 
   return error ? (
     <Error />
@@ -70,9 +70,9 @@ const Carousel = () => {
             {items.map((item, index) => (
               <div
                 key={index}
-                className={index === activeIndex ? "slide active" : "slide"}
+                className={index === current ? "slide active" : "slide"}
               >
-                {index === activeIndex && (
+                {index === current && (
                   <div className="columns">
                     <div className="column is-mobile-8 is-mobile-offset-2 is-6-tablet">
                       <Link to={`/items/${item._id}`}>
@@ -97,8 +97,8 @@ const Carousel = () => {
         {items.map((_, index) => (
           <span
             key={index}
-            className={activeIndex === index ? "dot active" : "dot"}
-            onClick={() => setActiveIndex(index)}
+            className={current === index ? "dot active" : "dot"}
+            onClick={() => setCurrent(index)}
           ></span>
         ))}
       </div>
@@ -106,7 +106,7 @@ const Carousel = () => {
         <span
           className="prev"
           onClick={() =>
-            setActiveIndex(activeIndex < 1 ? maxIndex : activeIndex - 1)
+            setCurrent(current < 1 ? maxIndex : current - 1)
           }
         >
           &#10094;
@@ -114,7 +114,7 @@ const Carousel = () => {
         <span
           className="next"
           onClick={() =>
-            setActiveIndex(activeIndex === maxIndex ? 0 : activeIndex + 1)
+            setCurrent(current === maxIndex ? 0 : current + 1)
           }
         >
           &#10095;

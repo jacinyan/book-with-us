@@ -20,11 +20,13 @@
   .slide.active {
     opacity: 1;
     transition: all 1s ease-in-out;
+    will-change: transform;
   }
 
   .slide {
     opacity: 0;
     transition: all 1s ease-in-out;
+    will-change: transform;
   }
 }
 
