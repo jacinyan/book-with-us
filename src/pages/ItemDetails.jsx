@@ -35,13 +35,16 @@ const ItemDetails = ({ history, match }) => {
     // console.count("useEffect -- ItemDetails triggered");
     // registered :id
     if (successItemReview) {
+      // console.log("useEffect -- successItemReview triggered");
       alert("Review submitted");
       setRating(0);
       setComment("");
       dispatch({ type: ITEM_CREATE_REVIEW_RESET });
     }
+    // console.log("useEffect -- match.params.id triggered");
+    // console.count("useEffect -- match.params.id triggered");
     dispatch(listItemDetails(match.params.id));
-  }, [match, dispatch, successItemReview]);
+  }, [match.params.id, dispatch, successItemReview]);
 
   const handleAddToCart = () => {
     dispatch(addToCart(item._id, Number(qty)));

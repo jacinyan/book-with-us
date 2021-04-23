@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 
@@ -7,15 +7,17 @@ import { logout } from "../redux/actions/userActions";
 import SearchBox from "./SearchBox";
 
 const Header = () => {
-  const history = useHistory()
+  const history = useHistory();
   const dispatch = useDispatch();
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
+  const [isActive, setIsActive] = useState(false);
+
   const handleLogout = (e) => {
     e.preventDefault();
     dispatch(logout());
-    history.replace('/login')
+    history.replace("/login");
   };
 
   return (
@@ -27,14 +29,26 @@ const Header = () => {
               <img src="/assets/logo.png" alt="BooksRUs Logo" />
             </Link>
 
-            <Link to="#" className="navbar-burger">
+            <Link
+              to="#"
+              role="button"
+              className={`navbar-burger burger ${isActive ? "is-active" : ""}`}
+              aria-label="navbar-menu"
+              aria-expanded="false"
+              onClick={() => {
+                setIsActive(!isActive);
+              }}
+              
+            >
               <span aria-hidden="true"></span>
               <span aria-hidden="true"></span>
               <span aria-hidden="true"></span>
             </Link>
           </div>
 
-          <div className="navbar-menu">
+          <div
+            className={`navbar-menu ${isActive ? "is-active" : ""}`}
+          >
             <div className="navbar-start">
               <SearchBox />
             </div>
@@ -71,7 +85,12 @@ const Header = () => {
                   {!userInfo.isAdmin && (
                     <div className="navbar-item has-dropdown is-boxed is-hoverable">
                       <Link className="navbar-link has-text-primary" to="#">
-                        {userInfo.username}
+                        <span className="icon-text">
+                          <span className="icon">
+                            <i className="fas fa-user"></i>
+                          </span>
+                          <span>{userInfo.username}</span>
+                        </span>
                       </Link>
                       <div className="navbar-dropdown">
                         <Link
