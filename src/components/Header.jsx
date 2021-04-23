@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 
@@ -14,8 +14,26 @@ const Header = () => {
 
   const [isActive, setIsActive] = useState(false);
 
-  const handleNavbarToggle = () => {
+  useEffect(() => {
+    document.onclick = () => {
+      alert(1);
+      setIsActive(false);
+    };
+  }, [isActive]);
+
+  const handleClickNonMenuWhiteSpace = () => {
+    document.onclick = null;
+    alert(2);
     setIsActive(!isActive);
+  };
+
+  const handleClickMenuWhiteSpace = (e) => {
+    //stop document from listening in on this 
+    e.nativeEvent.stopImmediatePropagation();
+    if (document.onclick) {
+      alert(3);
+      setIsActive(true);
+    }
   };
 
   const handleLogout = (e) => {
@@ -29,7 +47,7 @@ const Header = () => {
       <nav className="navbar is-transparent is-fixed-top has-shadow">
         <div className="container is-fluid">
           <div className="navbar-brand ">
-            <Link className="navbar-item" to="/" onClick={handleNavbarToggle}>
+            <Link className="navbar-item" to="/">
               <img src="/assets/logo.png" alt="BooksRUs Logo" />
             </Link>
 
@@ -39,7 +57,7 @@ const Header = () => {
               className={`navbar-burger burger ${isActive ? "is-active" : ""}`}
               aria-label="navbar-menu"
               aria-expanded="false"
-              onClick={handleNavbarToggle}
+              onClick={handleClickNonMenuWhiteSpace}
             >
               <span aria-hidden="true"></span>
               <span aria-hidden="true"></span>
@@ -47,7 +65,10 @@ const Header = () => {
             </Link>
           </div>
 
-          <div className={`navbar-menu ${isActive ? "is-active" : ""}`}>
+          <div
+            className={`navbar-menu ${isActive ? "is-active" : ""}`}
+            onClick={handleClickMenuWhiteSpace}
+          >
             <div className="navbar-start">
               <SearchBox
                 handleSearchActive={(active) => {
@@ -59,7 +80,7 @@ const Header = () => {
               <Link
                 to="/cart"
                 className="navbar-item has-text-primary"
-                onClick={handleNavbarToggle}
+                onClick={handleClickNonMenuWhiteSpace}
               >
                 <span className="icon-text">
                   <span className="icon">
@@ -74,7 +95,7 @@ const Header = () => {
                     <Link
                       to="/register"
                       className="button is-rounded has-text-white is-primary"
-                      onClick={handleNavbarToggle}
+                      onClick={handleClickNonMenuWhiteSpace}
                     >
                       <strong>Sign Up</strong>
                     </Link>
@@ -82,7 +103,7 @@ const Header = () => {
                   <Link
                     to="/login"
                     className="navbar-item has-text-primary"
-                    onClick={handleNavbarToggle}
+                    onClick={handleClickNonMenuWhiteSpace}
                   >
                     <span className="icon-text">
                       <span className="icon">
@@ -108,7 +129,7 @@ const Header = () => {
                         <Link
                           className="navbar-item has-text-primary"
                           to="/profile"
-                          onClick={handleNavbarToggle}
+                          onClick={handleClickNonMenuWhiteSpace}
                         >
                           Profile
                         </Link>
@@ -116,7 +137,7 @@ const Header = () => {
                         <div
                           className="navbar-item "
                           onClick={(e) => {
-                            handleNavbarToggle();
+                            handleClickNonMenuWhiteSpace();
                             handleLogout(e);
                           }}
                         >
@@ -141,21 +162,21 @@ const Header = () => {
                         <Link
                           className="navbar-item has-text-primary"
                           to="/admin/users-list"
-                          onClick={handleNavbarToggle}
+                          onClick={handleClickNonMenuWhiteSpace}
                         >
                           Users
                         </Link>
                         <Link
                           to="/admin/items-list"
                           className="navbar-item has-text-primary"
-                          onClick={handleNavbarToggle}
+                          onClick={handleClickNonMenuWhiteSpace}
                         >
                           Items
                         </Link>
                         <Link
                           to="/admin/orders-list"
                           className="navbar-item has-text-primary"
-                          onClick={handleNavbarToggle}
+                          onClick={handleClickNonMenuWhiteSpace}
                         >
                           Orders
                         </Link>
@@ -163,7 +184,7 @@ const Header = () => {
                         <div
                           className="navbar-item "
                           onClick={(e) => {
-                            handleNavbarToggle();
+                            handleClickNonMenuWhiteSpace();
                             handleLogout(e);
                           }}
                         >
