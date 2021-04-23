@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 
-const SearchBox = () => {
+const SearchBox = ({ handleSearchActive }) => {
   const history = useHistory();
   const [keyword, setKeyword] = useState("");
 
@@ -12,6 +12,7 @@ const SearchBox = () => {
     } else {
       history.push("/");
     }
+    handleSearchActive(false);
   };
   return (
     <div className="navbar-item">
@@ -27,9 +28,7 @@ const SearchBox = () => {
             />
           </div>
           <p className="control ">
-            <button className="button is-rounded is-primary">
-              Search
-            </button>
+            <button className="button is-rounded is-primary">Search</button>
           </p>
         </div>
       </form>

@@ -14,6 +14,10 @@ const Header = () => {
 
   const [isActive, setIsActive] = useState(false);
 
+  const handleNavbarToggle = () => {
+    setIsActive(!isActive);
+  };
+
   const handleLogout = (e) => {
     e.preventDefault();
     dispatch(logout());
@@ -25,7 +29,7 @@ const Header = () => {
       <nav className="navbar is-transparent is-fixed-top has-shadow">
         <div className="container is-fluid">
           <div className="navbar-brand ">
-            <Link className="navbar-item" to="/">
+            <Link className="navbar-item" to="/" onClick={handleNavbarToggle}>
               <img src="/assets/logo.png" alt="BooksRUs Logo" />
             </Link>
 
@@ -35,10 +39,7 @@ const Header = () => {
               className={`navbar-burger burger ${isActive ? "is-active" : ""}`}
               aria-label="navbar-menu"
               aria-expanded="false"
-              onClick={() => {
-                setIsActive(!isActive);
-              }}
-              
+              onClick={handleNavbarToggle}
             >
               <span aria-hidden="true"></span>
               <span aria-hidden="true"></span>
@@ -46,14 +47,20 @@ const Header = () => {
             </Link>
           </div>
 
-          <div
-            className={`navbar-menu ${isActive ? "is-active" : ""}`}
-          >
+          <div className={`navbar-menu ${isActive ? "is-active" : ""}`}>
             <div className="navbar-start">
-              <SearchBox />
+              <SearchBox
+                handleSearchActive={(active) => {
+                  setIsActive(active);
+                }}
+              />
             </div>
             <div className="navbar-end">
-              <Link to="/cart" className="navbar-item has-text-primary">
+              <Link
+                to="/cart"
+                className="navbar-item has-text-primary"
+                onClick={handleNavbarToggle}
+              >
                 <span className="icon-text">
                   <span className="icon">
                     <i className="fas fa-shopping-cart"></i>
@@ -67,11 +74,16 @@ const Header = () => {
                     <Link
                       to="/register"
                       className="button is-rounded has-text-white is-primary"
+                      onClick={handleNavbarToggle}
                     >
                       <strong>Sign Up</strong>
                     </Link>
                   </div>
-                  <Link to="/login" className="navbar-item has-text-primary">
+                  <Link
+                    to="/login"
+                    className="navbar-item has-text-primary"
+                    onClick={handleNavbarToggle}
+                  >
                     <span className="icon-text">
                       <span className="icon">
                         <i className="fas fa-user"></i>
@@ -96,11 +108,18 @@ const Header = () => {
                         <Link
                           className="navbar-item has-text-primary"
                           to="/profile"
+                          onClick={handleNavbarToggle}
                         >
                           Profile
                         </Link>
                         <hr className="navbar-divider"></hr>
-                        <div className="navbar-item " onClick={handleLogout}>
+                        <div
+                          className="navbar-item "
+                          onClick={(e) => {
+                            handleNavbarToggle();
+                            handleLogout(e);
+                          }}
+                        >
                           <Link to="#" className="has-text-grey">
                             Log Out
                           </Link>
@@ -122,23 +141,32 @@ const Header = () => {
                         <Link
                           className="navbar-item has-text-primary"
                           to="/admin/users-list"
+                          onClick={handleNavbarToggle}
                         >
                           Users
                         </Link>
                         <Link
                           to="/admin/items-list"
                           className="navbar-item has-text-primary"
+                          onClick={handleNavbarToggle}
                         >
                           Items
                         </Link>
                         <Link
                           to="/admin/orders-list"
                           className="navbar-item has-text-primary"
+                          onClick={handleNavbarToggle}
                         >
                           Orders
                         </Link>
                         <hr className="navbar-divider"></hr>
-                        <div className="navbar-item " onClick={handleLogout}>
+                        <div
+                          className="navbar-item "
+                          onClick={(e) => {
+                            handleNavbarToggle();
+                            handleLogout(e);
+                          }}
+                        >
                           <Link to="#" className="has-text-grey">
                             Log Out
                           </Link>
