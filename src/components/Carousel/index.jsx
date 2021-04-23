@@ -6,6 +6,7 @@ import TypeWriter from "typewriter-effect";
 import { listTopItems } from "../../redux/actions/itemActions";
 
 import "./index.scss";
+import banner from '../../images/banner.jpeg' 
 
 const Carousel = () => {
   const dispatch = useDispatch();
@@ -34,7 +35,7 @@ const Carousel = () => {
 
   return (
     !error && (
-      <div className="carousel">
+      <div className="carousel" style={{backgroundImage:`url(${banner})` }}>
         <section className="slides">
           <div
             className="columns is-vcentered is-mobile"
