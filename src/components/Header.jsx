@@ -16,7 +16,7 @@ const Header = () => {
 
   useEffect(() => {
     document.onclick = () => {
-      // alert(1);
+      // alert(1); 
       setIsActive(false);
     };
   }, [isActive]);
