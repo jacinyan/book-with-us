@@ -111,7 +111,12 @@ const Header = () => {
                   {userInfo.isAdmin && (
                     <div className="navbar-item has-dropdown is-boxed is-hoverable">
                       <Link className="navbar-link has-text-primary" to="#">
-                        Admin
+                        <span className="icon-text">
+                          <span className="icon">
+                            <i className="fas fa-user-cog"></i>
+                          </span>
+                          <span>Admin</span>
+                        </span>
                       </Link>
                       <div className="navbar-dropdown">
                         <Link

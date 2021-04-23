@@ -23,7 +23,6 @@ const UserEdit = ({ history, match }) => {
 
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
@@ -90,20 +89,6 @@ const UserEdit = ({ history, match }) => {
 
                           <span className="icon is-small is-left">
                             <i className="fas fa-envelope"></i>
-                          </span>
-                        </div>
-                      </div>
-                      <div className="field">
-                        <div className="control has-icons-left">
-                          <input
-                            className="input "
-                            type="password"
-                            placeholder="Password"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                          />
-                          <span className="icon is-small is-left">
-                            <i className="fas fa-lock"></i>
                           </span>
                         </div>
                       </div>
