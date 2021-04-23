@@ -95,79 +95,76 @@ const OrderDetails = ({ match, history }) => {
               <h1 className="title hr">Order {order._id}</h1>
               <div className="columns">
                 <div className="column is-8">
-                    <div className="content">
-                      <h3>Shipping</h3>
-                      <p>
-                        <strong>Name: </strong>
-                        {order.user.username}
+                  <div className="content">
+                    <h3>Shipping</h3>
+                    <p>
+                      <strong>Name: </strong>
+                      {order.user.username}
+                    </p>
+                    <p>
+                      <strong>Email: </strong>
+                      <a
+                        href={`mailto:${order.user.email}`}
+                        className="has-text-primary"
+                      >
+                        {order.user.email}
+                      </a>
+                    </p>
+                    <p>
+                      <strong>Address:</strong> {order.shippingAddress.address},{" "}
+                      {order.shippingAddress.city},{" "}
+                      {order.shippingAddress.postalCode},{" "}
+                      {order.shippingAddress.country}
+                    </p>
+                    {order.isDelivered ? (
+                      <p className="has-text-success">
+                        Delivered on {order.deliveredAt}
                       </p>
-                      <p>
-                        <strong>Email: </strong>
-                        <a
-                          href={`mailto:${order.user.email}`}
-                          className="has-text-primary"
-                        >
-                          {order.user.email}
-                        </a>
-                      </p>
-                      <p>
-                        <strong>Address:</strong>{" "}
-                        {order.shippingAddress.address},{" "}
-                        {order.shippingAddress.city},{" "}
-                        {order.shippingAddress.postalCode},{" "}
-                        {order.shippingAddress.country}
-                      </p>
-                      {order.isDelivered ? (
-                        <p className="has-text-success">
-                          Delivered on {order.deliveredAt}
-                        </p>
-                      ) : (
-                        <p className="has-text-danger">Not Delivered</p>
-                      )}
-                    </div>
-                    <hr />
-                    <div className="content">
-                      <h3>Payment Method</h3>
-                      <p>
-                        <strong>Method: </strong> {order.paymentMethod}
-                      </p>
-                      {order.isPaid ? (
-                        <p className="has-text-success">
-                          Paid on {order.paidAt}
-                        </p>
-                      ) : (
-                        <p className="has-text-danger">Not paid</p>
-                      )}
-                    </div>
-                    <hr />
-                    <div className="content">
-                      <h3>Order Items</h3>
-                      {order.orderItems.length === 0 ? (
-                        <h3>Order is empty</h3>
-                      ) : (
-                        <>
-                          {order.orderItems.map((orderItem) => (
-                            <div className="columns" key={orderItem.item}>
-                              <div className="column is-2">
-                                <img src={orderItem.image} alt="" />
-                              </div>
-                              <div className="column is-3 has-text-centered">
-                                <Link
-                                  to={`/items/${orderItem.item}`}
-                                  className="has-text-primary"
-                                >
-                                  {orderItem.name}
-                                </Link>
-                              </div>
-                              <div className="column is-8 has-text-centered">
-                                {orderItem.qty} x $ {orderItem.price} = ${" "}
-                                {orderItem.qty * orderItem.price}
-                              </div>
+                    ) : (
+                      <p className="has-text-danger">Not Delivered</p>
+                    )}
+                  </div>
+                  <hr />
+                  <div className="content">
+                    <h3>Payment Method</h3>
+                    <p>
+                      <strong>Method: </strong> {order.paymentMethod}
+                    </p>
+                    {order.isPaid ? (
+                      <p className="has-text-success">Paid on {order.paidAt}</p>
+                    ) : (
+                      <p className="has-text-danger">Not paid</p>
+                    )}
+                  </div>
+                  <hr />
+                  <div className="content">
+                    <h3>Order Items</h3>
+                    {order.orderItems.length === 0 ? (
+                      <h3>Order is empty</h3>
+                    ) : (
+                      <>
+                        {order.orderItems.map((orderItem) => (
+                          <div className="columns" key={orderItem.item}>
+                            <div className="column is-2">
+                              <img src={orderItem.image} alt="" />
                             </div>
-                          ))}
-                        </>
-                      )}
-                    </div>
+                            <div className="column is-3 has-text-centered">
+                              <Link
+                                to={`/items/${orderItem.item}`}
+                                className="has-text-primary"
+                              >
+                                {orderItem.name}
+                              </Link>
+                            </div>
+                            <div className="column is-8 has-text-centered">
+                              {orderItem.qty} x $ {orderItem.price} = ${" "}
+                              {orderItem.qty * orderItem.price}
+                            </div>
+                          </div>
+                        ))}
+                      </>
+                    )}
+                  </div>
                 </div>
                 <div className="column is-4">
                   <div className="card">
@@ -200,20 +197,21 @@ const OrderDetails = ({ match, history }) => {
                       <footer className="card-footer pb-0 pt-3" id="order-page">
                         {!order.isPaid && (
                           <>
-                            {loadingPay && (
+                            {!loadingPay ? (
+                              !sdkReady ? (
+                                <button className="card-footer-item button is-loading is-fullwidth">
+                                  Loading
+                                </button>
+                              ) : (
+                                <PayPalButton
+                                  amount={order.totalPrice}
+                                  onSuccess={handleSuccessPayment}
+                                />
+                              )
+                            ) : (
                               <button className="card-footer-item button  is-loading is-fullwidth">
                                 Loading
                               </button>
-                            )}
-                            {!sdkReady ? (
-                              <button className="card-footer-item button is-loading is-fullwidth">
-                                Loading
-                              </button>
-                            ) : (
-                              <PayPalButton
-                                amount={order.totalPrice}
-                                onSuccess={handleSuccessPayment}
-                              />
                             )}
                           </>
                         )}
