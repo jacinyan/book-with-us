@@ -79,7 +79,7 @@ a.has-text-primary:hover {
 .hr {
   display: inline-block;
 }
-.hr:after {
+.hr::after {
   content: "";
   display: block;
   border-top: 0.15rem solid $primary;

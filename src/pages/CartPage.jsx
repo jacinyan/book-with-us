@@ -63,24 +63,24 @@ const CartPage = ({ history }) => {
                       <span className="price">${cartItem.price}</span>
                     </div>
                     <div className="column is-2 ">
-                        <div className="select is-primary is-fullwidth">
-                          <select
-                            value={cartItem.qty}
-                            onChange={(e) =>
-                              dispatch(
-                                addToCart(cartItem.item, Number(e.target.value))
-                              )
-                            }
-                          >
-                            {[...Array(cartItem.countInStock).keys()].map(
-                              (index) => (
-                                <option key={index + 1} value={index + 1}>
-                                  {index + 1}
-                                </option>
-                              )
-                            )}
-                          </select>
-                        </div>
+                      <div className="select is-primary is-fullwidth">
+                        <select
+                          value={cartItem.qty}
+                          onChange={(e) =>
+                            dispatch(
+                              addToCart(cartItem.item, Number(e.target.value))
+                            )
+                          }
+                        >
+                          {[...Array(cartItem.countInStock).keys()].map(
+                            (index) => (
+                              <option key={index + 1} value={index + 1}>
+                                {index + 1}
+                              </option>
+                            )
+                          )}
+                        </select>
+                      </div>
                     </div>
                   </div>
                 </Fragment>
@@ -100,16 +100,16 @@ const CartPage = ({ history }) => {
                     .reduce((prev, curr) => prev + curr.qty * curr.price, 0)
                     .toFixed(2)}
                 </p>
-                <footer className="card-footer pb-0 ">
-                  <button
-                    className="card-footer-item button is-rounded py-3 has-background-primary has-text-white"
-                    disabled={cartItems.length === 0}
-                    onClick={handleCheckout}
-                  >
-                    <strong>Proceed to Checkout</strong>
-                  </button>
-                </footer>
               </div>
+              <footer className="card-footer p-4">
+                <button
+                  className="card-footer-item button is-rounded has-background-primary has-text-white"
+                  disabled={cartItems.length === 0}
+                  onClick={handleCheckout}
+                >
+                  <strong>Proceed to Checkout</strong>
+                </button>
+              </footer>
             </div>
           </div>
         </div>

@@ -194,45 +194,45 @@ const OrderDetails = ({ match, history }) => {
                         </div>
                         <div className="column">${order.totalPrice}</div>
                       </div>
-                      <footer className="card-footer pb-0 pt-3" id="order-page">
-                        {!order.isPaid && (
-                          <>
-                            {!loadingPay ? (
-                              !sdkReady ? (
-                                <button className="card-footer-item button is-loading is-fullwidth">
-                                  Loading
-                                </button>
-                              ) : (
-                                <PayPalButton
-                                  amount={order.totalPrice}
-                                  onSuccess={handleSuccessPayment}
-                                />
-                              )
-                            ) : (
-                              <button className="card-footer-item button  is-loading is-fullwidth">
+                    </div>
+                    <footer className="card-footer p-4" id="order-page">
+                      {!order.isPaid && (
+                        <>
+                          {!loadingPay ? (
+                            !sdkReady ? (
+                              <button className="card-footer-item button is-loading is-fullwidth">
                                 Loading
                               </button>
-                            )}
-                          </>
-                        )}
-                        {loadingDeliver && (
-                          <button className="card-footer-item button is-loading is-fullwidth">
-                            Loading
-                          </button>
-                        )}
-                        {userInfo &&
-                          userInfo.isAdmin &&
-                          order.isPaid &&
-                          !order.isDelivered && (
-                            <button
-                              className="button is-primary"
-                              onClick={handleDeliver}
-                            >
-                              Mark as delivered
+                            ) : (
+                              <PayPalButton
+                                amount={order.totalPrice}
+                                onSuccess={handleSuccessPayment}
+                              />
+                            )
+                          ) : (
+                            <button className="card-footer-item button  is-loading is-fullwidth">
+                              Loading
                             </button>
                           )}
-                      </footer>
-                    </div>
+                        </>
+                      )}
+                      {loadingDeliver && (
+                        <button className="card-footer-item button is-loading is-fullwidth">
+                          Loading
+                        </button>
+                      )}
+                      {userInfo &&
+                        userInfo.isAdmin &&
+                        order.isPaid &&
+                        !order.isDelivered && (
+                          <button
+                            className="button is-primary"
+                            onClick={handleDeliver}
+                          >
+                            Mark as delivered
+                          </button>
+                        )}
+                    </footer>
                   </div>
                 </div>
               </div>

@@ -134,16 +134,16 @@ const PlaceOrder = ({ history }) => {
                   </div>
                   <div className="column">${cart.totalPrice}</div>
                 </div>
-                <footer className="card-footer pb-0 ">
-                  <button
-                    className="card-footer-item button is-rounded py-3 has-background-primary has-text-white"
-                    disabled={cart.cartItems.length === 0}
-                    onClick={handlePlaceOrder}
-                  >
-                    <strong>Place Order</strong>
-                  </button>
-                </footer>
               </div>
+              <footer className="card-footer p-4 ">
+                <button
+                  className="card-footer-item button is-rounded has-background-primary has-text-white"
+                  disabled={cart.cartItems.length === 0}
+                  onClick={handlePlaceOrder}
+                >
+                  <strong>Place Order</strong>
+                </button>
+              </footer>
             </div>
           </div>
         </div>

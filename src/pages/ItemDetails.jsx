@@ -125,16 +125,16 @@ const ItemDetails = ({ history, match }) => {
                         </div>
                       </div>
                     )}
-                    <footer className="card-footer pb-0 ">
-                      <button
-                        className="card-footer-item button py-3 has-background-primary has-text-white is-rounded"
-                        disabled={item.countInStock === 0}
-                        onClick={handleAddToCart}
-                      >
-                        <strong>Add to Cart</strong>
-                      </button>
-                    </footer>
                   </div>
+                  <footer className="card-footer p-4">
+                    <button
+                      className="card-footer-item button has-background-primary has-text-white is-rounded"
+                      disabled={item.countInStock === 0}
+                      onClick={handleAddToCart}
+                    >
+                      <strong>Add to Cart</strong>
+                    </button>
+                  </footer>
                 </div>
               </div>
               <div className="column is-8-mobile is-offset-2-mobile is-6-tablet is-5-desktop">
