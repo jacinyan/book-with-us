@@ -114,7 +114,6 @@ export const getOrderDetails = (id) => async (dispatch, getState) => {
       type: ORDER_DETAILS_FAILURE,
       payload: finalMessage,
     });
-    toast.error(finalMessage, { autoClose: false });
   }
 };
 
