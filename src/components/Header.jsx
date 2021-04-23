@@ -16,22 +16,22 @@ const Header = () => {
 
   useEffect(() => {
     document.onclick = () => {
-      alert(1);
+      // alert(1);
       setIsActive(false);
     };
   }, [isActive]);
 
   const handleClickNonMenuWhiteSpace = () => {
     document.onclick = null;
-    alert(2);
+    // alert(2);
     setIsActive(!isActive);
   };
 
   const handleClickMenuWhiteSpace = (e) => {
-    //stop document from listening in on this 
+    //stop document from being aware of this 
     e.nativeEvent.stopImmediatePropagation();
     if (document.onclick) {
-      alert(3);
+      // alert(3);
       setIsActive(true);
     }
   };
