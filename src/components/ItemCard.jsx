@@ -21,8 +21,7 @@ const ItemCard = ({ item }) => {
               {item.name}
             </Link>
           </p>
-        </div>
-        <div className="content is-small">
+          <p className=" is-size-7">
           <Rating
             value={item.rating}
             text={
@@ -32,8 +31,10 @@ const ItemCard = ({ item }) => {
             }
             color="#f8d125"
           />
+        </p>
+        <p className="content is-normal">${addDecimals(item.price)}</p>
         </div>
-        <div className="content is-medium">${addDecimals(item.price)}</div>
+        
       </div>
     </div>
   );

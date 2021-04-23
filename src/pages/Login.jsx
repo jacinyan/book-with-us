@@ -80,7 +80,7 @@ const Login = ({ location, history }) => {
                           </span>
                         </div>
                       </div>
-                      <button className="button is-rounded is-block is-primary is-fullwidth is-rounded">
+                      <button className="button is-rounded is-block is-primary is-fullwidth">
                         <strong>Sign In</strong>
                       </button>
                     </form>

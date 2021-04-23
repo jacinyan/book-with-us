@@ -128,7 +128,7 @@ const ItemDetails = ({ history, match }) => {
                   </div>
                   <footer className="card-footer p-4">
                     <button
-                      className="card-footer-item button has-background-primary has-text-white is-rounded"
+                      className="card-footer-item button has-background-primary has-text-white is-rounded "
                       disabled={item.countInStock === 0}
                       onClick={handleAddToCart}
                     >

@@ -19,7 +19,7 @@ const SearchBox = () => {
         <div className="field has-addons">
           <div className="control is-expanded">
             <input
-              className="input is-rounded is-default"
+              className="input is-rounded "
               type="text"
               placeholder="Find a book..."
               name="q"
@@ -27,7 +27,7 @@ const SearchBox = () => {
             />
           </div>
           <p className="control ">
-            <button className="button is-rounded is-default is-primary">
+            <button className="button is-rounded is-primary">
               Search
             </button>
           </p>

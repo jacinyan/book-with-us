@@ -2,7 +2,7 @@ import React from "react";
 
 const Rating = ({ value, text, color }) => {
   return (
-    <div className="rating">
+    <>
       <span>
         {[...Array(5)].map((_, index) => {
           const className =
@@ -15,7 +15,7 @@ const Rating = ({ value, text, color }) => {
         })}
       </span>
       <span className="pl-2">{text && text}</span>
-    </div>
+    </>
   );
 };
 

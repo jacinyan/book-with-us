@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const Pagination = ({ pages, page, isAdmin = false, keyword = "" }) => {
   return (
     pages > 1 && (
-      <nav className="pagination is-rounded pt-4 " >
+      <nav className="pagination is-rounded pt-4" >
         <Link
           className="pagination-previous"
           to={

@@ -99,7 +99,7 @@ a.has-text-primary:hover {
 
 /* mobile styles */
 html {
-  font-size: 0.95rem;
+  font-size: 0.85rem;
 }
 
 .navbar {
@@ -129,8 +129,8 @@ nav.breadcrumb[data-page="shipping-payment"] {
 }
 
 footer.footer {
-  padding-top: 2.7rem;
-  padding-bottom: 2.7rem;
+  padding-top: 2.5rem;
+  padding-bottom: 2.5rem;
 
   .fab {
     padding-right: 1.2rem;
@@ -165,14 +165,8 @@ footer.footer {
 }
 
 /* desktop styles */
-@media screen and (min-width: 1024px) {
-  html {
-    font-size: 1.05rem;
-  }
-
+@media screen and (min-width: 1024px) { 
   footer.footer {
-    padding-top: 2.1rem;
-    padding-bottom: 2.1rem;
     .fab {
       padding-right: 1.6rem;
       font-size: 1.6rem;
@@ -182,13 +176,8 @@ footer.footer {
 
 /* widescreen styles */
 @media screen and (min-width: 1216px) {
-  html {
-    font-size: 1.1rem;
-  }
 
   footer.footer {
-    padding-top: 2rem;
-    padding-bottom: 2rem;
     .fab {
       padding-right: 1.7rem;
       font-size: 1.7rem;

@@ -31,7 +31,7 @@ const Home = ({ match }) => {
         {!keyword && <Carousel />}
         <div className="container ">
           {keyword && (
-            <Link className="button is-rounded is-light my-3 " to="/">
+            <Link className="button is-rounded is-light my-3" to="/">
               Go Back
             </Link>
           )}
