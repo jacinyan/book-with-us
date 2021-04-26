@@ -94,7 +94,7 @@ const OrderDetails = ({ match, history }) => {
             <>
               <h1 className="title hr">Order {order._id}</h1>
               <div className="columns">
-                <div className="column is-8">
+                <div className="column is-8-mobile is-offset-2-mobile is-8-tablet">
                   <div className="content">
                     <h3>Shipping</h3>
                     <p>
@@ -145,10 +145,10 @@ const OrderDetails = ({ match, history }) => {
                       <>
                         {order.orderItems.map((orderItem) => (
                           <div className="columns" key={orderItem.item}>
-                            <div className="column is-2">
-                              <img src={orderItem.image} alt="" />
+                            <div className="column is-mobile is-2 has-text-centered">
+                              <img src={orderItem.image} alt="" style={{maxHeight: 120}}/>
                             </div>
-                            <div className="column is-3 has-text-centered">
+                            <div className="column is-mobile is-3 has-text-centered">
                               <Link
                                 to={`/items/${orderItem.item}`}
                                 className="has-text-primary"
@@ -156,7 +156,7 @@ const OrderDetails = ({ match, history }) => {
                                 {orderItem.name}
                               </Link>
                             </div>
-                            <div className="column is-8 has-text-centered">
+                            <div className="column is-mobile is-7 has-text-centered">
                               {orderItem.qty} x $ {orderItem.price} = ${" "}
                               {orderItem.qty * orderItem.price}
                             </div>
@@ -166,7 +166,7 @@ const OrderDetails = ({ match, history }) => {
                     )}
                   </div>
                 </div>
-                <div className="column is-4">
+                <div className="column is-8-mobile is-offset-2-mobile is-4-tablet">
                   <div className="card">
                     <div className="card-content">
                       <p className="title">Order Summary</p>
