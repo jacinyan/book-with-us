@@ -1,7 +1,10 @@
 import React, { Fragment, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
 import { useForm } from "../hooks/useForm";
+import { useFetchState } from "../hooks/useFetchState";
+import { Link } from "react-router-dom";
+import SlidingPane from "react-sliding-pane";
+import "react-sliding-pane/dist/react-sliding-pane.css";
 
 import { listItems } from "../redux/actions/itemActions";
 
@@ -22,61 +25,79 @@ const Home = ({ match }) => {
   const keyword = match.params.keyword;
   const pageNumber = match.params.pageNumber || 1;
 
+  const [panelOpen, setPanelOpen] = useFetchState({
+    isPaneOpen: false,
+    isPaneOpenLeft: false,
+  });
+
   const { state, handleChange, reset } = useForm({
     minPrice: "",
     maxPrice: "",
     genre: "",
-    rating: ""
+    rating: "",
   });
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      dispatch(
-        listItems(
-          keyword,
-          pageNumber,
-          state.minPrice,
-          state.maxPrice,
-          state.genre,
-          state.rating,
-        )
-      );
-    }, 1100);
-    return () => {
-      clearTimeout(timer);
-    };
+    if (state.minPrice || state.maxPrice || state.genre || state.rating) {
+      const timer = setTimeout(() => {
+        dispatch(
+          listItems(
+            keyword,
+            pageNumber,
+            state.minPrice,
+            state.maxPrice,
+            state.genre,
+            state.rating
+          )
+        );
+      }, 800);
+      return () => {
+        clearTimeout(timer);
+      };
+    }
+    dispatch(listItems(keyword, pageNumber));
   }, [dispatch, keyword, pageNumber, state]);
 
   return (
     <>
       <Meta />
       <section className="py-6">
-        {!keyword && <Carousel />}
+        {!keyword && !panelOpen.isPaneOpenLeft && <Carousel />}
         <div className="container ">
           {keyword && (
             <Link className="button is-rounded is-light my-3" to="/">
               Go Back
             </Link>
           )}
+          <div style={{ marginTop: "32px" }}>
+            <button onClick={() => setPanelOpen({ isPaneOpenLeft: true })}>
+              Click me to open left pane with 20% width!
+            </button>
+          </div>
+          <SlidingPane
+            closeIcon={<div>Some div containing custom close icon.</div>}
+            isOpen={panelOpen.isPaneOpenLeft}
+            title="Hey, it is optional pane title.  I can be React component too."
+            from="left"
+            width="200px"
+            onRequestClose={() => setPanelOpen({ isPaneOpenLeft: false })}
+          >
+            <Filter state={state} handleChange={handleChange} reset={reset} />
+          </SlidingPane>
           {loading ? (
             <Loader />
           ) : error ? (
             <Error />
           ) : (
-            <>
-              <section>
-                <Filter state={state} handleChange={handleChange} reset={reset}/>
-              </section>
-              <div className="columns is-multiline is-vcentered">
-                {items.map((item) => (
-                  <Fragment key={item._id}>
-                    <div className="column is-8-mobile is-offset-2-mobile is-one-third-tablet is-one-quarter-desktop">
-                      <ItemCard item={item} />
-                    </div>
-                  </Fragment>
-                ))}
-              </div>
-            </>
+            <div className="columns is-multiline is-vcentered">
+              {items.map((item) => (
+                <Fragment key={item._id}>
+                  <div className="column is-8-mobile is-offset-2-mobile is-one-third-tablet is-one-quarter-desktop">
+                    <ItemCard item={item} />
+                  </div>
+                </Fragment>
+              ))}
+            </div>
           )}
           <Pagination
             pages={pages}

@@ -28,7 +28,7 @@ const SearchBox = ({ handleSearchActive }) => {
             />
           </div>
           <p className="control ">
-            <button className="button is-rounded is-primary">Search</button>
+            <button className="button is-rounded is-primary"><i className="fas fa-search"></i></button>
           </p>
         </div>
       </form>

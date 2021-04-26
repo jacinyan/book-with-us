@@ -32,7 +32,7 @@ export const listItems = (
   maxPrice = "",
   genre = "",
   rating = ""
-) => async (dispatch) => {
+) => async (dispatch, getState) => {
   try {
     dispatch({
       type: ITEMS_LIST_REQUEST,
@@ -47,6 +47,11 @@ export const listItems = (
       type: ITEMS_LIST_SUCCESS,
       payload: data,
     });
+
+    localStorage.setItem(
+      "allItemGenres",
+      JSON.stringify(getState().itemsList.allItemGenres)
+    );
   } catch (error) {
     const finalMessage =
       error.response && error.response.data.message

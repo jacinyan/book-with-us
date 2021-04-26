@@ -35,6 +35,7 @@ export const itemsListReducer = (state = { items: [] }, action) => {
         items: action.payload.items,
         pages: action.payload.pages,
         page: action.payload.page,
+        allItemGenres: action.payload.allItemGenres
       };
     case ITEMS_LIST_FAILURE:
       return { loading: false, error: action.payload };
