@@ -32,6 +32,7 @@ function App() {
           <Route
             path="/page/:pageNumber"
             render={(props) => <Home {...props} />}
+            exact
           />
           <Route
             path="/search/:keyword"
@@ -41,6 +42,7 @@ function App() {
           <Route
             path="/search/:keyword/page/:pageNumber"
             render={(props) => <Home {...props} />}
+            exact
           />
           <Route
             path="/items/:id"

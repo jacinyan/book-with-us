@@ -1,6 +1,7 @@
 import React, { Fragment, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { useForm } from "../hooks/useForm";
 
 import { listItems } from "../redux/actions/itemActions";
 
@@ -9,7 +10,8 @@ import Loader from "../components/Loader";
 import Error from "../components/Error";
 import Pagination from "../components/Pagination";
 import Carousel from "../components/Carousel/index";
-import Meta from "../components/Meta"; 
+import Filter from "../components/Filter";
+import Meta from "../components/Meta";
 
 const Home = ({ match }) => {
   const dispatch = useDispatch();
@@ -20,9 +22,30 @@ const Home = ({ match }) => {
   const keyword = match.params.keyword;
   const pageNumber = match.params.pageNumber || 1;
 
+  const { state, handleChange, reset } = useForm({
+    minPrice: "",
+    maxPrice: "",
+    genre: "",
+    rating: ""
+  });
+
   useEffect(() => {
-    dispatch(listItems(keyword, pageNumber));
-  }, [dispatch, keyword, pageNumber]);
+    const timer = setTimeout(() => {
+      dispatch(
+        listItems(
+          keyword,
+          pageNumber,
+          state.minPrice,
+          state.maxPrice,
+          state.genre,
+          state.rating,
+        )
+      );
+    }, 1100);
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [dispatch, keyword, pageNumber, state]);
 
   return (
     <>
@@ -41,7 +64,9 @@ const Home = ({ match }) => {
             <Error />
           ) : (
             <>
-              {!keyword && <h1 className="mb-5 title hr">New Arrivals</h1>}
+              <section>
+                <Filter state={state} handleChange={handleChange} reset={reset}/>
+              </section>
               <div className="columns is-multiline is-vcentered">
                 {items.map((item) => (
                   <Fragment key={item._id}>
