@@ -97,6 +97,22 @@ a.has-text-primary:hover {
   border-color: $grey-light;
 }
 
+.toggle-panel{
+    border: 1px solid #dbdbdb;
+    position: fixed;
+    left: 0;
+    top: 31rem;
+    width: 2.1rem;
+    height: 5.5rem;
+    transform: translateX(0);
+    z-index: 999;
+    cursor: pointer;
+    padding: 6px 4px 6px 4px;
+    box-shadow: 3px 3px 3px 3px whitesmoke;
+    writing-mode: vertical-lr;
+    font-weight: 400
+}
+
 /* mobile styles */
 html {
   font-size: 0.85rem;

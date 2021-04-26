@@ -8,7 +8,7 @@ import { listTopItems } from "../../redux/actions/itemActions";
 import "./index.scss";
 import banner from '../../images/banner.jpeg' 
 
-const Carousel = () => {
+const Carousel = ({active}) => {
   const dispatch = useDispatch();
 
   const itemsTopRated = useSelector((state) => state.itemsTopRated);
@@ -35,7 +35,7 @@ const Carousel = () => {
 
   return (
     !error && (
-      <div className="carousel" style={{backgroundImage:`url(${banner})` }}>
+      <div className='carousel' style={{backgroundImage:`url(${banner})` }}>
         <section className="slides">
           <div
             className="columns is-vcentered is-mobile"

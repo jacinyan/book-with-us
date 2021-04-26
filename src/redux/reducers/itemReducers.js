@@ -35,7 +35,7 @@ export const itemsListReducer = (state = { items: [] }, action) => {
         items: action.payload.items,
         pages: action.payload.pages,
         page: action.payload.page,
-        allItemGenres: action.payload.allItemGenres
+        allItemGenres: action.payload.allItemGenres,
       };
     case ITEMS_LIST_FAILURE:
       return { loading: false, error: action.payload };
@@ -118,7 +118,7 @@ export const itemReviewCreateReducer = (state = {}, action) => {
   }
 };
 
-export const itemsTopRatedReducer = (state = {items:[]}, action) => {
+export const itemsTopRatedReducer = (state = { items: [] }, action) => {
   switch (action.type) {
     case ITEMS_TOP_REQUEST:
       return { loading: true, items: [] };
