@@ -1,8 +1,9 @@
-import React, { Fragment, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useForm } from "../hooks/useForm";
 import { useFetchState } from "../hooks/useFetchState";
 import SlidingPane from "react-sliding-pane";
+import { CSSTransition, TransitionGroup } from "react-transition-group";
 import "react-sliding-pane/dist/react-sliding-pane.css";
 
 import { listItems } from "../redux/actions/itemActions";
@@ -98,13 +99,23 @@ const Home = ({ match }) => {
           ) : (
             <>
               <div className="columns is-multiline is-vcentered">
-                {items.map((item) => (
-                  <Fragment key={item._id}>
-                    <div className="column is-8-mobile is-offset-2-mobile is-one-third-tablet is-one-quarter-desktop">
-                      <ItemCard item={item} />
-                    </div>
-                  </Fragment>
-                ))}
+                <TransitionGroup component={null}>
+                  {items.map((item) => (
+                    <CSSTransition
+                      classNames="fade"
+                      timeout={1000}
+                      key={item._id}
+                      appear
+                    >
+                      <div
+                        className="column is-8-mobile is-offset-2-mobile is-one-third-tablet is-one-quarter-desktop"
+                        key={item._id}
+                      >
+                        <ItemCard item={item} />
+                      </div>
+                    </CSSTransition>
+                  ))}
+                </TransitionGroup>
               </div>
               <Pagination
                 pages={pages}

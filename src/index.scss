@@ -97,23 +97,33 @@ a.has-text-primary:hover {
   border-color: $grey-light;
 }
 
-.toggle-panel{
-    border: 1px solid #dbdbdb;
-    position: fixed;
-    left: 0;
-    top: 31rem;
-    width: 2.1rem;
-    height: 5.5rem;
-    transform: translateX(0);
-    z-index: 999;
-    cursor: pointer;
-    padding: 6px 4px 6px 4px;
-    box-shadow: 3px 3px 3px 3px whitesmoke;
-    writing-mode: vertical-lr;
-    font-weight: 400
+.toggle-panel {
+  background: $primary;
+  border: 0.01rem solid #dbdbdb;
+  border-radius: 0 0.5rem 0.5rem 0;
+  position: fixed;
+  left: 0;
+  top: 30rem;
+  width: 2rem;
+  height: 5.5rem;
+  cursor: pointer;
+  padding: 0.4rem 0.25rem 0.4rem 0.25rem;
+  writing-mode: vertical-lr;
+  color: #fff;
+  font-weight: 400;
+  z-index: 99;
 }
 
-/* mobile styles */
+.fade-appear {
+  opacity: 0.01;
+}
+
+.fade-appear.fade-appear-active {
+  opacity: 1;
+  transition: opacity 1s ease-in-out;
+}
+
+/* mobile */
 html {
   font-size: 0.85rem;
 }
@@ -155,7 +165,7 @@ footer.footer {
   }
 }
 
-/* tablet styles */
+/* tablet */
 @media screen and (min-width: 769px) {
   html {
     font-size: 1rem;
@@ -180,8 +190,8 @@ footer.footer {
   }
 }
 
-/* desktop styles */
-@media screen and (min-width: 1024px) { 
+/* desktop */
+@media screen and (min-width: 1024px) {
   footer.footer {
     .fab {
       padding-right: 1.6rem;
@@ -190,9 +200,8 @@ footer.footer {
   }
 }
 
-/* widescreen styles */
+/* widescreen */
 @media screen and (min-width: 1216px) {
-
   footer.footer {
     .fab {
       padding-right: 1.7rem;
