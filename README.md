@@ -1,7 +1,7 @@
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
-  <a href="https://github.com/jacinyan/books-r-us">
+  <a href="https://booksrus.netlify.app/assets/logo.png">
     <img src="https://booksrus.netlify.app/assets/logo.png" alt="Logo" width="80" height="80">
   </a>
 
@@ -116,15 +116,16 @@ The idea behind the project is to reinforce and demonstrate my knowledge and ski
 
   misc: react-toastify, react-transition-group, typewriter-effect
 
-- Server Side
+- Server Side (https://github.com/jacinyan/books-r-us-server)
 
   - NodeJs
   - Express
   - Mongoose
   - jswonwebtoken + bcrypt
 
-- DataBase
+- 3rd Party Services
   - MongoDB Atlas (cloud db services)
+  - S3 Bucket (item image storage)
 - Deployment
   - The client side and the server side of the project are hosted on Netlify and Heroku respectively
 - Version Control: Git and GitHub
@@ -141,10 +142,10 @@ The idea behind the project is to reinforce and demonstrate my knowledge and ski
   - Is provided with options of either using debit/credit card or other payment services
   - has a module to keep track of his/her orders.
   - Can leave a review for his/her ordered items
-  - is able to update his/her profile
+  - Is able to update his/her profile
   
-- An **Admin** : 
-  - has the overall control of the website
+- An **Admin** 
+   has the overall control of the application in ways of, e.g. , performing basic CRUD in Users, Items, Orders modules
 
 <!-- TODO -->
 
