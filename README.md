@@ -1,27 +1,3 @@
-<!--
-*** To avoid retyping too much info. Do a search and replace for the following:
-*** github_username, repo_name, twitter_handle, email, project_title, project_description
--->
-
-
-
-<!-- PROJECT SHIELDS -->
-<!--
-*** I'm using markdown "reference style" links for readability.
-*** Reference links are enclosed in brackets [ ] instead of parentheses ( ).
-*** See the bottom of this document for the declaration of the reference variables
-*** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
-*** https://www.markdownguide.org/basic-syntax/#reference-style-links
--->
-[![Contributors][contributors-shield]][contributors-url]
-[![Forks][forks-shield]][forks-url]
-[![Stargazers][stars-shield]][stars-url]
-[![Issues][issues-shield]][issues-url]
-[![MIT License][license-shield]][license-url]
-[![LinkedIn][linkedin-shield]][linkedin-url]
-
-
-
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
@@ -32,20 +8,12 @@
   <h3 align="center">BooksRUs</h3>
 
   <p align="center">
-    project_description
-    <br />
-    <a href="https://github.com/github_username/repo_name"><strong>Explore the docs »</strong></a>
+    An online bookstore built with React and Node
     <br />
     <br />
-    <a href="https://github.com/github_username/repo_name">View Demo</a>
-    ·
-    <a href="https://github.com/github_username/repo_name/issues">Report Bug</a>
-    ·
-    <a href="https://github.com/github_username/repo_name/issues">Request Feature</a>
+    <a href="https://booksrus.netlify.app">View Demo</a>
   </p>
 </p>
-
-
 
 <!-- TABLE OF CONTENTS -->
 <details open="open">
@@ -54,138 +22,136 @@
     <li>
       <a href="#about-the-project">About The Project</a>
       <ul>
-        <li><a href="#built-with">Built With</a></li>
+        <li><a href="#app-structure">App Structure</a></li>
+        <li><a href="#tech-stack">Tech Stack</a></li>
       </ul>
     </li>
     <li>
-      <a href="#getting-started">Getting Started</a>
-      <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
-      </ul>
+      <a href="#features">Features</a>
     </li>
-    <li><a href="#usage">Usage</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#contributing">Contributing</a></li>
-    <li><a href="#license">License</a></li>
-    <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgements">Acknowledgements</a></li>
+    <li><a href="#to-do">To-Do</a></li>
   </ol>
 </details>
 
-
-
 <!-- ABOUT THE PROJECT -->
+
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+The idea behind the project is to reinforce and demonstrate my knowledge and skills in both frontend and backend development as a developer.
 
-Here's a blank template to get started:
-**To avoid retyping too much info. Do a search and replace with your text editor for the following:**
-`github_username`, `repo_name`, `twitter_handle`, `email`, `project_title`, `project_description`
+### App Structure
+
+```bash
+.
+├── App.js
+├── components
+│   ├── Carousel
+│   │   ├── index.jsx
+│   │   └── index.scss
+│   ├── CheckoutSteps.jsx
+│   ├── Error.jsx
+│   ├── Filter.jsx
+│   ├── Footer.jsx
+│   ├── Header.jsx
+│   ├── ItemCard.jsx
+│   ├── Layout.jsx
+│   ├── Loader.jsx
+│   ├── Meta.jsx
+│   ├── Pagination.jsx
+│   ├── PrivateRoute.jsx
+│   ├── Rating.jsx
+│   └── SearchBox.jsx
+├── hooks
+│   ├── useFetchState.js
+│   └── useForm.js
+├── images
+│   └── banner.jpeg
+├── index.js
+├── index.scss
+├── pages
+│   ├── CartPage.jsx
+│   ├── Home.jsx
+│   ├── ItemDetails.jsx
+│   ├── ItemEdit.jsx
+│   ├── ItemsList.jsx
+│   ├── Login.jsx
+│   ├── OrderDetails.jsx
+│   ├── OrdersList.jsx
+│   ├── Payment.jsx
+│   ├── PlaceOrder.jsx
+│   ├── Profile.jsx
+│   ├── Register.jsx
+│   ├── Shipping.jsx
+│   ├── UserEdit.jsx
+│   └── UsersList.jsx
+├── redux
+│   ├── actions
+│   │   ├── cartActions.js
+│   │   ├── itemActions.js
+│   │   ├── orderActions.js
+│   │   └── userActions.js
+│   ├── constants
+│   │   ├── cartConstants.js
+│   │   ├── itemConstants.js
+│   │   ├── orderConstants.js
+│   │   └── userConstants.js
+│   ├── reducers
+│   │   ├── cartReducers.js
+│   │   ├── itemReducers.js
+│   │   ├── orderReducers.js
+│   │   └── userReducers.js
+│   └── store.js
+└── utils
+    └── addDecimals.js
+```
+
+### Tech Stack
+
+- Client Side
+
+  - React
+  - Redux
+  - Bulma (CSS framework)
+  - Axios
+
+  misc: react-toastify, react-transition-group, typewriter-effect
+
+- Server Side
+
+  - NodeJs
+  - Express
+  - Mongoose
+  - jswonwebtoken + bcrypt
+
+- DataBase
+  - MongoDB Atlas (cloud db services)
+- Deployment
+  - The client side and the server side of the project are hosted on Netlify and Heroku respectively
+- Version Control: Git and GitHub
+
+<!-- FEATURES -->
+
+## Features
+
+- A **User** : 
+  - is shown a variety of book items when visiting the HomePage.
+  - Is able to perform a general search or an advanced search for certain items
+  - Is able to add/remove items into/from a shopping cart
+  - Is able to register and login to continue purchases
+  - Is provided with options of either using debit/credit card or other payment services
+  - has a module to keep track of his/her orders.
+  - Can leave a review for his/her ordered items
+  - is able to update his/her profile
+  
+- An **Admin** : 
+  - has the overall control of the website
+
+<!-- TODO -->
+
+## To-Do
+ Integration tests for state management logic refinement with Jest and Enzyme
 
 
-### Built With
-
-* []()
-* []()
-* []()
 
 
 
-<!-- GETTING STARTED -->
-## Getting Started
-
-To get a local copy up and running follow these simple steps.
-
-### Prerequisites
-
-This is an example of how to list things you need to use the software and how to install them.
-* npm
-  ```sh
-  npm install npm@latest -g
-  ```
-
-### Installation
-
-1. Clone the repo
-   ```sh
-   git clone https://github.com/github_username/repo_name.git
-   ```
-2. Install NPM packages
-   ```sh
-   npm install
-   ```
-
-
-
-<!-- USAGE EXAMPLES -->
-## Usage
-
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
-
-_For more examples, please refer to the [Documentation](https://example.com)_
-
-
-
-<!-- ROADMAP -->
-## Roadmap
-
-See the [open issues](https://github.com/github_username/repo_name/issues) for a list of proposed features (and known issues).
-
-
-
-<!-- CONTRIBUTING -->
-## Contributing
-
-Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
-
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-
-
-<!-- LICENSE -->
-## License
-
-Distributed under the MIT License. See `LICENSE` for more information.
-
-
-
-<!-- CONTACT -->
-## Contact
-
-Your Name - [@twitter_handle](https://twitter.com/twitter_handle) - email
-
-Project Link: [https://github.com/github_username/repo_name](https://github.com/github_username/repo_name)
-
-
-
-<!-- ACKNOWLEDGEMENTS -->
-## Acknowledgements
-
-* []()
-* []()
-* []()
-
-
-
-
-
-<!-- MARKDOWN LINKS & IMAGES -->
-<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/github_username/repo.svg?style=for-the-badge
-[contributors-url]: https://github.com/github_username/repo/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/github_username/repo.svg?style=for-the-badge
-[forks-url]: https://github.com/github_username/repo/network/members
-[stars-shield]: https://img.shields.io/github/stars/github_username/repo.svg?style=for-the-badge
-[stars-url]: https://github.com/github_username/repo/stargazers
-[issues-shield]: https://img.shields.io/github/issues/github_username/repo.svg?style=for-the-badge
-[issues-url]: https://github.com/github_username/repo/issues
-[license-shield]: https://img.shields.io/github/license/github_username/repo.svg?style=for-the-badge
-[license-url]: https://github.com/github_username/repo/blob/master/LICENSE.txt
-[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
-[linkedin-url]: https://linkedin.com/in/github_username
